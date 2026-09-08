@@ -1,13 +1,193 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WealthCashFx Test</title>
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>WealthCashFx | Build • Learn • Grow</title>  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<body>
-  <h1>WealthCashFx is Working! 🎉</h1>
-  <p>GitHub Pages deployment test successful.</p>
-</body>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #06152e, #0b2a52);
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 7%;
+      background: rgba(0, 0, 0, 0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #f5c542;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 18px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #f5c542;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #f5c542;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #d8e5f5;
+      margin-bottom: 35px;
+    }
+
+    .buttons a {
+      display: inline-block;
+      text-decoration: none;
+      padding: 14px 28px;
+      margin: 8px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .primary {
+      background: #f5c542;
+      color: #06152e;
+    }
+
+    .secondary {
+      border: 1px solid #f5c542;
+      color: #f5c542;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 40px 7% 80px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid rgba(245,197,66,0.25);
+    }
+
+    .card h3 {
+      color: #f5c542;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: #d8e5f5;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: rgba(0,0,0,0.3);
+      color: #b9c8d8;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+    }
+  </style></head><body>  <header>
+    <div class="logo">WealthCashFx</div><nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+</nav>
+
+  </header>  <main><section class="hero" id="home">
+  <h1>Build Your <span>Financial Future</span></h1>
+
+  <p>
+    Welcome to WealthCashFx — a platform focused on learning,
+    growth, financial knowledge, and building opportunities for
+    a stronger future.
+  </p>
+
+  <div class="buttons">
+    <a href="#services" class="primary">Get Started</a>
+    <a href="#about" class="secondary">Learn More</a>
+  </div>
+</section>
+
+<section class="features" id="services">
+
+  <div class="card">
+    <h3>📚 Learn</h3>
+    <p>
+      Explore useful information and resources designed to help
+      you understand financial opportunities.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>📈 Build</h3>
+    <p>
+      Develop knowledge, skills, and strategies that can help
+      you build toward your goals.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>🚀 Grow</h3>
+    <p>
+      Take steps toward personal growth and discover opportunities
+      for your financial journey.
+    </p>
+  </div>
+
+</section>
+
+<section class="hero" id="about">
+  <h2>About WealthCashFx</h2>
+
+  <p>
+    WealthCashFx represents a vision of building, learning, and
+    growing together through knowledge and opportunity.
+  </p>
+</section>
+
+  </main>  <footer>
+    <p>© 2026 WealthCashFx — Build • Learn • Grow</p>
+  </footer></body>
 </html>
