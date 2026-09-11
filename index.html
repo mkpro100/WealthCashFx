@@ -1,978 +1,1812 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>WealthCashFx</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #07111f;
-            color: #ffffff;
-            line-height: 1.6;
-        }
-
-        button,
-        input {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        /* NAVIGATION */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(7, 17, 31, 0.96);
-            border-bottom: 1px solid #203149;
-        }
-
-        nav {
-            max-width: 1150px;
-            margin: auto;
-            padding: 18px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: #38bdf8;
-        }
-
-        .logo span {
-            color: #ffffff;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
-
-        .nav-links button {
-            background: none;
-            border: none;
-            color: #dbeafe;
-        }
-
-        .nav-links button:hover {
-            color: #38bdf8;
-        }
-
-        /* GENERAL */
-
-        .container {
-            max-width: 1150px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* HERO */
-
-        .hero {
-            min-height: 650px;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            background:
-                radial-gradient(circle at top, #12365b 0%, #07111f 55%);
-        }
-
-        .hero-content {
-            max-width: 850px;
-            margin: auto;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 7px 14px;
-            border: 1px solid #2563eb;
-            border-radius: 30px;
-            color: #93c5fd;
-            margin-bottom: 22px;
-            font-size: 14px;
-        }
-
-        h1 {
-            font-size: clamp(42px, 8vw, 72px);
-            line-height: 1.05;
-            margin-bottom: 25px;
-        }
-
-        h1 span {
-            color: #38bdf8;
-        }
-
-        .hero p {
-            max-width: 700px;
-            margin: auto;
-            color: #b8c7d9;
-            font-size: 18px;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-top: 32px;
-        }
-
-        .btn {
-            border: none;
-            border-radius: 10px;
-            padding: 14px 25px;
-            font-weight: 700;
-            transition: 0.2s;
-        }
-
-        .btn-primary {
-            background: #0ea5e9;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #0284c7;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 1px solid #38506b;
-        }
-
-        .btn-secondary:hover {
-            border-color: #38bdf8;
-        }
-
-        /* SECTIONS */
-
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 45px;
-        }
-
-        .section-title h2 {
-            font-size: 38px;
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: #9fb0c3;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-
-        .card {
-            background: #0d1b2c;
-            border: 1px solid #203149;
-            border-radius: 16px;
-            padding: 28px;
-        }
-
-        .card h3 {
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-
-        .card p {
-            color: #aebed0;
-        }
-
-        .icon {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-
-        /* FORMS */
-
-        .form-page {
-            min-height: 720px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 20px;
-        }
-
-        .form-box {
-            width: 100%;
-            max-width: 480px;
-            background: #0d1b2c;
-            border: 1px solid #263c55;
-            border-radius: 18px;
-            padding: 35px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .form-box h2 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-
-        .form-box > p {
-            color: #9fb0c3;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin: 15px 0 7px;
-            color: #dbeafe;
-            font-weight: 600;
-        }
-
-        input {
-            width: 100%;
-            padding: 13px;
-            border-radius: 9px;
-            border: 1px solid #334b65;
-            background: #07111f;
-            color: white;
-            outline: none;
-        }
-
-        input:focus {
-            border-color: #38bdf8;
-        }
-
-        .form-box .btn {
-            width: 100%;
-            margin-top: 22px;
-        }
-
-        .form-link {
-            margin-top: 20px;
-            text-align: center;
-            color: #9fb0c3;
-        }
-
-        .form-link button {
-            background: none;
-            border: none;
-            color: #38bdf8;
-            font-weight: bold;
-        }
-
-        .message {
-            display: none;
-            margin-top: 18px;
-            padding: 12px;
-            border-radius: 8px;
-            background: #102b20;
-            border: 1px solid #1f704b;
-            color: #a7f3d0;
-        }
-
-        /* DASHBOARD */
-
-        .dashboard {
-            min-height: 750px;
-            padding: 45px 20px 80px;
-        }
-
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .dashboard-header p {
-            color: #9fb0c3;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .balance-card {
-            background: linear-gradient(135deg, #0c2944, #0d1b2c);
-            border: 1px solid #23567b;
-            border-radius: 16px;
-            padding: 25px;
-        }
-
-        .balance-card small {
-            color: #9fb0c3;
-        }
-
-        .balance {
-            font-size: 32px;
-            font-weight: 800;
-            margin-top: 7px;
-        }
-
-        .dashboard-panel {
-            margin-top: 25px;
-            background: #0d1b2c;
-            border: 1px solid #203149;
-            border-radius: 16px;
-            padding: 25px;
-        }
-
-        .dashboard-panel h3 {
-            margin-bottom: 15px;
-        }
-
-        .empty-state {
-            padding: 25px;
-            border: 1px dashed #3a5069;
-            border-radius: 10px;
-            color: #9fb0c3;
-            text-align: center;
-        }
-
-        /* FOOTER */
-
-        footer {
-            border-top: 1px solid #203149;
-            padding: 30px 20px;
-            text-align: center;
-            color: #8193a8;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 800px) {
-            .nav-links {
-                display: none;
-            }
-
-            .cards,
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .hero {
-                min-height: 580px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WealthCashFx</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#07111f;
+    color:#fff;
+    line-height:1.5
+}
+button,input{font:inherit}
+button{cursor:pointer}
+
+.page{display:none}
+.page.active{display:block}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#07111ff5;
+    border-bottom:1px solid #203149
+}
+
+nav{
+    max-width:1150px;
+    margin:auto;
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px
+}
+
+.logo{
+    background:none;
+    border:0;
+    color:#38bdf8;
+    font-size:24px;
+    font-weight:800
+}
+
+.logo span{color:#fff}
+
+.nav-links{
+    display:flex;
+    gap:18px;
+    list-style:none
+}
+
+.nav-links button{
+    background:none;
+    border:0;
+    color:#dbeafe
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:0 20px
+}
+
+.hero{
+    min-height:620px;
+    display:flex;
+    align-items:center;
+    text-align:center;
+    background:
+    radial-gradient(circle at top,#12365b,#07111f 55%)
+}
+
+.hero-content{
+    max-width:850px;
+    margin:auto
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 14px;
+    border:1px solid #2563eb;
+    border-radius:30px;
+    color:#93c5fd;
+    margin-bottom:22px;
+    font-size:13px
+}
+
+h1{
+    font-size:clamp(42px,8vw,72px);
+    line-height:1.05;
+    margin-bottom:22px
+}
+
+h1 span{color:#38bdf8}
+
+.hero p{
+    max-width:720px;
+    margin:auto;
+    color:#b8c7d9;
+    font-size:18px
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:30px
+}
+
+.btn{
+    border-radius:10px;
+    padding:13px 22px;
+    font-weight:700;
+    border:1px solid #38506b;
+    background:transparent;
+    color:#fff
+}
+
+.btn-primary{
+    background:#0ea5e9;
+    border-color:#0ea5e9
+}
+
+.btn-primary:hover{
+    background:#0284c7
+}
+
+.btn-danger{
+    border-color:#7f1d1d;
+    background:#451a1a
+}
+
+section{padding:70px 0}
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px
+}
+
+.section-title h2{
+    font-size:36px;
+    margin-bottom:8px
+}
+
+.section-title p,
+.muted{
+    color:#9fb0c3
+}
+
+.cards,
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px
+}
+
+.card,
+.panel{
+    background:#0d1b2c;
+    border:1px solid #203149;
+    border-radius:16px;
+    padding:25px
+}
+
+.icon{
+    font-size:30px;
+    margin-bottom:10px
+}
+
+.form-page{
+    min-height:720px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:50px 20px
+}
+
+.form-box{
+    width:100%;
+    max-width:480px;
+    background:#0d1b2c;
+    border:1px solid #263c55;
+    border-radius:18px;
+    padding:32px
+}
+
+.form-box h2{font-size:31px}
+
+.form-box>p{
+    color:#9fb0c3;
+    margin:6px 0 20px
+}
+
+label{
+    display:block;
+    margin:14px 0 6px;
+    color:#dbeafe;
+    font-weight:600
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border-radius:9px;
+    border:1px solid #334b65;
+    background:#07111f;
+    color:#fff;
+    outline:0
+}
+
+input:focus{
+    border-color:#38bdf8
+}
+
+.form-box .btn{
+    width:100%;
+    margin-top:20px
+}
+
+.message{
+    display:none;
+    margin-top:15px;
+    padding:11px;
+    border-radius:8px
+}
+
+.ok{
+    background:#102b20;
+    border:1px solid #1f704b;
+    color:#a7f3d0
+}
+
+.err{
+    background:#35171b;
+    border:1px solid #7f1d1d;
+    color:#fecaca
+}
+
+.dashboard{
+    padding:45px 0 80px
+}
+
+.dash-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px
+}
+
+.dash-head p{color:#9fb0c3}
+
+.balance-card{
+    background:linear-gradient(135deg,#0c2944,#0d1b2c);
+    border:1px solid #23567b;
+    border-radius:16px;
+    padding:24px
+}
+
+.balance{
+    font-size:34px;
+    font-weight:800;
+    margin-top:5px
+}
+
+.table-wrap{overflow:auto}
+
+.table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px
+}
+
+.table th,
+.table td{
+    padding:12px;
+    border-bottom:1px solid #263c55;
+    text-align:left
+}
+
+.table th{color:#93c5fd}
+
+.hidden{display:none!important}
+
+.notice{
+    padding:12px 14px;
+    border:1px solid #39506a;
+    background:#0b1b2d;
+    border-radius:10px;
+    margin-bottom:20px;
+    color:#c8d6e5
+}
+
+footer{
+    border-top:1px solid #203149;
+    padding:25px;
+    text-align:center;
+    color:#8193a8
+}
+
+@media(max-width:800px){
+    .nav-links{display:none}
+
+    .cards,
+    .grid{
+        grid-template-columns:1fr
+    }
+
+    .dash-head{
+        flex-direction:column;
+        align-items:flex-start
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <nav>
-        <button class="logo" onclick="showPage('home')">
-            Wealth<span>CashFx</span>
-        </button>
+<nav>
 
-        <ul class="nav-links">
-            <li><button onclick="showPage('home')">Home</button></li>
-            <li><button onclick="scrollToSection('features')">Features</button></li>
-            <li><button onclick="scrollToSection('about')">About</button></li>
-            <li><button onclick="showPage('login')">Login</button></li>
-        </ul>
+<button class="logo" onclick="showPage('home')">
+    Wealth<span>CashFx</span>
+</button>
 
-        <button class="btn btn-primary" onclick="showPage('signup')">
-            Get Started
-        </button>
-    </nav>
+<ul class="nav-links">
+<li>
+<button onclick="showPage('home')">Home</button>
+</li>
+
+<li>
+<button onclick="goToSection('features')">
+Features
+</button>
+</li>
+
+<li>
+<button onclick="goToSection('about')">
+About
+</button>
+</li>
+
+<li>
+<button onclick="showPage('login')">
+Login
+</button>
+</li>
+</ul>
+
+<button
+id="navAction"
+class="btn btn-primary"
+onclick="showPage('signup')">
+Get Started
+</button>
+
+</nav>
 </header>
 
 
-<!-- HOME PAGE -->
+<!-- HOME -->
 
 <main id="homePage" class="page active">
 
-    <section class="hero">
-        <div class="container hero-content">
+<section class="hero">
 
-            <div class="badge">
-                WEALTHCASHFX
-            </div>
+<div class="container hero-content">
 
-            <h1>
-                Build. Learn. <span>Grow.</span>
-            </h1>
+<div class="badge">
+WEALTHCASHFX
+</div>
 
-            <p>
-                A modern financial account platform designed to give
-                customers a clear place to manage their account information,
-                financial education and future services.
-            </p>
+<h1>
+Build. Learn. <span>Grow.</span>
+</h1>
 
-            <div class="buttons">
-                <button class="btn btn-primary" onclick="showPage('signup')">
-                    Get Started
-                </button>
+<p>
+A secure digital account portal for customer profiles,
+account information and internal platform credits.
+</p>
 
-                <button class="btn btn-secondary" onclick="showPage('login')">
-                    Customer Login
-                </button>
-            </div>
+<div class="buttons">
 
-        </div>
-    </section>
+<button
+class="btn btn-primary"
+onclick="showPage('signup')">
+Create Account
+</button>
 
+<button
+class="btn"
+onclick="showPage('login')">
+Customer Login
+</button>
 
-    <section id="features">
+</div>
 
-        <div class="container">
+</div>
 
-            <div class="section-title">
-                <h2>What WealthCashFx Offers</h2>
-                <p>Simple tools and information in one place.</p>
-            </div>
-
-            <div class="cards">
-
-                <div class="card">
-                    <div class="icon">🔐</div>
-                    <h3>Secure Account</h3>
-                    <p>
-                        A dedicated customer account area designed for
-                        secure access to personal information.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="icon">📊</div>
-                    <h3>Account Overview</h3>
-                    <p>
-                        Customers can view their account information,
-                        activity and available platform services.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="icon">📚</div>
-                    <h3>Financial Education</h3>
-                    <p>
-                        Access educational material and information
-                        designed to improve financial knowledge.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+</section>
 
 
-    <section id="about">
+<section id="features">
 
-        <div class="container">
+<div class="container">
 
-            <div class="section-title">
-                <h2>About WealthCashFx</h2>
-                <p>
-                    Building a straightforward digital financial experience.
-                </p>
-            </div>
+<div class="section-title">
 
-            <div class="card">
+<h2>Platform Features</h2>
 
-                <p>
-                    WealthCashFx is being developed as a digital platform
-                    for customer accounts, financial education and related
-                    services.
-                </p>
+<p>
+Simple account tools connected to your database.
+</p>
 
-                <br>
+</div>
 
-                <p>
-                    Financial transactions, investment services and other
-                    regulated activities require appropriate backend
-                    infrastructure, security controls, identity verification,
-                    payment integrations and applicable regulatory compliance.
-                </p>
 
-            </div>
+<div class="cards">
 
-        </div>
+<div class="card">
 
-    </section>
+<div class="icon">🔐</div>
+
+<h3>
+Secure Authentication
+</h3>
+
+<p>
+Customer accounts use Supabase authentication
+instead of browser-only storage.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">💳</div>
+
+<h3>
+Internal Transfers
+</h3>
+
+<p>
+Customers can transfer internal platform credits
+to another registered customer.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">📋</div>
+
+<h3>
+Transaction History
+</h3>
+
+<p>
+Transfers are recorded with transaction IDs,
+amounts, dates and statuses.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="about">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+About WealthCashFx
+</h2>
+
+<p>
+A straightforward digital account experience.
+</p>
+
+</div>
+
+
+<div class="panel">
+
+<p>
+WealthCashFx provides customer account tools,
+financial education and internal platform-credit
+features.
+</p>
+
+<br>
+
+<p>
+The credits displayed in this website are internal
+platform credits only. They are not bank deposits,
+cash, investment returns or guaranteed profits.
+Real-money financial services require appropriate
+regulated infrastructure, providers, security and
+compliance.
+</p>
+
+</div>
+
+</div>
+
+</section>
 
 </main>
 
 
-<!-- SIGN UP PAGE -->
+<!-- SIGN UP -->
 
 <main id="signupPage" class="page">
 
-    <section class="form-page">
+<section class="form-page">
 
-        <div class="form-box">
+<div class="form-box">
 
-            <h2>Create Account</h2>
+<h2>Create Account</h2>
 
-            <p>
-                Create your WealthCashFx customer profile.
-            </p>
+<p>
+Create your WealthCashFx customer profile.
+</p>
 
-            <form onsubmit="createAccount(event)">
 
-                <label for="signupName">
-                    Full Name
-                </label>
+<form id="signupForm">
 
-                <input
-                    id="signupName"
-                    type="text"
-                    placeholder="Enter your full name"
-                    required
-                >
+<label>
+Full Name
+</label>
 
-                <label for="signupEmail">
-                    Email Address
-                </label>
+<input
+id="signupName"
+type="text"
+placeholder="Enter your full name"
+required
+>
 
-                <input
-                    id="signupEmail"
-                    type="email"
-                    placeholder="you@example.com"
-                    required
-                >
 
-                <label for="signupPassword">
-                    Password
-                </label>
+<label>
+Email Address
+</label>
 
-                <input
-                    id="signupPassword"
-                    type="password"
-                    placeholder="Create a password"
-                    minlength="8"
-                    required
-                >
+<input
+id="signupEmail"
+type="email"
+placeholder="you@example.com"
+required
+>
 
-                <button class="btn btn-primary" type="submit">
-                    Create Account
-                </button>
 
-            </form>
+<label>
+Password
+</label>
 
-            <div id="signupMessage" class="message"></div>
+<input
+id="signupPassword"
+type="password"
+placeholder="Minimum 8 characters"
+minlength="8"
+required
+>
 
-            <div class="form-link">
-                Already have an account?
-                <button onclick="showPage('login')">
-                    Login
-                </button>
-            </div>
 
-            <div class="form-link">
-                <button onclick="showPage('home')">
-                    ← Back to Home
-                </button>
-            </div>
+<button
+class="btn btn-primary"
+type="submit">
+Create Account
+</button>
 
-        </div>
+</form>
 
-    </section>
+
+<div
+id="signupMessage"
+class="message">
+</div>
+
+
+<div
+style="margin-top:18px;text-align:center"
+class="muted">
+
+Already have an account?
+
+<button
+class="btn"
+style="border:0;padding:0;color:#38bdf8"
+onclick="showPage('login')">
+
+Login
+
+</button>
+
+</div>
+
+</div>
+
+</section>
 
 </main>
 
 
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 
 <main id="loginPage" class="page">
 
-    <section class="form-page">
+<section class="form-page">
 
-        <div class="form-box">
+<div class="form-box">
 
-            <h2>Customer Login</h2>
+<h2>
+Customer Login
+</h2>
 
-            <p>
-                Sign in to access your customer area.
-            </p>
+<p>
+Sign in to your account.
+</p>
 
-            <form onsubmit="loginAccount(event)">
 
-                <label for="loginEmail">
-                    Email Address
-                </label>
+<form id="loginForm">
 
-                <input
-                    id="loginEmail"
-                    type="email"
-                    placeholder="you@example.com"
-                    required
-                >
+<label>
+Email Address
+</label>
 
-                <label for="loginPassword">
-                    Password
-                </label>
+<input
+id="loginEmail"
+type="email"
+placeholder="you@example.com"
+required
+>
 
-                <input
-                    id="loginPassword"
-                    type="password"
-                    placeholder="Your password"
-                    required
-                >
 
-                <button class="btn btn-primary" type="submit">
-                    Login
-                </button>
+<label>
+Password
+</label>
 
-            </form>
+<input
+id="loginPassword"
+type="password"
+placeholder="Your password"
+required
+>
 
-            <div id="loginMessage" class="message"></div>
 
-            <div class="form-link">
-                Don't have an account?
-                <button onclick="showPage('signup')">
-                    Create Account
-                </button>
-            </div>
+<button
+class="btn btn-primary"
+type="submit">
 
-            <div class="form-link">
-                <button onclick="showPage('home')">
-                    ← Back to Home
-                </button>
-            </div>
+Login
 
-        </div>
+</button>
 
-    </section>
+</form>
+
+
+<div
+id="loginMessage"
+class="message">
+</div>
+
+
+<div
+style="margin-top:18px;text-align:center"
+class="muted">
+
+Don't have an account?
+
+<button
+class="btn"
+style="border:0;padding:0;color:#38bdf8"
+onclick="showPage('signup')">
+
+Create Account
+
+</button>
+
+</div>
+
+</div>
+
+</section>
 
 </main>
 
 
-<!-- CUSTOMER DASHBOARD -->
+<!-- DASHBOARD -->
 
 <main id="dashboardPage" class="page">
 
-    <section class="dashboard">
+<section class="dashboard">
 
-        <div class="container">
-
-            <div class="dashboard-header">
-
-                <div>
-                    <h2>Customer Dashboard</h2>
-                    <p id="welcomeText">
-                        Welcome to your account.
-                    </p>
-                </div>
-
-                <button class="btn btn-secondary" onclick="logout()">
-                    Logout
-                </button>
-
-            </div>
+<div class="container">
 
 
-            <div class="dashboard-grid">
+<div class="dash-head">
 
-                <div class="balance-card">
-                    <small>Available Balance</small>
-                    <div class="balance">$0.00</div>
-                </div>
+<div>
 
-                <div class="balance-card">
-                    <small>Account Status</small>
-                    <div class="balance" style="font-size:24px;">
-                        Active
-                    </div>
-                </div>
+<h2>
+Customer Dashboard
+</h2>
 
-                <div class="balance-card">
-                    <small>Transactions</small>
-                    <div class="balance">0</div>
-                </div>
+<p id="welcomeText">
+Welcome to your account.
+</p>
 
-            </div>
+</div>
 
 
-            <div class="dashboard-panel">
+<button
+class="btn btn-danger"
+onclick="logout()">
 
-                <h3>Account Activity</h3>
+Logout
 
-                <div class="empty-state">
-                    No account activity yet.
-                </div>
+</button>
 
-            </div>
+</div>
 
 
-            <div class="dashboard-panel">
+<div class="notice">
 
-                <h3>Available Services</h3>
+<strong>Important:</strong>
+The balance shown here represents internal
+platform credits only. This page does not process
+real-world cash or bank transfers.
 
-                <div class="cards">
+</div>
 
-                    <div class="card">
-                        <div class="icon">📖</div>
-                        <h3>Education</h3>
-                        <p>
-                            Explore financial education resources.
-                        </p>
-                    </div>
 
-                    <div class="card">
-                        <div class="icon">👤</div>
-                        <h3>Profile</h3>
-                        <p>
-                            Your customer profile information.
-                        </p>
-                    </div>
+<div class="grid">
 
-                    <div class="card">
-                        <div class="icon">🛡️</div>
-                        <h3>Security</h3>
-                        <p>
-                            Account security and verification settings.
-                        </p>
-                    </div>
 
-                </div>
+<div class="balance-card">
 
-            </div>
+<span class="muted">
+Available Credits
+</span>
 
-        </div>
+<div
+id="balance"
+class="balance">
 
-    </section>
+$0.00
+
+</div>
+
+</div>
+
+
+<div class="balance-card">
+
+<span class="muted">
+Account Status
+</span>
+
+<div
+id="accountStatus"
+class="balance"
+style="font-size:24px">
+
+Active
+
+</div>
+
+</div>
+
+
+<div class="balance-card">
+
+<span class="muted">
+Transactions
+</span>
+
+<div
+id="txCount"
+class="balance">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TRANSFER -->
+
+<div
+class="panel"
+style="margin-top:22px">
+
+<h3>
+Send Internal Credits
+</h3>
+
+<p
+class="muted"
+style="margin-top:5px">
+
+Send credits to another registered WealthCashFx
+customer.
+
+</p>
+
+
+<form
+id="transferForm"
+style="margin-top:15px">
+
+<label>
+Recipient Email
+</label>
+
+<input
+id="recipientEmail"
+type="email"
+placeholder="recipient@example.com"
+required
+>
+
+
+<label>
+Amount
+</label>
+
+<input
+id="transferAmount"
+type="number"
+min="0.01"
+step="0.01"
+placeholder="0.00"
+required
+>
+
+
+<button
+class="btn btn-primary"
+type="submit"
+style="width:100%;margin-top:18px">
+
+Send Credits
+
+</button>
+
+</form>
+
+
+<div
+id="transferMessage"
+class="message">
+</div>
+
+</div>
+
+
+<!-- TRANSACTIONS -->
+
+<div
+class="panel"
+style="margin-top:22px">
+
+<h3>
+Transaction History
+</h3>
+
+
+<div
+class="table-wrap"
+style="margin-top:12px">
+
+<table class="table">
+
+<thead>
+
+<tr>
+
+<th>
+Date
+</th>
+
+<th>
+Type
+</th>
+
+<th>
+Amount
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Transaction ID
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="txBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div
+id="adminPanel"
+class="panel hidden"
+style="margin-top:22px">
+
+<h3>
+Admin — Customer List
+</h3>
+
+<p
+class="muted"
+style="margin-top:5px">
+
+Only accounts authorized as administrators
+can see this section.
+
+</p>
+
+
+<div
+class="table-wrap"
+style="margin-top:15px">
+
+<table class="table">
+
+<thead>
+
+<tr>
+
+<th>
+Name
+</th>
+
+<th>
+Email
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Credits
+</th>
+
+<th>
+Joined
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="usersBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
 
 </main>
 
 
 <footer>
-    <p>
-        © 2026 WealthCashFx — Build • Learn • Grow
-    </p>
+
+© 2026 WealthCashFx — Build • Learn • Grow
+
 </footer>
 
 
 <script>
 
-    /*
-     * PAGE NAVIGATION
-     */
+/*
+====================================================
+SUPABASE CONFIGURATION
+====================================================
 
-    function showPage(page) {
+PUT YOUR SUPABASE PROJECT INFORMATION HERE.
 
-        document.querySelectorAll(".page").forEach(function(section) {
-            section.classList.remove("active");
-        });
+Use the Project URL and ANON/PUBLIC key.
 
-        if (page === "home") {
-            document.getElementById("homePage").classList.add("active");
-        }
+DO NOT PUT YOUR SERVICE_ROLE OR SECRET KEY HERE.
+====================================================
+*/
 
-        if (page === "signup") {
-            document.getElementById("signupPage").classList.add("active");
-        }
+const SUPABASE_URL =
+"YOUR_SUPABASE_URL";
 
-        if (page === "login") {
-            document.getElementById("loginPage").classList.add("active");
-        }
+const SUPABASE_ANON_KEY =
+"YOUR_SUPABASE_ANON_KEY";
 
-        if (page === "dashboard") {
-            document.getElementById("dashboardPage").classList.add("active");
 
-            const name = localStorage.getItem("wealthcashfx_name");
+const supabaseConfigured =
+!SUPABASE_URL.startsWith("YOUR_") &&
+!SUPABASE_ANON_KEY.startsWith("YOUR_");
 
-            if (name) {
-                document.getElementById("welcomeText").textContent =
-                    "Welcome, " + name + ".";
-            }
-        }
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
+const db =
+supabaseConfigured
+? window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+)
+: null;
 
 
-    /*
-     * SECTION NAVIGATION
-     */
+/*
+====================================================
+PAGE NAVIGATION
+====================================================
+*/
 
-    function scrollToSection(sectionId) {
+function showPage(page){
 
-        showPage("home");
+document
+.querySelectorAll(".page")
+.forEach(function(pageElement){
 
-        setTimeout(function() {
+pageElement.classList.remove("active");
 
-            const section = document.getElementById(sectionId);
+});
 
-            if (section) {
-                section.scrollIntoView({
-                    behavior: "smooth"
-                });
-            }
 
-        }, 100);
-    }
+const pageElement =
+document.getElementById(
+page + "Page"
+);
 
 
-    /*
-     * ACCOUNT CREATION
-     *
-     * This is only a front-end prototype.
-     * It does NOT create a secure production account.
-     */
+if(pageElement){
 
-    function createAccount(event) {
+pageElement.classList.add("active");
 
-        event.preventDefault();
+}
 
-        const name =
-            document.getElementById("signupName").value.trim();
 
-        const email =
-            document.getElementById("signupEmail").value.trim();
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
-        const password =
-            document.getElementById("signupPassword").value;
+}
 
-        const message =
-            document.getElementById("signupMessage");
 
+/*
+====================================================
+SECTION NAVIGATION
+====================================================
+*/
 
-        if (password.length < 8) {
+function goToSection(sectionId){
 
-            message.style.display = "block";
+showPage("home");
 
-            message.textContent =
-                "Password must contain at least 8 characters.";
+setTimeout(function(){
 
-            return;
-        }
+const section =
+document.getElementById(sectionId);
 
+if(section){
 
-        localStorage.setItem(
-            "wealthcashfx_name",
-            name
-        );
+section.scrollIntoView({
+behavior:"smooth"
+});
 
-        localStorage.setItem(
-            "wealthcashfx_email",
-            email
-        );
+}
 
+},100);
 
-        message.style.display = "block";
+}
 
-        message.textContent =
-            "Account profile created. Opening your customer area...";
 
+/*
+====================================================
+MESSAGES
+====================================================
+*/
 
-        setTimeout(function() {
+function showMessage(
+elementId,
+text,
+success=false
+){
 
-            showPage("dashboard");
+const element =
+document.getElementById(elementId);
 
-        }, 900);
-    }
+element.textContent = text;
 
+element.className =
+success
+? "message ok"
+: "message err";
 
-    /*
-     * LOGIN
-     *
-     * Temporary browser-only flow.
-     * Replace with secure backend authentication
-     * before using this for real customers.
-     */
+element.style.display =
+"block";
 
-    function loginAccount(event) {
+}
 
-        event.preventDefault();
 
-        const email =
-            document.getElementById("loginEmail").value.trim();
+/*
+====================================================
+CONFIGURATION CHECK
+====================================================
+*/
 
-        const savedEmail =
-            localStorage.getItem("wealthcashfx_email");
+function checkConfiguration(){
 
-        const message =
-            document.getElementById("loginMessage");
+if(!supabaseConfigured){
 
+alert(
+"Your Supabase URL and anon/public key have not been added yet."
+);
 
-        if (!savedEmail) {
+return false;
 
-            message.style.display = "block";
+}
 
-            message.textContent =
-                "No local account was found. Please create an account first.";
+return true;
 
-            return;
-        }
+}
 
 
-        if (email !== savedEmail) {
+/*
+====================================================
+CREATE ACCOUNT
+====================================================
+*/
 
-            message.style.display = "block";
+document
+.getElementById("signupForm")
+.addEventListener(
+"submit",
+async function(event){
 
-            message.textContent =
-                "The email does not match the account on this device.";
+event.preventDefault();
 
-            return;
-        }
+if(!checkConfiguration()){
+return;
+}
 
 
-        message.style.display = "block";
+const name =
+document
+.getElementById("signupName")
+.value
+.trim();
 
-        message.textContent =
-            "Login successful. Opening your dashboard...";
 
+const email =
+document
+.getElementById("signupEmail")
+.value
+.trim();
 
-        setTimeout(function() {
 
-            showPage("dashboard");
+const password =
+document
+.getElementById("signupPassword")
+.value;
 
-        }, 700);
-    }
 
+const {
+data,
+error
+} =
+await db.auth.signUp({
 
-    /*
-     * LOGOUT
-     */
+email:email,
 
-    function logout() {
+password:password,
 
-        showPage("home");
+options:{
+data:{
+full_name:name
+}
+}
 
-    }
+});
+
+
+if(error){
+
+showMessage(
+"signupMessage",
+error.message
+);
+
+return;
+
+}
+
+
+showMessage(
+"signupMessage",
+"Account created successfully. Check your email if email confirmation is enabled, then log in.",
+true
+);
+
+
+document
+.getElementById("signupForm")
+.reset();
+
+}
+);
+
+
+/*
+====================================================
+LOGIN
+====================================================
+*/
+
+document
+.getElementById("loginForm")
+.addEventListener(
+"submit",
+async function(event){
+
+event.preventDefault();
+
+if(!checkConfiguration()){
+return;
+}
+
+
+const email =
+document
+.getElementById("loginEmail")
+.value
+.trim();
+
+
+const password =
+document
+.getElementById("loginPassword")
+.value;
+
+
+const {
+data,
+error
+} =
+await db.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+
+if(error){
+
+showMessage(
+"loginMessage",
+error.message
+);
+
+return;
+
+}
+
+
+await loadDashboard(
+data.user
+);
+
+showPage("dashboard");
+
+}
+);
+
+
+/*
+====================================================
+LOAD CUSTOMER DASHBOARD
+====================================================
+*/
+
+async function loadDashboard(user=null){
+
+if(!checkConfiguration()){
+return;
+}
+
+
+if(!user){
+
+const {
+data
+} =
+await db.auth.getUser();
+
+user = data.user;
+
+}
+
+
+if(!user){
+return;
+}
+
+
+/*
+GET PROFILE
+*/
+
+const {
+data:profile,
+error:profileError
+} =
+await db
+.from("profiles")
+.select(
+"full_name,status,is_admin"
+)
+.eq("id",user.id)
+.single();
+
+
+if(profileError){
+
+console.error(profileError);
+
+return;
+
+}
+
+
+/*
+GET WALLET
+*/
+
+const {
+data:wallet
+} =
+await db
+.from("wallets")
+.select("balance")
+.eq("user_id",user.id)
+.single();
+
+
+const customerName =
+profile.full_name ||
+user.email;
+
+
+document
+.getElementById("welcomeText")
+.textContent =
+"Welcome, " +
+customerName +
+".";
+
+
+document
+.getElementById("balance")
+.textContent =
+"$" +
+Number(
+wallet?.balance || 0
+).toFixed(2);
+
+
+document
+.getElementById("accountStatus")
+.textContent =
+profile.status ||
+"Active";
+
+
+/*
+GET TRANSACTIONS
+*/
+
+const {
+data:transactions
+} =
+await db
+.from("transactions")
+.select(
+"id,transaction_type,amount,status,created_at"
+)
+.or(
+"sender_id.eq." +
+user.id +
+",recipient_id.eq." +
+user.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+)
+.limit(50);
+
+
+const transactionBody =
+document.getElementById(
+"txBody"
+);
+
+
+transactionBody.innerHTML = "";
+
+
+(transactions || [])
+.forEach(function(transaction){
+
+const row =
+document.createElement("tr");
+
+
+const incoming =
+transaction.transaction_type ===
+"transfer_in";
+
+
+row.innerHTML =
+
+"<td>" +
+new Date(
+transaction.created_at
+).toLocaleString() +
+"</td>" +
+
+"<td>" +
+(
+incoming
+? "Received"
+: "Sent"
+) +
+"</td>" +
+
+"<td>" +
+(
+incoming
+? "+"
+: "-"
+) +
+"$" +
+Number(
+transaction.amount
+).toFixed(2) +
+"</td>" +
+
+"<td>" +
+transaction.status +
+"</td>" +
+
+"<td>" +
+transaction.id +
+"</td>";
+
+
+transactionBody.appendChild(row);
+
+});
+
+
+document
+.getElementById("txCount")
+.textContent =
+(transactions || []).length;
+
+
+/*
+ADMIN SECTION
+*/
+
+if(profile.is_admin){
+
+document
+.getElementById("adminPanel")
+.classList.remove("hidden");
+
+
+await loadCustomers();
+
+}else{
+
+document
+.getElementById("adminPanel")
+.classList.add("hidden");
+
+}
+
+}
+
+
+/*
+====================================================
+SEND INTERNAL CREDITS
+====================================================
+*/
+
+document
+.getElementById("transferForm")
+.addEventListener(
+"submit",
+async function(event){
+
+event.preventDefault();
+
+if(!checkConfiguration()){
+return;
+}
+
+
+const recipient =
+document
+.getElementById("recipientEmail")
+.value
+.trim();
+
+
+const amount =
+Number(
+document
+.getElementById("transferAmount")
+.value
+);
+
+
+if(
+!Number.isFinite(amount) ||
+amount <= 0
+){
+
+showMessage(
+"transferMessage",
+"Enter a valid amount."
+);
+
+return;
+
+}
+
+
+const {
+data,
+error
+} =
+await db.rpc(
+"transfer_credits",
+{
+p_recipient_email:recipient,
+p_amount:amount
+}
+);
+
+
+if(error){
+
+showMessage(
+"transferMessage",
+error.message
+);
+
+return;
+
+}
+
+
+showMessage(
+"transferMessage",
+"Transfer completed successfully. Transaction ID: " + data,
+true
+);
+
+
+document
+.getElementById("transferForm")
+.reset();
+
+
+await loadDashboard();
+
+}
+);
+
+
+/*
+====================================================
+LOAD ADMIN CUSTOMER LIST
+====================================================
+*/
+
+async function loadCustomers(){
+
+const {
+data,
+error
+} =
+await db
+.from("admin_customer_view")
+.select("*")
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+const body =
+document.getElementById(
+"usersBody"
+);
+
+
+body.innerHTML = "";
+
+
+(data || [])
+.forEach(function(customer){
+
+const row =
+document.createElement("tr");
+
+
+row.innerHTML =
+
+"<td>" +
+escapeHtml(
+customer.full_name || ""
+) +
+"</td>" +
+
+"<td>" +
+escapeHtml(
+customer.email || ""
+) +
+"</td>" +
+
+"<td>" +
+escapeHtml(
+customer.status || ""
+) +
+"</td>" +
+
+"<td>$" +
+Number(
+customer.balance || 0
+).toFixed(2) +
+"</td>" +
+
+"<td>" +
+new Date(
+customer.created_at
+).toLocaleDateString() +
+"</td>";
+
+
+body.appendChild(row);
+
+});
+
+}
+
+
+/*
+====================================================
+HTML SECURITY
+====================================================
+*/
+
+function escapeHtml(value){
+
+return String(value)
+.replace(
+/[&<>"']/g,
+function(character){
+
+const replacements = {
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+};
+
+return replacements[character];
+
+}
+);
+
+}
+
+
+/*
+====================================================
+LOGOUT
+====================================================
+*/
+
+async function logout(){
+
+if(db){
+
+await db.auth.signOut();
+
+}
+
+showPage("home");
+
+}
+
+
+/*
+====================================================
+CHECK EXISTING SESSION
+====================================================
+*/
+
+(async function(){
+
+if(!supabaseConfigured){
+return;
+}
+
+
+const {
+data
+} =
+await db.auth.getSession();
+
+
+if(data.session){
+
+await loadDashboard(
+data.session.user
+);
+
+showPage("dashboard");
+
+}
+
+
+db.auth.onAuthStateChange(
+function(event,session){
+
+if(event === "SIGNED_OUT"){
+
+showPage("home");
+
+}
+
+}
+);
+
+})();
 
 </script>
 
