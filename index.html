@@ -1026,11 +1026,22 @@ DO NOT PUT YOUR SERVICE_ROLE OR SECRET KEY HERE.
 */
 
 const SUPABASE_URL =
-"YOUR_SUPABASE_URL";
+"https://dgwncijvafhbsgakmiqo.supabase.co";
 
 const SUPABASE_ANON_KEY =
-"YOUR_SUPABASE_ANON_KEY";
+"sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmB";
 
+const supabaseConfigured =
+  !SUPABASE_URL.startsWith("YOUR_") &&
+  !SUPABASE_ANON_KEY.startsWith("YOUR_");
+
+const db =
+  supabaseConfigured
+    ? window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      )
+    : null;
 
 const supabaseConfigured =
 !SUPABASE_URL.startsWith("YOUR_") &&
