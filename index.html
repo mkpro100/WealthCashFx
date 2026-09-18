@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>WealthCashFx</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WealthCashFx</title>
 
-<script src=""https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" (https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2)"></script>
+<!-- Supabase JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{
@@ -60,7 +61,7 @@ header{
     position:sticky;
     top:0;
     z-index:1000;
-    background:rgba(6,16,29,.96);
+    background:rgba(6,16,29,.97);
     backdrop-filter:blur(12px);
     border-bottom:1px solid #203149;
 }
@@ -98,7 +99,6 @@ nav{
     background:none;
     border:0;
     color:#dbeafe;
-    transition:.2s;
 }
 
 .nav-links button:hover{
@@ -147,7 +147,12 @@ nav{
     align-items:center;
     text-align:center;
     background:
-        radial-gradient(circle at 50% 0%,#16466f 0%,#0a2038 30%,#06101d 70%);
+        radial-gradient(
+            circle at 50% 0%,
+            #16466f 0%,
+            #0a2038 30%,
+            #06101d 70%
+        );
 }
 
 .hero-content{
@@ -467,19 +472,22 @@ footer{
     }
 }
 </style>
-
 </head>
 
 <body>
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 <nav>
 
 <button
-class="logo"
-type="button"
-onclick="showPage('home')">
-Wealth<span>CashFx</span>
+    class="logo"
+    type="button"
+    onclick="showPage('home')">
+    Wealth<span>CashFx</span>
 </button>
 
 <ul class="nav-links">
@@ -511,17 +519,20 @@ Login
 </ul>
 
 <button
-id="navAction"
-class="btn btn-primary"
-type="button"
-onclick="showPage('signup')">
-Get Started
+    id="navAction"
+    class="btn btn-primary"
+    type="button"
+    onclick="showPage('signup')">
+    Get Started
 </button>
 
 </nav>
 </header>
 
-<!-- HOME -->
+
+<!-- =========================
+     HOME
+========================= -->
 
 <main id="homePage" class="page active">
 
@@ -545,24 +556,24 @@ account information and internal platform credits.
 <div class="buttons">
 
 <button
-class="btn btn-primary"
-type="button"
-onclick="showPage('signup')">
-Create Account
+    class="btn btn-primary"
+    type="button"
+    onclick="showPage('signup')">
+    Create Account
 </button>
 
 <button
-class="btn"
-type="button"
-onclick="showPage('login')">
-Customer Login
+    class="btn"
+    type="button"
+    onclick="showPage('login')">
+    Customer Login
 </button>
 
 </div>
 
 </div>
-
 </section>
+
 
 <section id="features">
 
@@ -570,9 +581,7 @@ Customer Login
 
 <div class="section-title">
 
-<h2>
-Platform Features
-</h2>
+<h2>Platform Features</h2>
 
 <p>
 Simple account tools connected to your database.
@@ -580,15 +589,14 @@ Simple account tools connected to your database.
 
 </div>
 
+
 <div class="cards">
 
 <div class="card">
 
 <div class="icon">🔐</div>
 
-<h3>
-Secure Authentication
-</h3>
+<h3>Secure Authentication</h3>
 
 <p class="muted">
 Customer accounts use Supabase authentication
@@ -597,13 +605,12 @@ instead of browser-only storage.
 
 </div>
 
+
 <div class="card">
 
 <div class="icon">💳</div>
 
-<h3>
-Internal Transfers
-</h3>
+<h3>Internal Transfers</h3>
 
 <p class="muted">
 Customers can transfer internal platform credits
@@ -612,13 +619,12 @@ to another registered customer.
 
 </div>
 
+
 <div class="card">
 
 <div class="icon">📋</div>
 
-<h3>
-Transaction History
-</h3>
+<h3>Transaction History</h3>
 
 <p class="muted">
 Transfers can be recorded with transaction IDs,
@@ -630,8 +636,8 @@ amounts, dates and statuses.
 </div>
 
 </div>
-
 </section>
+
 
 <section id="about">
 
@@ -639,9 +645,7 @@ amounts, dates and statuses.
 
 <div class="section-title">
 
-<h2>
-About WealthCashFx
-</h2>
+<h2>About WealthCashFx</h2>
 
 <p>
 A straightforward digital account experience.
@@ -671,12 +675,14 @@ compliance.
 </div>
 
 </div>
-
 </section>
 
 </main>
 
-<!-- SIGN UP -->
+
+<!-- =========================
+     SIGN UP
+========================= -->
 
 <main id="signupPage" class="page">
 
@@ -684,9 +690,7 @@ compliance.
 
 <div class="form-box">
 
-<h2>
-Create Account
-</h2>
+<h2>Create Account</h2>
 
 <p>
 Create your WealthCashFx customer profile.
@@ -699,46 +703,43 @@ Full Name
 </label>
 
 <input
-id="signupName"
-type="text"
-placeholder="Enter your full name"
-autocomplete="name"
-required
-
-«»
+    id="signupName"
+    type="text"
+    placeholder="Enter your full name"
+    autocomplete="name"
+    required
+>
 
 <label for="signupEmail">
 Email Address
 </label>
 
 <input
-id="signupEmail"
-type="email"
-placeholder=""you@example.com" (mailto:you@example.com)"
-autocomplete="email"
-required
-
-«»
+    id="signupEmail"
+    type="email"
+    placeholder="you@example.com"
+    autocomplete="email"
+    required
+>
 
 <label for="signupPassword">
 Password
 </label>
 
 <input
-id="signupPassword"
-type="password"
-placeholder="Minimum 8 characters"
-minlength="8"
-autocomplete="new-password"
-required
-
-«»
+    id="signupPassword"
+    type="password"
+    placeholder="Minimum 8 characters"
+    minlength="8"
+    autocomplete="new-password"
+    required
+>
 
 <button
-id="signupButton"
-class="btn btn-primary"
-type="submit">
-Create Account
+    id="signupButton"
+    class="btn btn-primary"
+    type="submit">
+    Create Account
 </button>
 
 </form>
@@ -750,22 +751,24 @@ Create Account
 Already have an account?
 
 <button
-class="btn"
-type="button"
-style="border:0;padding:0;color:#38bdf8"
-onclick="showPage('login')">
-Login
+    class="btn"
+    type="button"
+    style="border:0;padding:0;color:#38bdf8"
+    onclick="showPage('login')">
+    Login
 </button>
 
 </div>
 
 </div>
-
 </section>
 
 </main>
 
-<!-- LOGIN -->
+
+<!-- =========================
+     LOGIN
+========================= -->
 
 <main id="loginPage" class="page">
 
@@ -773,9 +776,7 @@ Login
 
 <div class="form-box">
 
-<h2>
-Customer Login
-</h2>
+<h2>Customer Login</h2>
 
 <p>
 Sign in to your account.
@@ -788,32 +789,30 @@ Email Address
 </label>
 
 <input
-id="loginEmail"
-type="email"
-placeholder=""you@example.com" (mailto:you@example.com)"
-autocomplete="email"
-required
-
-«»
+    id="loginEmail"
+    type="email"
+    placeholder="you@example.com"
+    autocomplete="email"
+    required
+>
 
 <label for="loginPassword">
 Password
 </label>
 
 <input
-id="loginPassword"
-type="password"
-placeholder="Your password"
-autocomplete="current-password"
-required
-
-«»
+    id="loginPassword"
+    type="password"
+    placeholder="Your password"
+    autocomplete="current-password"
+    required
+>
 
 <button
-id="loginButton"
-class="btn btn-primary"
-type="submit">
-Login
+    id="loginButton"
+    class="btn btn-primary"
+    type="submit">
+    Login
 </button>
 
 </form>
@@ -825,22 +824,24 @@ Login
 Don't have an account?
 
 <button
-class="btn"
-type="button"
-style="border:0;padding:0;color:#38bdf8"
-onclick="showPage('signup')">
-Create Account
+    class="btn"
+    type="button"
+    style="border:0;padding:0;color:#38bdf8"
+    onclick="showPage('signup')">
+    Create Account
 </button>
 
 </div>
 
 </div>
-
 </section>
 
 </main>
 
-<!-- DASHBOARD -->
+
+<!-- =========================
+     DASHBOARD
+========================= -->
 
 <main id="dashboardPage" class="page">
 
@@ -852,9 +853,7 @@ Create Account
 
 <div>
 
-<h2>
-Customer Dashboard
-</h2>
+<h2>Customer Dashboard</h2>
 
 <p id="welcomeText">
 Welcome to your account.
@@ -863,28 +862,31 @@ Welcome to your account.
 </div>
 
 <button
-class="btn btn-danger"
-type="button"
-onclick="logout()">
-Logout
+    class="btn btn-danger"
+    type="button"
+    onclick="logout()">
+    Logout
 </button>
 
 </div>
 
+
 <div class="notice">
 
 <strong>Important:</strong>
+
 The balance shown here represents internal
 platform credits only. This page does not process
 real-world cash or bank transfers.
 
 </div>
 
+
 <div class="grid">
 
 <div class="balance-card">
 
-<span class="muted">in my t
+<span class="muted">
 Available Credits
 </span>
 
@@ -894,6 +896,7 @@ $0.00
 
 </div>
 
+
 <div class="balance-card">
 
 <span class="muted">
@@ -901,14 +904,18 @@ Account Status
 </span>
 
 <div
-id="accountStatus"
-class="balance status-line"
-style="font-size:24px">
+    id="accountStatus"
+    class="balance status-line"
+    style="font-size:24px">
+
 <span class="status-dot"></span>
+
 <span>Active</span>
+
 </div>
 
 </div>
+
 
 <div class="balance-card">
 
@@ -924,6 +931,7 @@ Transactions
 
 </div>
 
+
 <!-- TRANSFER -->
 
 <div class="panel" style="margin-top:22px">
@@ -933,10 +941,8 @@ Send Internal Credits
 </h3>
 
 <p class="muted" style="margin-top:5px">
-
 Send credits to another registered WealthCashFx
 customer.
-
 </p>
 
 <form id="transferForm" style="margin-top:15px">
@@ -946,33 +952,31 @@ Recipient Email
 </label>
 
 <input
-id="recipientEmail"
-type="email"
-placeholder=""recipient@example.com" (mailto:recipient@example.com)"
-required
-
-«»
+    id="recipientEmail"
+    type="email"
+    placeholder="recipient@example.com"
+    required
+>
 
 <label for="transferAmount">
 Amount
 </label>
 
 <input
-id="transferAmount"
-type="number"
-min="0.01"
-step="0.01"
-placeholder="0.00"
-required
-
-«»
+    id="transferAmount"
+    type="number"
+    min="0.01"
+    step="0.01"
+    placeholder="0.00"
+    required
+>
 
 <button
-id="transferButton"
-class="btn btn-primary"
-type="submit"
-style="width:100%;margin-top:18px">
-Send Credits
+    id="transferButton"
+    class="btn btn-primary"
+    type="submit"
+    style="width:100%;margin-top:18px">
+    Send Credits
 </button>
 
 </form>
@@ -980,6 +984,7 @@ Send Credits
 <div id="transferMessage" class="message"></div>
 
 </div>
+
 
 <!-- TRANSACTIONS -->
 
@@ -1021,22 +1026,21 @@ No transactions yet.
 
 </div>
 
+
 <!-- ADMIN -->
 
 <div
-id="adminPanel"
-class="panel hidden"
-style="margin-top:22px">
+    id="adminPanel"
+    class="panel hidden"
+    style="margin-top:22px">
 
 <h3>
 Admin — Customer List
 </h3>
 
 <p class="muted" style="margin-top:5px">
-
 Only accounts authorized as administrators
 can see this section.
-
 </p>
 
 <div class="table-wrap" style="margin-top:15px">
@@ -1069,88 +1073,70 @@ can see this section.
 
 </main>
 
+
 <footer>
-
 © 2026 WealthCashFx — Build • Learn • Grow
-
 </footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
 
-/*
-====================================================
-SUPABASE CONFIGURATION
-====================================================
-
-Use only your Supabase PROJECT URL and
-PUBLISHABLE browser key.
-
-NEVER put an sb_secret_ key or service-role key
-inside this HTML file.
-====================================================
-*/
+/* =========================================
+   SUPABASE CONFIGURATION
+========================================= */
 
 const SUPABASE_URL =
-""https://dgwncijvafhbsgakmiqo.supabase.co" (https://dgwncijvafhbsgakmiqo.supabase.co)";
+    "https://dgwncijvafhbsgakmiqo.supabase.co";
 
 const SUPABASE_ANON_KEY =
-"sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmB";
+    "sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmB";
 
-/*
-====================================================
-SUPABASE CLIENT
-====================================================
-*/
 
-const supabaseConfigured =
-Boolean(
-    SUPABASE_URL &&
-    SUPABASE_ANON_KEY &&
-    !SUPABASE_URL.startsWith("YOUR_") &&
-    !SUPABASE_ANON_KEY.startsWith("YOUR_")
-);
+/* =========================================
+   SUPABASE CLIENT
+========================================= */
 
-const db =
-supabaseConfigured
-    ? window.supabase.createClient(
+let db = null;
+
+if (
+    window.supabase &&
+    typeof window.supabase.createClient === "function"
+) {
+    db = window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_ANON_KEY
-    )
-    : null;
+    );
+}
 
-/*
-====================================================
-CURRENT USER
-====================================================
-*/
+
+/* =========================================
+   CURRENT USER
+========================================= */
 
 let currentUser = null;
 
-/*
-====================================================
-PAGE NAVIGATION
-====================================================
-*/
 
-function showPage(page){
+/* =========================================
+   PAGE NAVIGATION
+========================================= */
+
+function showPage(page) {
 
     document
         .querySelectorAll(".page")
-        .forEach(function(pageElement){
-
+        .forEach(function(pageElement) {
             pageElement.classList.remove("active");
-
         });
 
     const pageElement =
-        document.getElementById(
-            page + "Page"
-        );
+        document.getElementById(page + "Page");
 
-    if(pageElement){
-
+    if (pageElement) {
         pageElement.classList.add("active");
-
     }
 
     window.scrollTo({
@@ -1159,48 +1145,44 @@ function showPage(page){
     });
 }
 
-/*
-====================================================
-SECTION NAVIGATION
-====================================================
-*/
 
-function goToSection(sectionId){
+/* =========================================
+   SECTION NAVIGATION
+========================================= */
+
+function goToSection(sectionId) {
 
     showPage("home");
 
-    setTimeout(function(){
+    setTimeout(function() {
 
         const section =
             document.getElementById(sectionId);
 
-        if(section){
-
+        if (section) {
             section.scrollIntoView({
                 behavior:"smooth"
             });
-
         }
 
     },100);
 }
 
-/*
-====================================================
-MESSAGE SYSTEM
-====================================================
-*/
+
+/* =========================================
+   MESSAGES
+========================================= */
 
 function showMessage(
     elementId,
     text,
     success=false
-){
+) {
 
     const element =
         document.getElementById(elementId);
 
-    if(!element){
+    if (!element) {
         return;
     }
 
@@ -1214,387 +1196,369 @@ function showMessage(
     element.style.display = "block";
 }
 
-/*
-====================================================
-CLEAR MESSAGE
-====================================================
-*/
 
-function clearMessage(elementId){
+function clearMessage(elementId) {
 
     const element =
         document.getElementById(elementId);
 
-    if(element){
-
+    if (element) {
         element.textContent = "";
         element.style.display = "none";
-
     }
 }
 
-/*
-====================================================
-CONFIGURATION CHECK
-====================================================
-*/
 
-function checkConfiguration(){
+/* =========================================
+   CONFIGURATION CHECK
+========================================= */
 
-    if(!supabaseConfigured || !db){
+function checkConfiguration(messageId) {
+
+    if (!db) {
 
         showMessage(
-            "loginMessage",
-            "Supabase is not configured correctly."
+            messageId,
+            "The account service could not be loaded. Please refresh the page and try again."
         );
 
         return false;
-
     }
 
     return true;
 }
 
-/*
-====================================================
-CREATE ACCOUNT
-====================================================
-*/
+
+/* =========================================
+   SIGN UP
+========================================= */
 
 document
-.getElementById("signupForm")
-.addEventListener(
-"submit",
-async function(event){
+    .getElementById("signupForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
 
-    event.preventDefault();
+            event.preventDefault();
 
-    clearMessage("signupMessage");
+            clearMessage("signupMessage");
 
-    if(!checkConfiguration()){
-        return;
-    }
-
-    const button =
-        document.getElementById(
-            "signupButton"
-        );
-
-    const name =
-        document
-        .getElementById("signupName")
-        .value
-        .trim();
-
-    const email =
-        document
-        .getElementById("signupEmail")
-        .value
-        .trim()
-        .toLowerCase();
-
-    const password =
-        document
-        .getElementById("signupPassword")
-        .value;
-
-    if(name.length < 2){
-
-        showMessage(
-            "signupMessage",
-            "Please enter your full name."
-        );
-
-        return;
-    }
-
-    if(password.length < 8){
-
-        showMessage(
-            "signupMessage",
-            "Password must contain at least 8 characters."
-        );
-
-        return;
-    }
-
-    button.disabled = true;
-    button.textContent = "Creating Account...";
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-        await db.auth.signUp({
-
-            email:email,
-
-            password:password,
-
-            options:{
-                data:{
-                    full_name:name
-                }
+            if (!checkConfiguration("signupMessage")) {
+                return;
             }
 
-        });
+            const button =
+                document.getElementById(
+                    "signupButton"
+                );
 
-        if(error){
+            const name =
+                document
+                    .getElementById("signupName")
+                    .value
+                    .trim();
 
-            showMessage(
-                "signupMessage",
-                error.message
-            );
+            const email =
+                document
+                    .getElementById("signupEmail")
+                    .value
+                    .trim()
+                    .toLowerCase();
 
-            return;
+            const password =
+                document
+                    .getElementById("signupPassword")
+                    .value;
+
+            if (name.length < 2) {
+
+                showMessage(
+                    "signupMessage",
+                    "Please enter your full name."
+                );
+
+                return;
+            }
+
+            if (password.length < 8) {
+
+                showMessage(
+                    "signupMessage",
+                    "Password must contain at least 8 characters."
+                );
+
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Creating Account...";
+
+            try {
+
+                const result =
+                    await db.auth.signUp({
+                        email:email,
+                        password:password,
+
+                        options:{
+                            data:{
+                                full_name:name
+                            }
+                        }
+                    });
+
+                if (result.error) {
+
+                    showMessage(
+                        "signupMessage",
+                        result.error.message
+                    );
+
+                    return;
+                }
+
+                document
+                    .getElementById("signupForm")
+                    .reset();
+
+                if (
+                    result.data &&
+                    result.data.session &&
+                    result.data.user
+                ) {
+
+                    currentUser =
+                        result.data.user;
+
+                    showMessage(
+                        "signupMessage",
+                        "Account created successfully.",
+                        true
+                    );
+
+                    await loadDashboard(
+                        result.data.user
+                    );
+
+                    setTimeout(function() {
+                        showPage("dashboard");
+                    },500);
+
+                } else {
+
+                    showMessage(
+                        "signupMessage",
+                        "Account created. Please check your email if email confirmation is enabled, then log in.",
+                        true
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    "signupMessage",
+                    "Unable to create the account. Please try again."
+                );
+
+            } finally {
+
+                button.disabled = false;
+                button.textContent = "Create Account";
+            }
+
         }
+    );
 
-        document
-        .getElementById("signupForm")
-        .reset();
 
-        if(data && data.session && data.user){
+/* =========================================
+   LOGIN
+========================================= */
 
-            showMessage(
-                "signupMessage",
-                "Account created successfully.",
-                true
-            );
+document
+    .getElementById("loginForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
 
-            currentUser = data.user;
+            event.preventDefault();
 
-            setTimeout(async function(){
+            clearMessage("loginMessage");
+
+            if (!checkConfiguration("loginMessage")) {
+                return;
+            }
+
+            const button =
+                document.getElementById(
+                    "loginButton"
+                );
+
+            const email =
+                document
+                    .getElementById("loginEmail")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+            const password =
+                document
+                    .getElementById("loginPassword")
+                    .value;
+
+            button.disabled = true;
+            button.textContent = "Signing In...";
+
+            try {
+
+                const result =
+                    await db.auth.signInWithPassword({
+                        email:email,
+                        password:password
+                    });
+
+                if (result.error) {
+
+                    showMessage(
+                        "loginMessage",
+                        result.error.message
+                    );
+
+                    return;
+                }
+
+                if (
+                    !result.data ||
+                    !result.data.user
+                ) {
+
+                    showMessage(
+                        "loginMessage",
+                        "No customer account was returned."
+                    );
+
+                    return;
+                }
+
+                currentUser =
+                    result.data.user;
 
                 await loadDashboard(
-                    data.user
+                    result.data.user
                 );
 
                 showPage("dashboard");
 
-            },700);
+            } catch (error) {
 
-        }else{
+                console.error(error);
 
-            showMessage(
-                "signupMessage",
-                "Account created. Please check your email if email confirmation is enabled, then log in.",
-                true
-            );
+                showMessage(
+                    "loginMessage",
+                    "Unable to log in. Please try again."
+                );
+
+            } finally {
+
+                button.disabled = false;
+                button.textContent = "Login";
+            }
 
         }
+    );
 
-    }catch(error){
 
-        console.error(error);
+/* =========================================
+   LOAD DASHBOARD
+========================================= */
 
-        showMessage(
-            "signupMessage",
-            "Unable to create the account. Please try again."
-        );
+async function loadDashboard(user=null) {
 
-    }finally{
-
-        button.disabled = false;
-        button.textContent = "Create Account";
-
-    }
-
-});
-
-/*
-====================================================
-LOGIN
-====================================================
-*/
-
-document
-.getElementById("loginForm")
-.addEventListener(
-"submit",
-async function(event){
-
-    event.preventDefault();
-
-    clearMessage("loginMessage");
-
-    if(!checkConfiguration()){
+    if (!db) {
         return;
     }
 
-    const button =
-        document.getElementById(
-            "loginButton"
-        );
+    if (!user) {
 
-    const email =
-        document
-        .getElementById("loginEmail")
-        .value
-        .trim()
-        .toLowerCase();
+        const result =
+            await db.auth.getUser();
 
-    const password =
-        document
-        .getElementById("loginPassword")
-        .value;
-
-    button.disabled = true;
-    button.textContent = "Signing In...";
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-        await db.auth.signInWithPassword({
-
-            email:email,
-
-            password:password
-
-        });
-
-        if(error){
-
-            showMessage(
-                "loginMessage",
-                error.message
-            );
-
+        if (result.error) {
+            console.error(result.error);
             return;
         }
 
-        if(!data || !data.user){
-
-            showMessage(
-                "loginMessage",
-                "No customer account was returned."
-            );
-
-            return;
-        }
-
-        currentUser = data.user;
-
-        await loadDashboard(
-            data.user
-        );
-
-        showPage("dashboard");
-
-    }catch(error){
-
-        console.error(error);
-
-        showMessage(
-            "loginMessage",
-            "Unable to log in. Please try again."
-        );
-
-    }finally{
-
-        button.disabled = false;
-        button.textContent = "Login";
-
+        user = result.data.user;
     }
 
-});
-
-/*
-====================================================
-LOAD CUSTOMER DASHBOARD
-====================================================
-*/
-
-async function loadDashboard(user=null){
-
-    if(!db){
-        return;
-    }
-
-    if(!user){
-
-        const {
-            data,
-            error
-        } =
-        await db.auth.getUser();
-
-        if(error){
-
-            console.error(
-                "User error:",
-                error
-            );
-
-            return;
-        }
-
-        user = data.user;
-
-    }
-
-    if(!user){
+    if (!user) {
 
         currentUser = null;
-
         showPage("login");
-
         return;
     }
 
     currentUser = user;
 
-    /*
-    PROFILE
-    */
 
-    const {
-        data:profile,
-        error:profileError
-    } =
-    await db
-    .from("profiles")
-    .select(
-        "full_name,status,is_admin"
-    )
-    .eq("id",user.id)
-    .maybeSingle();
+    /* PROFILE */
 
-    if(profileError){
+    let profile = null;
 
-        console.warn(
-            "Profile error:",
-            profileError
-        );
+    try {
 
+        const result =
+            await db
+                .from("profiles")
+                .select(
+                    "full_name,status,is_admin"
+                )
+                .eq("id",user.id)
+                .maybeSingle();
+
+        profile = result.data;
+
+        if (result.error) {
+            console.warn(
+                "Profile error:",
+                result.error
+            );
+        }
+
+    } catch (error) {
+        console.warn(error);
     }
 
-    /*
-    WALLET
-    */
 
-    const {
-        data:wallet,
-        error:walletError
-    } =
-    await db
-    .from("wallets")
-    .select("balance")
-    .eq("user_id",user.id)
-    .maybeSingle();
+    /* WALLET */
 
-    if(walletError){
+    let wallet = null;
 
-        console.warn(
-            "Wallet error:",
-            walletError
-        );
+    try {
 
+        const result =
+            await db
+                .from("wallets")
+                .select("balance")
+                .eq("user_id",user.id)
+                .maybeSingle();
+
+        wallet = result.data;
+
+        if (result.error) {
+            console.warn(
+                "Wallet error:",
+                result.error
+            );
+        }
+
+    } catch (error) {
+        console.warn(error);
     }
+
+
+    /* CUSTOMER NAME */
 
     const customerName =
         profile?.full_name ||
@@ -1603,26 +1567,26 @@ async function loadDashboard(user=null){
         "Customer";
 
     document
-    .getElementById("welcomeText")
-    .textContent =
-        "Welcome, " +
-        customerName +
-        ".";
+        .getElementById("welcomeText")
+        .textContent =
+            "Welcome, " +
+            customerName +
+            ".";
+
+
+    /* BALANCE */
 
     const balance =
-        Number(
-            wallet?.balance || 0
-        );
+        Number(wallet?.balance || 0);
 
     document
-    .getElementById("balance")
-    .textContent =
-        "$" +
-        balance.toFixed(2);
+        .getElementById("balance")
+        .textContent =
+            "$" +
+            balance.toFixed(2);
 
-    /*
-    ACCOUNT STATUS
-    */
+
+    /* STATUS */
 
     const status =
         profile?.status ||
@@ -1648,84 +1612,86 @@ async function loadDashboard(user=null){
     statusElement.appendChild(dot);
     statusElement.appendChild(statusText);
 
-    /*
-    TRANSACTIONS
-    */
 
-    const {
-        data:transactions,
-        error:transactionError
-    } =
-    await db
-    .from("transactions")
-    .select(
-        "id,transaction_type,amount,status,created_at,sender_id,recipient_id"
-    )
-    .or(
-        "sender_id.eq." +
-        user.id +
-        ",recipient_id.eq." +
-        user.id
-    )
-    .order(
-        "created_at",
-        {
-            ascending:false
+    /* TRANSACTIONS */
+
+    let transactions = [];
+
+    try {
+
+        const result =
+            await db
+                .from("transactions")
+                .select(
+                    "id,transaction_type,amount,status,created_at,sender_id,recipient_id"
+                )
+                .or(
+                    "sender_id.eq." +
+                    user.id +
+                    ",recipient_id.eq." +
+                    user.id
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending:false
+                    }
+                )
+                .limit(50);
+
+        transactions =
+            result.data || [];
+
+        if (result.error) {
+            console.warn(
+                "Transaction error:",
+                result.error
+            );
         }
-    )
-    .limit(50);
 
-    if(transactionError){
-
-        console.warn(
-            "Transaction error:",
-            transactionError
-        );
-
+    } catch (error) {
+        console.warn(error);
     }
 
+
     renderTransactions(
-        transactions || [],
+        transactions,
         user.id
     );
 
     document
-    .getElementById("txCount")
-    .textContent =
-        (transactions || []).length;
+        .getElementById("txCount")
+        .textContent =
+            transactions.length;
 
-    /*
-    ADMIN
-    */
 
-    if(profile?.is_admin === true){
+    /* ADMIN */
+
+    if (profile?.is_admin === true) {
 
         document
-        .getElementById("adminPanel")
-        .classList.remove("hidden");
+            .getElementById("adminPanel")
+            .classList.remove("hidden");
 
         await loadCustomers();
 
-    }else{
+    } else {
 
         document
-        .getElementById("adminPanel")
-        .classList.add("hidden");
-
+            .getElementById("adminPanel")
+            .classList.add("hidden");
     }
-
 }
 
-/*
-====================================================
-RENDER TRANSACTIONS
-====================================================
-*/
+
+/* =========================================
+   RENDER TRANSACTIONS
+========================================= */
 
 function renderTransactions(
     transactions,
     userId
-){
+) {
 
     const body =
         document.getElementById(
@@ -1734,20 +1700,26 @@ function renderTransactions(
 
     body.innerHTML = "";
 
-    if(!transactions.length){
+    if (!transactions.length) {
 
-        body.innerHTML =
-        '<tr>' +
-        '<td colspan="5" class="empty">' +
-        'No transactions yet.' +
-        '</td>' +
-        '</tr>';
+        const row =
+            document.createElement("tr");
+
+        const cell =
+            document.createElement("td");
+
+        cell.colSpan = 5;
+        cell.className = "empty";
+        cell.textContent =
+            "No transactions yet.";
+
+        row.appendChild(cell);
+        body.appendChild(row);
 
         return;
     }
 
-    transactions.forEach(
-    function(transaction){
+    transactions.forEach(function(transaction) {
 
         const row =
             document.createElement("tr");
@@ -1756,6 +1728,7 @@ function renderTransactions(
             transaction.recipient_id === userId ||
             transaction.transaction_type === "transfer_in";
 
+
         const dateCell =
             document.createElement("td");
 
@@ -1763,8 +1736,9 @@ function renderTransactions(
             transaction.created_at
                 ? new Date(
                     transaction.created_at
-                  ).toLocaleString()
+                ).toLocaleString()
                 : "";
+
 
         const typeCell =
             document.createElement("td");
@@ -1773,6 +1747,7 @@ function renderTransactions(
             incoming
                 ? "Received"
                 : "Sent";
+
 
         const amountCell =
             document.createElement("td");
@@ -1784,17 +1759,20 @@ function renderTransactions(
                 transaction.amount || 0
             ).toFixed(2);
 
+
         const statusCell =
             document.createElement("td");
 
         statusCell.textContent =
             transaction.status || "";
 
+
         const idCell =
             document.createElement("td");
 
         idCell.textContent =
             transaction.id || "";
+
 
         row.appendChild(dateCell);
         row.appendChild(typeCell);
@@ -1805,294 +1783,307 @@ function renderTransactions(
         body.appendChild(row);
 
     });
-
 }
 
-/*
-====================================================
-SEND INTERNAL CREDITS
-====================================================
-*/
+
+/* =========================================
+   TRANSFER INTERNAL CREDITS
+========================================= */
 
 document
-.getElementById("transferForm")
-.addEventListener(
-"submit",
-async function(event){
+    .getElementById("transferForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
 
-    event.preventDefault();
+            event.preventDefault();
 
-    clearMessage("transferMessage");
+            clearMessage("transferMessage");
 
-    if(!checkConfiguration()){
-        return;
-    }
-
-    const button =
-        document.getElementById(
-            "transferButton"
-        );
-
-    const recipient =
-        document
-        .getElementById("recipientEmail")
-        .value
-        .trim()
-        .toLowerCase();
-
-    const amount =
-        Number(
-            document
-            .getElementById("transferAmount")
-            .value
-        );
-
-    if(
-        !recipient ||
-        !recipient.includes("@")
-    ){
-
-        showMessage(
-            "transferMessage",
-            "Enter a valid recipient email."
-        );
-
-        return;
-    }
-
-    if(
-        !Number.isFinite(amount) ||
-        amount <= 0
-    ){
-
-        showMessage(
-            "transferMessage",
-            "Enter a valid amount greater than zero."
-        );
-
-        return;
-    }
-
-    if(
-        currentUser &&
-        recipient ===
-        String(
-            currentUser.email || ""
-        ).toLowerCase()
-    ){
-
-        showMessage(
-            "transferMessage",
-            "You cannot transfer credits to your own account."
-        );
-
-        return;
-    }
-
-    button.disabled = true;
-    button.textContent = "Sending...";
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-        await db.rpc(
-            "transfer_credits",
-            {
-                p_recipient_email:
-                    recipient,
-
-                p_amount:
-                    amount
+            if (!checkConfiguration("transferMessage")) {
+                return;
             }
-        );
 
-        if(error){
+            const button =
+                document.getElementById(
+                    "transferButton"
+                );
 
-            showMessage(
-                "transferMessage",
-                error.message
+            const recipient =
+                document
+                    .getElementById("recipientEmail")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+            const amount =
+                Number(
+                    document
+                        .getElementById("transferAmount")
+                        .value
+                );
+
+
+            if (
+                !recipient ||
+                !recipient.includes("@")
+            ) {
+
+                showMessage(
+                    "transferMessage",
+                    "Enter a valid recipient email."
+                );
+
+                return;
+            }
+
+
+            if (
+                !Number.isFinite(amount) ||
+                amount <= 0
+            ) {
+
+                showMessage(
+                    "transferMessage",
+                    "Enter a valid amount greater than zero."
+                );
+
+                return;
+            }
+
+
+            if (
+                currentUser &&
+                recipient ===
+                String(
+                    currentUser.email || ""
+                ).toLowerCase()
+            ) {
+
+                showMessage(
+                    "transferMessage",
+                    "You cannot transfer credits to your own account."
+                );
+
+                return;
+            }
+
+
+            button.disabled = true;
+            button.textContent = "Sending...";
+
+
+            try {
+
+                const result =
+                    await db.rpc(
+                        "transfer_credits",
+                        {
+                            p_recipient_email:
+                                recipient,
+
+                            p_amount:
+                                amount
+                        }
+                    );
+
+
+                if (result.error) {
+
+                    showMessage(
+                        "transferMessage",
+                        result.error.message
+                    );
+
+                    return;
+                }
+
+
+                showMessage(
+                    "transferMessage",
+                    "Transfer completed successfully." +
+                    (
+                        result.data
+                            ? " Transaction ID: " +
+                              result.data
+                            : ""
+                    ),
+                    true
+                );
+
+
+                document
+                    .getElementById("transferForm")
+                    .reset();
+
+
+                await loadDashboard(
+                    currentUser
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    "transferMessage",
+                    "The transfer could not be completed."
+                );
+
+            } finally {
+
+                button.disabled = false;
+                button.textContent = "Send Credits";
+            }
+
+        }
+    );
+
+
+/* =========================================
+   ADMIN CUSTOMER LIST
+========================================= */
+
+async function loadCustomers() {
+
+    if (!db) {
+        return;
+    }
+
+    try {
+
+        const result =
+            await db
+                .from("admin_customer_view")
+                .select("*")
+                .order(
+                    "created_at",
+                    {
+                        ascending:false
+                    }
+                );
+
+
+        if (result.error) {
+
+            console.error(
+                "Admin customer error:",
+                result.error
             );
 
             return;
         }
 
-        showMessage(
-            "transferMessage",
-            "Transfer completed successfully." +
-            (
-                data
-                    ? " Transaction ID: " + data
-                    : ""
-            ),
-            true
-        );
 
-        document
-        .getElementById("transferForm")
-        .reset();
+        const body =
+            document.getElementById(
+                "usersBody"
+            );
 
-        await loadDashboard(
-            currentUser
-        );
+        body.innerHTML = "";
 
-    }catch(error){
+
+        if (
+            !result.data ||
+            result.data.length === 0
+        ) {
+
+            const row =
+                document.createElement("tr");
+
+            const cell =
+                document.createElement("td");
+
+            cell.colSpan = 5;
+            cell.className = "empty";
+            cell.textContent =
+                "No customers found.";
+
+            row.appendChild(cell);
+            body.appendChild(row);
+
+            return;
+        }
+
+
+        result.data.forEach(function(customer) {
+
+            const row =
+                document.createElement("tr");
+
+
+            const name =
+                document.createElement("td");
+
+            name.textContent =
+                customer.full_name || "";
+
+
+            const email =
+                document.createElement("td");
+
+            email.textContent =
+                customer.email || "";
+
+
+            const status =
+                document.createElement("td");
+
+            status.textContent =
+                customer.status || "";
+
+
+            const balance =
+                document.createElement("td");
+
+            balance.textContent =
+                "$" +
+                Number(
+                    customer.balance || 0
+                ).toFixed(2);
+
+
+            const joined =
+                document.createElement("td");
+
+            joined.textContent =
+                customer.created_at
+                    ? new Date(
+                        customer.created_at
+                    ).toLocaleDateString()
+                    : "";
+
+
+            row.appendChild(name);
+            row.appendChild(email);
+            row.appendChild(status);
+            row.appendChild(balance);
+            row.appendChild(joined);
+
+            body.appendChild(row);
+
+        });
+
+    } catch (error) {
 
         console.error(error);
-
-        showMessage(
-            "transferMessage",
-            "The transfer could not be completed."
-        );
-
-    }finally{
-
-        button.disabled = false;
-        button.textContent = "Send Credits";
-
     }
-
-});
-
-/*
-====================================================
-LOAD ADMIN CUSTOMER LIST
-====================================================
-*/
-
-async function loadCustomers(){
-
-    if(!db){
-        return;
-    }
-
-    const {
-        data,
-        error
-    } =
-    await db
-    .from("admin_customer_view")
-    .select("*")
-    .order(
-        "created_at",
-        {
-            ascending:false
-        }
-    );
-
-    if(error){
-
-        console.error(
-            "Admin customer error:",
-            error
-        );
-
-        return;
-    }
-
-    const body =
-        document.getElementById(
-            "usersBody"
-        );
-
-    body.innerHTML = "";
-
-    if(!data || data.length === 0){
-
-        body.innerHTML =
-        '<tr>' +
-        '<td colspan="5" class="empty">' +
-        'No customers found.' +
-        '</td>' +
-        '</tr>';
-
-        return;
-    }
-
-    data.forEach(
-    function(customer){
-
-        const row =
-            document.createElement("tr");
-
-        const name =
-            document.createElement("td");
-
-        name.textContent =
-            customer.full_name || "";
-
-        const email =
-            document.createElement("td");
-
-        email.textContent =
-            customer.email || "";
-
-        const status =
-            document.createElement("td");
-
-        status.textContent =
-            customer.status || "";
-
-        const balance =
-            document.createElement("td");
-
-        balance.textContent =
-            "$" +
-            Number(
-                customer.balance || 0
-            ).toFixed(2);
-
-        const joined =
-            document.createElement("td");
-
-        joined.textContent =
-            customer.created_at
-                ? new Date(
-                    customer.created_at
-                  ).toLocaleDateString()
-                : "";
-
-        row.appendChild(name);
-        row.appendChild(email);
-        row.appendChild(status);
-        row.appendChild(balance);
-        row.appendChild(joined);
-
-        body.appendChild(row);
-
-    });
-
 }
 
-/*
-====================================================
-LOGOUT
-====================================================
-*/
 
-async function logout(){
+/* =========================================
+   LOGOUT
+========================================= */
 
-    if(db){
+async function logout() {
 
-        try{
+    if (db) {
 
-            const {
-                error
-            } =
+        try {
             await db.auth.signOut();
-
-            if(error){
-                console.error(error);
-            }
-
-        }catch(error){
-
+        } catch (error) {
             console.error(error);
-
         }
-
     }
 
     currentUser = null;
@@ -2100,83 +2091,75 @@ async function logout(){
     showPage("home");
 }
 
-/*
-====================================================
-AUTH STATE
-====================================================
-*/
 
-if(db){
+/* =========================================
+   AUTH STATE
+========================================= */
+
+if (db) {
 
     db.auth.onAuthStateChange(
-    function(event,session){
+        function(event,session) {
 
-        if(event === "SIGNED_OUT"){
+            if (event === "SIGNED_OUT") {
 
-            currentUser = null;
+                currentUser = null;
 
-            showPage("home");
-
+                showPage("home");
+            }
         }
-
-    });
-
+    );
 }
 
-/*
-====================================================
-CHECK EXISTING SESSION
-====================================================
-*/
 
-(async function(){
+/* =========================================
+   CHECK EXISTING SESSION
+========================================= */
 
-    if(!supabaseConfigured || !db){
+(async function() {
+
+    if (!db) {
         return;
     }
 
-    try{
+    try {
 
-        const {
-            data,
-            error
-        } =
-        await db.auth.getSession();
+        const result =
+            await db.auth.getSession();
 
-        if(error){
+        if (result.error) {
 
             console.error(
                 "Session error:",
-                error
+                result.error
             );
 
             return;
         }
 
-        if(
-            data &&
-            data.session &&
-            data.session.user
-        ){
+
+        if (
+            result.data &&
+            result.data.session &&
+            result.data.session.user
+        ) {
 
             currentUser =
-                data.session.user;
+                result.data.session.user;
 
             await loadDashboard(
-                data.session.user
+                result.data.session.user
             );
 
             showPage("dashboard");
-
         }
 
-    }catch(error){
+    } catch (error) {
 
         console.error(
             "Startup error:",
             error
         );
-
     }
 
 })();
