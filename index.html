@@ -18,8 +18,12 @@
 
     body {
       background: #071426;
-      color: #fff;
+      color: white;
       min-height: 100vh;
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     button,
@@ -29,8 +33,8 @@
       font: inherit;
     }
 
-    .hidden {
-      display: none !important;
+    button {
+      cursor: pointer;
     }
 
     .container {
@@ -40,6 +44,7 @@
     }
 
     /* AUTH */
+
     #authScreen {
       min-height: 100vh;
       display: flex;
@@ -47,48 +52,51 @@
       justify-content: center;
       padding: 25px;
       background:
-        radial-gradient(circle at top right, rgba(19, 88, 160, .35), transparent 35%),
+        radial-gradient(
+          circle at top right,
+          rgba(19, 88, 160, .35),
+          transparent 35%
+        ),
         linear-gradient(135deg, #06101f, #0a1e35);
     }
 
     .auth-box {
       width: 100%;
-      max-width: 430px;
-      background: rgba(12, 31, 54, .96);
-      border: 1px solid rgba(255,255,255,.08);
+      max-width: 440px;
+      background: #0c1f36;
+      border: 1px solid #203b57;
       border-radius: 18px;
       padding: 30px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
     }
 
     .logo {
       text-align: center;
-      margin-bottom: 10px;
+      color: #f5c542;
       font-size: 30px;
       font-weight: 800;
-      color: #f5c542;
+      margin-bottom: 8px;
     }
 
     .subtitle {
       text-align: center;
       color: #aab8ca;
-      margin-bottom: 25px;
+      margin-bottom: 24px;
     }
 
     .auth-tabs {
       display: flex;
       gap: 8px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .auth-tabs button {
       flex: 1;
-      border: 0;
       padding: 12px;
-      border-radius: 10px;
+      border: 0;
+      border-radius: 9px;
       background: #132a44;
       color: #c9d5e4;
-      cursor: pointer;
     }
 
     .auth-tabs button.active {
@@ -103,8 +111,8 @@
 
     label {
       display: block;
-      color: #d7e0eb;
       margin-bottom: 7px;
+      color: #d7e0eb;
       font-size: 14px;
     }
 
@@ -120,15 +128,31 @@
       outline: none;
     }
 
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
     input:focus,
     select:focus,
     textarea:focus {
       border-color: #f5c542;
+    }
+
+    .password-row {
+      position: relative;
+    }
+
+    .password-row input {
+      padding-right: 75px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 8px;
+      top: 7px;
+      height: 34px;
+      padding: 0 9px;
+      border: 0;
+      border-radius: 6px;
+      background: #18334f;
+      color: #dce7f3;
+      font-size: 12px;
     }
 
     .primary-btn {
@@ -139,20 +163,25 @@
       background: #f5c542;
       color: #071426;
       font-weight: 800;
-      cursor: pointer;
       margin-top: 5px;
     }
 
-    .primary-btn:hover {
-      opacity: .92;
+    .primary-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
     }
 
+    /* PERMANENT MESSAGE */
+
     .message {
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      font-size: 14px;
       display: none;
+      position: relative;
+      padding: 14px 42px 14px 14px;
+      border-radius: 9px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      word-break: break-word;
     }
 
     .message.show {
@@ -160,18 +189,48 @@
     }
 
     .message.error {
-      background: rgba(220, 53, 69, .15);
-      border: 1px solid rgba(220, 53, 69, .4);
-      color: #ff9da6;
+      background: #35151b;
+      border: 1px solid #a53b4a;
+      color: #ffb2bb;
     }
 
     .message.success {
-      background: rgba(25, 135, 84, .15);
-      border: 1px solid rgba(25, 135, 84, .4);
-      color: #8be0b4;
+      background: #123323;
+      border: 1px solid #2c8b58;
+      color: #9be6ba;
+    }
+
+    .message.info {
+      background: #112c46;
+      border: 1px solid #2e638d;
+      color: #a8d6fa;
+    }
+
+    .close-message {
+      position: absolute;
+      right: 9px;
+      top: 8px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .error-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .error-details {
+      margin-top: 7px;
+      color: inherit;
+      opacity: .95;
+      font-size: 13px;
     }
 
     /* APP */
+
     #appScreen {
       min-height: 100vh;
     }
@@ -212,14 +271,9 @@
     .logout-btn {
       border: 1px solid #35506b;
       background: transparent;
-      color: #fff;
+      color: white;
       padding: 9px 13px;
       border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .logout-btn:hover {
-      background: #132a44;
     }
 
     main {
@@ -301,11 +355,6 @@
       background: #102a45;
       color: white;
       border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .action-btn:hover {
-      border-color: #f5c542;
     }
 
     .info-box {
@@ -317,7 +366,6 @@
       line-height: 1.6;
     }
 
-    /* TABLE */
     .table-wrap {
       overflow-x: auto;
     }
@@ -372,7 +420,6 @@
       color: #7ee2a8;
     }
 
-    /* ADMIN */
     .admin-title {
       color: #f5c542;
     }
@@ -390,7 +437,6 @@
       border-radius: 8px;
       background: #102a45;
       color: #d5dfeb;
-      cursor: pointer;
     }
 
     .admin-tab.active {
@@ -410,26 +456,16 @@
       padding: 7px 10px;
       border-radius: 7px;
       border: 1px solid #35516b;
-      cursor: pointer;
       background: #102a45;
       color: white;
       font-size: 12px;
     }
 
-    .small-btn:hover {
-      border-color: #f5c542;
-    }
-
-    .empty {
+    .empty,
+    .loading {
       text-align: center;
       padding: 25px;
       color: #8396aa;
-    }
-
-    .loading {
-      text-align: center;
-      color: #a9b8c8;
-      padding: 20px;
     }
 
     footer {
@@ -440,14 +476,8 @@
     }
 
     @media (max-width: 800px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-
+      .cards,
+      .grid-2,
       .action-buttons {
         grid-template-columns: 1fr;
       }
@@ -473,9 +503,7 @@
 
 <body>
 
-  <!-- =========================
-       AUTH SCREEN
-  ========================== -->
+  <!-- AUTH SCREEN -->
   <section id="authScreen">
 
     <div class="auth-box">
@@ -489,79 +517,137 @@
       <div id="authMessage" class="message"></div>
 
       <div class="auth-tabs">
-        <button id="loginTab" class="active" onclick="showLogin()">
+
+        <button
+          id="loginTab"
+          class="active"
+          onclick="showLogin()">
           Login
         </button>
 
-        <button id="signupTab" onclick="showSignup()">
-          Sign Up
+        <button
+          id="signupTab"
+          onclick="showSignup()">
+          Create Account
         </button>
+
       </div>
 
       <!-- LOGIN -->
       <form id="loginForm">
 
         <div class="form-group">
+
           <label>Email</label>
+
           <input
             type="email"
             id="loginEmail"
             placeholder="Enter your email"
+            autocomplete="email"
             required
           >
+
         </div>
 
         <div class="form-group">
+
           <label>Password</label>
-          <input
-            type="password"
-            id="loginPassword"
-            placeholder="Enter your password"
-            required
-          >
+
+          <div class="password-row">
+
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="show-password"
+              onclick="togglePassword('loginPassword', this)">
+              Show
+            </button>
+
+          </div>
+
         </div>
 
-        <button class="primary-btn" type="submit">
+        <button
+          class="primary-btn"
+          id="loginButton"
+          type="submit">
           Login
         </button>
 
       </form>
 
+
       <!-- SIGNUP -->
-      <form id="signupForm" class="hidden">
+      <form
+        id="signupForm"
+        class="hidden">
 
         <div class="form-group">
+
           <label>Full Name</label>
+
           <input
             type="text"
             id="signupName"
             placeholder="Enter your full name"
+            autocomplete="name"
             required
           >
+
         </div>
 
         <div class="form-group">
+
           <label>Email</label>
+
           <input
             type="email"
             id="signupEmail"
             placeholder="Enter your email"
+            autocomplete="email"
             required
           >
+
         </div>
 
         <div class="form-group">
+
           <label>Password</label>
-          <input
-            type="password"
-            id="signupPassword"
-            placeholder="Minimum 8 characters"
-            minlength="8"
-            required
-          >
+
+          <div class="password-row">
+
+            <input
+              type="password"
+              id="signupPassword"
+              placeholder="Minimum 8 characters"
+              autocomplete="new-password"
+              minlength="8"
+              required
+            >
+
+            <button
+              type="button"
+              class="show-password"
+              onclick="togglePassword('signupPassword', this)">
+              Show
+            </button>
+
+          </div>
+
         </div>
 
-        <button class="primary-btn" type="submit">
+        <button
+          class="primary-btn"
+          id="signupButton"
+          type="submit">
           Create Account
         </button>
 
@@ -572,10 +658,10 @@
   </section>
 
 
-  <!-- =========================
-       APP SCREEN
-  ========================== -->
-  <section id="appScreen" class="hidden">
+  <!-- APP SCREEN -->
+  <section
+    id="appScreen"
+    class="hidden">
 
     <header>
 
@@ -587,11 +673,15 @@
 
         <div class="nav-right">
 
-          <div class="user-email" id="navEmail">
+          <div
+            class="user-email"
+            id="navEmail">
             Checking account...
           </div>
 
-          <button class="logout-btn" id="logoutBtn">
+          <button
+            class="logout-btn"
+            id="logoutBtn">
             Logout
           </button>
 
@@ -617,7 +707,6 @@
       </div>
 
 
-      <!-- ACCOUNT CARDS -->
       <div class="cards">
 
         <div class="card">
@@ -626,12 +715,13 @@
             Available Balance
           </div>
 
-          <div class="balance" id="balanceDisplay">
+          <div
+            class="balance"
+            id="balanceDisplay">
             USD 0.00
           </div>
 
         </div>
-
 
         <div class="card">
 
@@ -639,12 +729,13 @@
             Account Status
           </div>
 
-          <div class="status" id="statusDisplay">
+          <div
+            class="status"
+            id="statusDisplay">
             Active
           </div>
 
         </div>
-
 
         <div class="card">
 
@@ -661,7 +752,7 @@
       </div>
 
 
-      <!-- QUICK ACTIONS -->
+      <!-- ACTIONS -->
       <section class="section">
 
         <h2>
@@ -670,15 +761,21 @@
 
         <div class="action-buttons">
 
-          <button class="action-btn" onclick="scrollToSection('withdrawSection')">
+          <button
+            class="action-btn"
+            onclick="scrollToSection('withdrawSection')">
             Withdraw Funds
           </button>
 
-          <button class="action-btn" onclick="showTransferNotice()">
+          <button
+            class="action-btn"
+            onclick="showTransferNotice()">
             Send Money
           </button>
 
-          <button class="action-btn" onclick="showDepositNotice()">
+          <button
+            class="action-btn"
+            onclick="showDepositNotice()">
             Add Money
           </button>
 
@@ -688,13 +785,18 @@
 
 
       <!-- WITHDRAW -->
-      <section class="section" id="withdrawSection">
+      <section
+        class="section"
+        id="withdrawSection">
 
         <h2>
           Request a Withdrawal
         </h2>
 
-        <div id="withdrawMessage" class="message"></div>
+        <div
+          id="withdrawMessage"
+          class="message">
+        </div>
 
         <form id="withdrawForm">
 
@@ -717,14 +819,15 @@
 
             </div>
 
-
             <div class="form-group">
 
               <label>
                 Withdrawal Method
               </label>
 
-              <select id="withdrawMethod" required>
+              <select
+                id="withdrawMethod"
+                required>
 
                 <option value="">
                   Select method
@@ -752,7 +855,6 @@
 
           </div>
 
-
           <div class="form-group">
 
             <label>
@@ -761,17 +863,14 @@
 
             <textarea
               id="accountDetails"
-              placeholder="Enter the account number, wallet address, email, or other payment details"
-              required
-            ></textarea>
+              placeholder="Enter your payment details"
+              required></textarea>
 
           </div>
 
-
           <button
             class="primary-btn"
-            type="submit"
-          >
+            type="submit">
             Submit Withdrawal Request
           </button>
 
@@ -780,7 +879,7 @@
       </section>
 
 
-      <!-- MY WITHDRAWALS -->
+      <!-- USER WITHDRAWALS -->
       <section class="section">
 
         <h2>
@@ -805,81 +904,68 @@
 
         <div class="info-box">
 
-          <strong>Transfer Not Configured</strong><br><br>
+          <strong>Transfer Not Configured</strong>
+          <br><br>
 
-          The transfer feature is currently disabled until a secure
-          server-side transfer system is configured. This prevents
-          unauthorized balance changes from browser code.
+          The transfer feature is currently disabled until
+          a secure server-side transfer system is configured.
 
         </div>
 
       </section>
 
 
-      <!-- ADMIN DASHBOARD -->
+      <!-- ADMIN -->
       <section
         class="section hidden"
-        id="adminSection"
-      >
+        id="adminSection">
 
         <h2 class="admin-title">
           Admin Dashboard
         </h2>
 
-        <p style="color:#9eb0c3;margin-bottom:20px;">
+        <p
+          style="color:#9eb0c3;margin-bottom:20px;">
           Manage customer withdrawal requests.
         </p>
-
 
         <div class="admin-tabs">
 
           <button
             class="admin-tab active"
-            data-status="Pending"
-            onclick="changeAdminTab('Pending', this)"
-          >
+            onclick="changeAdminTab('Pending', this)">
             Pending
           </button>
 
           <button
             class="admin-tab"
-            data-status="Approved"
-            onclick="changeAdminTab('Approved', this)"
-          >
+            onclick="changeAdminTab('Approved', this)">
             Approved
           </button>
 
           <button
             class="admin-tab"
-            data-status="Rejected"
-            onclick="changeAdminTab('Rejected', this)"
-          >
+            onclick="changeAdminTab('Rejected', this)">
             Rejected
           </button>
 
           <button
             class="admin-tab"
-            data-status="Paid"
-            onclick="changeAdminTab('Paid', this)"
-          >
+            onclick="changeAdminTab('Paid', this)">
             Paid
           </button>
 
         </div>
 
-
         <div id="adminWithdrawals">
-
           <div class="loading">
             Loading admin requests...
           </div>
-
         </div>
 
       </section>
 
     </main>
-
 
     <footer>
       WealthCashFx © 2026
@@ -888,236 +974,364 @@
   </section>
 
 
-  <script>
-    /* =========================================
-       SUPABASE CONFIGURATION
-    ========================================== */
+<script>
+/* =====================================================
+   SUPABASE
+===================================================== */
 
-    const SUPABASE_URL =
-      "https://qzcxqaaxwxkhfyzodihy.supabase.co";
+const SUPABASE_URL =
+  "https://qzcxqaaxwxkhfyzodihy.supabase.co";
 
-    const SUPABASE_ANON_KEY =
-      "sb_publishable_ORnDeZmqluJy1BKobLPs2Q_PBEX24E6";
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_ORnDeZmqluJy1BKobLPs2Q_PBEX24E6";
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
-
-
-    /* =========================================
-       GLOBAL VARIABLES
-    ========================================== */
-
-    let currentUser = null;
-    let currentProfile = null;
-    let currentAdminStatus = "Pending";
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
 
 
-    /* =========================================
-       AUTH UI
-    ========================================== */
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
 
-    function showLogin() {
+let currentUser = null;
+let currentProfile = null;
+let currentAdminStatus = "Pending";
 
-      document.getElementById("loginForm")
-        .classList.remove("hidden");
 
-      document.getElementById("signupForm")
-        .classList.add("hidden");
+/* =====================================================
+   MESSAGE SYSTEM
+===================================================== */
 
-      document.getElementById("loginTab")
-        .classList.add("active");
+function showAuthMessage(
+  message,
+  type = "error",
+  title = ""
+) {
 
-      document.getElementById("signupTab")
-        .classList.remove("active");
+  const box =
+    document.getElementById("authMessage");
+
+  let heading = "";
+
+  if (title) {
+    heading =
+      `<div class="error-title">${escapeHtml(title)}</div>`;
+  }
+
+  box.innerHTML =
+    heading +
+    `<div>${escapeHtml(message)}</div>` +
+    `<button
+      class="close-message"
+      onclick="clearAuthMessage()"
+      aria-label="Close">
+      ×
+    </button>`;
+
+  box.className =
+    "message show " + type;
+
+}
+
+
+function clearAuthMessage() {
+
+  const box =
+    document.getElementById("authMessage");
+
+  box.innerHTML = "";
+
+  box.className = "message";
+
+}
+
+
+function showWithdrawMessage(
+  message,
+  type = "error"
+) {
+
+  const box =
+    document.getElementById("withdrawMessage");
+
+  box.innerHTML =
+    `<div>${escapeHtml(message)}</div>`;
+
+  box.className =
+    "message show " + type;
+
+}
+
+
+/* =====================================================
+   AUTH TABS
+===================================================== */
+
+function showLogin() {
+
+  document
+    .getElementById("loginForm")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("signupForm")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginTab")
+    .classList.add("active");
+
+  document
+    .getElementById("signupTab")
+    .classList.remove("active");
+
+  clearAuthMessage();
+}
+
+
+function showSignup() {
+
+  document
+    .getElementById("signupForm")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("loginForm")
+    .classList.add("hidden");
+
+  document
+    .getElementById("signupTab")
+    .classList.add("active");
+
+  document
+    .getElementById("loginTab")
+    .classList.remove("active");
+
+  clearAuthMessage();
+}
+
+
+/* =====================================================
+   SHOW PASSWORD
+===================================================== */
+
+function togglePassword(
+  inputId,
+  button
+) {
+
+  const input =
+    document.getElementById(inputId);
+
+  if (input.type === "password") {
+
+    input.type = "text";
+
+    button.textContent = "Hide";
+
+  } else {
+
+    input.type = "password";
+
+    button.textContent = "Show";
+
+  }
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+document
+  .getElementById("loginForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
 
       clearAuthMessage();
-    }
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+      if (!email || !password) {
+
+        showAuthMessage(
+          "Please enter your email and password.",
+          "error",
+          "Login information missing"
+        );
+
+        return;
+      }
 
 
-    function showSignup() {
+      const button =
+        document.getElementById("loginButton");
 
-      document.getElementById("signupForm")
-        .classList.remove("hidden");
+      button.disabled = true;
 
-      document.getElementById("loginForm")
-        .classList.add("hidden");
-
-      document.getElementById("signupTab")
-        .classList.add("active");
-
-      document.getElementById("loginTab")
-        .classList.remove("active");
-
-      clearAuthMessage();
-    }
+      button.textContent =
+        "Checking...";
 
 
-    function showAuthMessage(message, type = "error") {
+      try {
 
-      const box =
-        document.getElementById("authMessage");
-
-      box.textContent = message;
-
-      box.className =
-        "message show " + type;
-
-    }
-
-
-    function clearAuthMessage() {
-
-      const box =
-        document.getElementById("authMessage");
-
-      box.textContent = "";
-
-      box.className = "message";
-
-    }
-
-
-    function showWithdrawMessage(message, type = "error") {
-
-      const box =
-        document.getElementById("withdrawMessage");
-
-      box.textContent = message;
-
-      box.className =
-        "message show " + type;
-
-    }
-
-
-    /* =========================================
-       LOGIN
-    ========================================== */
-
-    document.getElementById("loginForm")
-      .addEventListener("submit", async function(event) {
-
-        event.preventDefault();
-
-        clearAuthMessage();
-
-        const email =
-          document.getElementById("loginEmail")
-            .value.trim();
-
-        const password =
-          document.getElementById("loginPassword")
-            .value;
-
-        if (!email || !password) {
-
-          showAuthMessage(
-            "Please enter your email and password."
-          );
-
-          return;
-        }
-
-
-        const button =
-          this.querySelector("button");
-
-        button.disabled = true;
-        button.textContent = "Logging in...";
-
-
-        try {
-
-          const { data, error } =
-            await supabaseClient.auth.signInWithPassword({
-              email,
-              password
+        const result =
+          await supabaseClient.auth
+            .signInWithPassword({
+              email: email,
+              password: password
             });
 
 
-          if (error) {
-            throw error;
-          }
-
-
-          if (!data.user) {
-            throw new Error("Login failed.");
-          }
-
-
-          currentUser = data.user;
-
-          await loadApplication();
-
-
-        } catch (error) {
-
-          console.error(error);
-
-          showAuthMessage(
-            error.message || "Unable to login."
-          );
-
-        } finally {
-
-          button.disabled = false;
-          button.textContent = "Login";
-
-        }
-
-      });
-
-
-    /* =========================================
-       SIGNUP
-    ========================================== */
-
-    document.getElementById("signupForm")
-      .addEventListener("submit", async function(event) {
-
-        event.preventDefault();
-
-        clearAuthMessage();
-
-        const fullName =
-          document.getElementById("signupName")
-            .value.trim();
-
-        const email =
-          document.getElementById("signupEmail")
-            .value.trim();
-
-        const password =
-          document.getElementById("signupPassword")
-            .value;
-
-
-        if (password.length < 8) {
-
-          showAuthMessage(
-            "Password must contain at least 8 characters."
-          );
-
-          return;
+        if (result.error) {
+          throw result.error;
         }
 
 
-        const button =
-          this.querySelector("button");
+        if (!result.data ||
+            !result.data.user) {
 
-        button.disabled = true;
-        button.textContent = "Creating account...";
+          throw new Error(
+            "Supabase did not return a user account."
+          );
+
+        }
 
 
-        try {
+        currentUser =
+          result.data.user;
 
-          const { data, error } =
-            await supabaseClient.auth.signUp({
-              email,
-              password,
+
+        await loadApplication();
+
+
+      } catch (error) {
+
+        console.error(
+          "LOGIN ERROR:",
+          error
+        );
+
+
+        showAuthMessage(
+          getReadableError(error),
+          "error",
+          "Login failed"
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "Login";
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   SIGNUP
+===================================================== */
+
+document
+  .getElementById("signupForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+      clearAuthMessage();
+
+      const fullName =
+        document
+          .getElementById("signupName")
+          .value
+          .trim();
+
+      const email =
+        document
+          .getElementById("signupEmail")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("signupPassword")
+          .value;
+
+
+      if (!fullName) {
+
+        showAuthMessage(
+          "Please enter your full name.",
+          "error",
+          "Information missing"
+        );
+
+        return;
+      }
+
+
+      if (!email) {
+
+        showAuthMessage(
+          "Please enter your email address.",
+          "error",
+          "Information missing"
+        );
+
+        return;
+      }
+
+
+      if (password.length < 8) {
+
+        showAuthMessage(
+          "Your password must contain at least 8 characters.",
+          "error",
+          "Password too short"
+        );
+
+        return;
+      }
+
+
+      const button =
+        document.getElementById("signupButton");
+
+      button.disabled = true;
+
+      button.textContent =
+        "Creating account...";
+
+
+      try {
+
+        const result =
+          await supabaseClient.auth
+            .signUp({
+              email: email,
+              password: password,
               options: {
                 data: {
                   full_name: fullName
@@ -1126,1111 +1340,1298 @@
             });
 
 
-          if (error) {
-            throw error;
-          }
-
-
-          if (data.session && data.user) {
-
-            currentUser = data.user;
-
-            await createOrLoadProfile(
-              data.user,
-              fullName
-            );
-
-            await loadApplication();
-
-          } else {
-
-            showAuthMessage(
-              "Account created. Please check your email to confirm your account.",
-              "success"
-            );
-
-          }
-
-
-        } catch (error) {
-
-          console.error(error);
-
-          showAuthMessage(
-            error.message || "Unable to create account."
-          );
-
-        } finally {
-
-          button.disabled = false;
-          button.textContent = "Create Account";
-
-        }
-
-      });
-
-
-    /* =========================================
-       CREATE / LOAD PROFILE
-    ========================================== */
-
-    async function createOrLoadProfile(user, suppliedName = "") {
-
-      const { data: existingProfile, error } =
-        await supabaseClient
-          .from("profiles")
-          .select("*")
-          .eq("id", user.id)
-          .maybeSingle();
-
-
-      if (error) {
-
-        console.error(
-          "Profile lookup error:",
-          error
-        );
-
-        throw error;
-      }
-
-
-      if (existingProfile) {
-
-        currentProfile = existingProfile;
-
-        return existingProfile;
-      }
-
-
-      const fullName =
-        suppliedName ||
-        user.user_metadata?.full_name ||
-        "";
-
-
-      const { data: newProfile, error: insertError } =
-        await supabaseClient
-          .from("profiles")
-          .insert({
-            id: user.id,
-            full_name: fullName,
-            email: user.email,
-            balance: 0,
-            status: "Active",
-            is_admin: false
-          })
-          .select()
-          .single();
-
-
-      if (insertError) {
-
-        console.error(
-          "Profile creation error:",
-          insertError
-        );
-
-        throw insertError;
-      }
-
-
-      currentProfile = newProfile;
-
-      return newProfile;
-    }
-
-
-    /* =========================================
-       LOAD APPLICATION
-    ========================================== */
-
-    async function loadApplication() {
-
-      if (!currentUser) {
-        return;
-      }
-
-
-      try {
-
-        const profile =
-          await createOrLoadProfile(
-            currentUser
-          );
-
-
-        document.getElementById("authScreen")
-          .classList.add("hidden");
-
-        document.getElementById("appScreen")
-          .classList.remove("hidden");
-
-
-        document.getElementById("navEmail")
-          .textContent =
-          currentUser.email || "";
-
-
-        document.getElementById("welcomeText")
-          .textContent =
-          profile.full_name
-            ? "Welcome, " + profile.full_name + "."
-            : "Your WealthCashFx account overview.";
-
-
-        updateDashboard(profile);
-
-        await loadMyWithdrawals();
-
-
-        if (profile.is_admin === true) {
-
-          document.getElementById("adminSection")
-            .classList.remove("hidden");
-
-          await loadAdminWithdrawals(
-            currentAdminStatus
-          );
-
-        } else {
-
-          document.getElementById("adminSection")
-            .classList.add("hidden");
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Application loading error:",
-          error
-        );
-
-        showAuthMessage(
-          error.message || "Unable to load your account."
-        );
-
-        await logout(false);
-      }
-    }
-
-
-    /* =========================================
-       DASHBOARD
-    ========================================== */
-
-    function updateDashboard(profile) {
-
-      const balance =
-        Number(profile.balance || 0);
-
-      document.getElementById("balanceDisplay")
-        .textContent =
-        "USD " +
-        balance.toLocaleString(
-          "en-US",
-          {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }
-        );
-
-
-      document.getElementById("statusDisplay")
-        .textContent =
-        profile.status || "Active";
-    }
-
-
-    /* =========================================
-       LOGOUT
-    ========================================== */
-
-    async function logout(showMessage = true) {
-
-      try {
-
-        await supabaseClient.auth.signOut({
-          scope: "local"
-        });
-
-      } catch (error) {
-
-        console.error(
-          "Logout error:",
-          error
-        );
-
-      }
-
-
-      currentUser = null;
-      currentProfile = null;
-
-
-      document.getElementById("appScreen")
-        .classList.add("hidden");
-
-      document.getElementById("authScreen")
-        .classList.remove("hidden");
-
-
-      document.getElementById("adminSection")
-        .classList.add("hidden");
-
-
-      document.getElementById("loginForm")
-        .reset();
-
-      document.getElementById("signupForm")
-        .reset();
-
-
-      showLogin();
-
-
-      if (showMessage) {
-        showAuthMessage(
-          "You have been logged out.",
-          "success"
-        );
-      }
-    }
-
-
-    document.getElementById("logoutBtn")
-      .addEventListener("click", async function() {
-
-        this.disabled = true;
-
-        this.textContent = "Logging out...";
-
-        await logout();
-
-        this.disabled = false;
-
-        this.textContent = "Logout";
-
-      });
-
-
-    /* =========================================
-       WITHDRAWAL REQUEST
-    ========================================== */
-
-    document.getElementById("withdrawForm")
-      .addEventListener("submit", async function(event) {
-
-        event.preventDefault();
-
-        if (!currentUser) {
-
-          showWithdrawMessage(
-            "Please log in first."
-          );
-
-          return;
+        if (result.error) {
+          throw result.error;
         }
 
 
-        const amount =
-          Number(
-            document.getElementById("withdrawAmount").value
-          );
-
-        const method =
-          document.getElementById("withdrawMethod")
-            .value;
-
-        const accountDetails =
-          document.getElementById("accountDetails")
-            .value.trim();
-
-
-        if (!amount || amount <= 0) {
-
-          showWithdrawMessage(
-            "Please enter a valid withdrawal amount."
-          );
-
-          return;
-        }
-
-
-        if (!method) {
-
-          showWithdrawMessage(
-            "Please select a withdrawal method."
-          );
-
-          return;
-        }
-
-
-        if (!accountDetails) {
-
-          showWithdrawMessage(
-            "Please enter your payment details."
-          );
-
-          return;
-        }
-
-
-        const currentBalance =
-          Number(currentProfile?.balance || 0);
-
-
-        if (amount > currentBalance) {
-
-          showWithdrawMessage(
-            "Withdrawal amount cannot exceed your available balance."
-          );
-
-          return;
-        }
-
-
-        const button =
-          this.querySelector("button");
-
-        button.disabled = true;
-
-        button.textContent =
-          "Submitting...";
-
-
-        try {
-
-          const { error } =
-            await supabaseClient
-              .from("withdrawal_requests")
-              .insert({
-                user_id: currentUser.id,
-                amount: amount,
-                method: method,
-                account_details: accountDetails,
-                status: "Pending"
-              });
-
-
-          if (error) {
-            throw error;
-          }
-
-
-          showWithdrawMessage(
-            "Withdrawal request submitted successfully.",
-            "success"
-          );
-
-
-          document.getElementById("withdrawForm")
-            .reset();
-
-
-          await loadMyWithdrawals();
-
-
-        } catch (error) {
-
-          console.error(error);
-
-          showWithdrawMessage(
-            error.message ||
-            "Unable to submit withdrawal request."
-          );
-
-        } finally {
-
-          button.disabled = false;
-
-          button.textContent =
-            "Submit Withdrawal Request";
-
-        }
-
-      });
-
-
-    /* =========================================
-       USER WITHDRAWAL HISTORY
-    ========================================== */
-
-    async function loadMyWithdrawals() {
-
-      const container =
-        document.getElementById("myWithdrawals");
-
-
-      if (!currentUser) {
-
-        container.innerHTML =
-          '<div class="empty">Please log in.</div>';
-
-        return;
-      }
-
-
-      container.innerHTML =
-        '<div class="loading">Loading withdrawal requests...</div>';
-
-
-      const { data, error } =
-        await supabaseClient
-          .from("withdrawal_requests")
-          .select("*")
-          .eq("user_id", currentUser.id)
-          .order("created_at", {
-            ascending: false
-          });
-
-
-      if (error) {
-
-        console.error(error);
-
-        container.innerHTML =
-          '<div class="empty">Unable to load withdrawal requests.</div>';
-
-        return;
-      }
-
-
-      if (!data || data.length === 0) {
-
-        container.innerHTML =
-          '<div class="empty">No withdrawal requests yet.</div>';
-
-        return;
-      }
-
-
-      let html = `
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Method</th>
-                <th>Status</th>
-                <th>Admin Note</th>
-              </tr>
-            </thead>
-            <tbody>
-      `;
-
-
-      data.forEach(request => {
-
-        const status =
-          request.status || "Pending";
-
-        const badgeClass =
-          status.toLowerCase();
-
-
-        html += `
-          <tr>
-
-            <td>
-              ${formatDate(request.created_at)}
-            </td>
-
-            <td>
-              USD ${formatMoney(request.amount)}
-            </td>
-
-            <td>
-              ${escapeHtml(request.method)}
-            </td>
-
-            <td>
-              <span class="badge ${badgeClass}">
-                ${escapeHtml(status)}
-              </span>
-            </td>
-
-            <td>
-              ${escapeHtml(request.admin_note || "-")}
-            </td>
-
-          </tr>
-        `;
-
-      });
-
-
-      html += `
-            </tbody>
-          </table>
-        </div>
-      `;
-
-
-      container.innerHTML = html;
-    }
-
-
-    /* =========================================
-       ADMIN TAB
-    ========================================== */
-
-    function changeAdminTab(status, button) {
-
-      currentAdminStatus = status;
-
-
-      document.querySelectorAll(".admin-tab")
-        .forEach(tab => {
-
-          tab.classList.remove("active");
-
-        });
-
-
-      button.classList.add("active");
-
-
-      loadAdminWithdrawals(status);
-    }
-
-
-    /* =========================================
-       ADMIN WITHDRAWALS
-    ========================================== */
-
-    async function loadAdminWithdrawals(status) {
-
-      const container =
-        document.getElementById("adminWithdrawals");
-
-
-      if (!currentProfile ||
-          currentProfile.is_admin !== true) {
-
-        container.innerHTML =
-          '<div class="empty">Admin access required.</div>';
-
-        return;
-      }
-
-
-      container.innerHTML =
-        '<div class="loading">Loading requests...</div>';
-
-
-      const { data, error } =
-        await supabaseClient
-          .from("withdrawal_requests")
-          .select(`
-            id,
-            user_id,
-            amount,
-            method,
-            account_details,
-            status,
-            admin_note,
-            created_at,
-            updated_at
-          `)
-          .eq("status", status)
-          .order("created_at", {
-            ascending: false
-          });
-
-
-      if (error) {
-
-        console.error(error);
-
-        container.innerHTML = `
-          <div class="empty">
-            Unable to load admin requests.<br><br>
-            ${escapeHtml(error.message)}
-          </div>
-        `;
-
-        return;
-      }
-
-
-      if (!data || data.length === 0) {
-
-        container.innerHTML =
-          '<div class="empty">No ' +
-          escapeHtml(status) +
-          ' withdrawal requests.</div>';
-
-        return;
-      }
-
-
-      let html = `
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-
-                <th>Date</th>
-                <th>User ID</th>
-                <th>Amount</th>
-                <th>Method</th>
-                <th>Account Details</th>
-                <th>Status</th>
-                <th>Actions</th>
-
-              </tr>
-
-            </thead>
-
-            <tbody>
-      `;
-
-
-      data.forEach(request => {
-
-        html += `
-          <tr>
-
-            <td>
-              ${formatDate(request.created_at)}
-            </td>
-
-            <td>
-              ${escapeHtml(request.user_id)}
-            </td>
-
-            <td>
-              USD ${formatMoney(request.amount)}
-            </td>
-
-            <td>
-              ${escapeHtml(request.method)}
-            </td>
-
-            <td>
-              ${escapeHtml(request.account_details)}
-            </td>
-
-            <td>
-              <span class="badge ${request.status.toLowerCase()}">
-                ${escapeHtml(request.status)}
-              </span>
-            </td>
-
-            <td>
-
-              <div class="admin-actions">
-
-                ${
-                  request.status === "Pending"
-                  ? `
-                    <button
-                      class="small-btn"
-                      onclick="updateWithdrawalStatus('${request.id}', 'Approved')"
-                    >
-                      Approve
-                    </button>
-
-                    <button
-                      class="small-btn"
-                      onclick="updateWithdrawalStatus('${request.id}', 'Rejected')"
-                    >
-                      Reject
-                    </button>
-                  `
-                  : ""
-                }
-
-
-                ${
-                  request.status === "Approved"
-                  ? `
-                    <button
-                      class="small-btn"
-                      onclick="updateWithdrawalStatus('${request.id}', 'Paid')"
-                    >
-                      Mark as Paid
-                    </button>
-
-                    <button
-                      class="small-btn"
-                      onclick="updateWithdrawalStatus('${request.id}', 'Rejected')"
-                    >
-                      Reject
-                    </button>
-                  `
-                  : ""
-                }
-
-
-                ${
-                  request.status === "Rejected"
-                  ? `
-                    <button
-                      class="small-btn"
-                      onclick="updateWithdrawalStatus('${request.id}', 'Pending')"
-                    >
-                      Move to Pending
-                    </button>
-                  `
-                  : ""
-                }
-
-
-                ${
-                  request.status === "Paid"
-                  ? `
-                    <span style="color:#7ee2a8;font-size:12px;">
-                      Completed
-                    </span>
-                  `
-                  : ""
-                }
-
-              </div>
-
-            </td>
-
-          </tr>
-        `;
-
-      });
-
-
-      html += `
-            </tbody>
-
-          </table>
-
-        </div>
-      `;
-
-
-      container.innerHTML = html;
-    }
-
-
-    /* =========================================
-       ADMIN UPDATE STATUS
-    ========================================== */
-
-    async function updateWithdrawalStatus(
-      requestId,
-      newStatus
-    ) {
-
-      if (!currentUser ||
-          !currentProfile ||
-          currentProfile.is_admin !== true) {
-
-        alert("Admin access required.");
-
-        return;
-      }
-
-
-      let note = "";
-
-
-      if (newStatus === "Rejected") {
-
-        note =
-          prompt(
-            "Optional reason for rejection:"
-          ) || "";
-
-      }
-
-
-      if (newStatus === "Paid") {
-
-        const confirmed =
-          confirm(
-            "Mark this withdrawal request as Paid?"
-          );
-
-        if (!confirmed) {
-          return;
-        }
-
-      }
-
-
-      if (newStatus === "Approved") {
-
-        const confirmed =
-          confirm(
-            "Approve this withdrawal request?"
-          );
-
-        if (!confirmed) {
-          return;
-        }
-
-      }
-
-
-      try {
-
-        const updateData = {
-          status: newStatus,
-          updated_at: new Date().toISOString()
-        };
-
-
-        if (note) {
-          updateData.admin_note = note;
-        }
-
-
-        const { error } =
-          await supabaseClient
-            .from("withdrawal_requests")
-            .update(updateData)
-            .eq("id", requestId);
-
-
-        if (error) {
-          throw error;
-        }
-
-
-        await loadAdminWithdrawals(
-          currentAdminStatus
-        );
-
-
-        await loadMyWithdrawals();
-
-
-        alert(
-          "Withdrawal status updated to " +
-          newStatus +
-          "."
-        );
-
-
-      } catch (error) {
-
-        console.error(error);
-
-        alert(
-          error.message ||
-          "Unable to update withdrawal status."
-        );
-
-      }
-
-    }
-
-
-    /* =========================================
-       OTHER BUTTONS
-    ========================================== */
-
-    function showTransferNotice() {
-
-      alert(
-        "The Send Money feature is not configured yet. It will require a secure server-side transfer system."
-      );
-    }
-
-
-    function showDepositNotice() {
-
-      alert(
-        "The Add Money feature is not configured yet."
-      );
-    }
-
-
-    function scrollToSection(id) {
-
-      const element =
-        document.getElementById(id);
-
-      if (element) {
-
-        element.scrollIntoView({
-          behavior: "smooth"
-        });
-
-      }
-
-    }
-
-
-    /* =========================================
-       UTILITIES
-    ========================================== */
-
-    function formatMoney(value) {
-
-      return Number(value || 0)
-        .toLocaleString(
-          "en-US",
-          {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }
-        );
-
-    }
-
-
-    function formatDate(value) {
-
-      if (!value) {
-        return "-";
-      }
-
-
-      return new Date(value)
-        .toLocaleString(
-          "en-US",
-          {
-            dateStyle: "medium",
-            timeStyle: "short"
-          }
-        );
-
-    }
-
-
-    function escapeHtml(value) {
-
-      if (value === null ||
-          value === undefined) {
-
-        return "";
-
-      }
-
-
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
-
-
-    /* =========================================
-       AUTH SESSION CHECK
-    ========================================== */
-
-    async function checkExistingSession() {
-
-      try {
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.getSession();
-
-
-        if (error) {
-          throw error;
-        }
-
-
-        if (data.session &&
-            data.session.user) {
-
-          currentUser =
-            data.session.user;
-
-          await loadApplication();
-
-        } else {
-
-          document.getElementById("authScreen")
-            .classList.remove("hidden");
-
-          document.getElementById("appScreen")
-            .classList.add("hidden");
-
-        }
-
-
-      } catch (error) {
-
-        console.error(
-          "Session check failed:",
-          error
-        );
-
-        document.getElementById("authScreen")
-          .classList.remove("hidden");
-
-        document.getElementById("appScreen")
-          .classList.add("hidden");
-
-        showAuthMessage(
-          error.message ||
-          "Unable to connect to your account."
-        );
-
-      }
-
-    }
-
-
-    /* =========================================
-       AUTH STATE LISTENER
-    ========================================== */
-
-    supabaseClient.auth.onAuthStateChange(
-      async (event, session) => {
-
-        console.log(
-          "Auth event:",
-          event
-        );
-
+        /*
+          EMAIL CONFIRMATION ENABLED
+        */
 
         if (
-          session &&
-          session.user &&
-          !currentUser
+          result.data &&
+          result.data.user &&
+          !result.data.session
+        ) {
+
+          showAuthMessage(
+            "Your account was created successfully. Supabase requires you to confirm your email before you can log in. Check your email inbox and spam/junk folder.",
+            "success",
+            "Account created"
+          );
+
+          document
+            .getElementById("signupForm")
+            .reset();
+
+          return;
+        }
+
+
+        /*
+          USER LOGGED IN IMMEDIATELY
+        */
+
+        if (
+          result.data &&
+          result.data.user
         ) {
 
           currentUser =
-            session.user;
+            result.data.user;
+
+          await createOrLoadProfile(
+            result.data.user,
+            fullName
+          );
 
           await loadApplication();
 
-        }
+        } else {
 
-
-        if (!session) {
-
-          currentUser = null;
-          currentProfile = null;
+          throw new Error(
+            "The account was not returned by Supabase."
+          );
 
         }
 
+
+      } catch (error) {
+
+        console.error(
+          "SIGNUP ERROR:",
+          error
+        );
+
+
+        showAuthMessage(
+          getReadableError(error),
+          "error",
+          "Account creation failed"
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "Create Account";
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+async function createOrLoadProfile(
+  user,
+  suppliedName = ""
+) {
+
+  const lookup =
+    await supabaseClient
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .maybeSingle();
+
+
+  if (lookup.error) {
+
+    throw new Error(
+      "Your login worked, but your profile could not be loaded. Supabase says: " +
+      lookup.error.message
+    );
+
+  }
+
+
+  if (lookup.data) {
+
+    currentProfile =
+      lookup.data;
+
+    return lookup.data;
+
+  }
+
+
+  const fullName =
+    suppliedName ||
+    user.user_metadata?.full_name ||
+    "";
+
+
+  const insert =
+    await supabaseClient
+      .from("profiles")
+      .insert({
+        id: user.id,
+        full_name: fullName,
+        email: user.email,
+        balance: 0,
+        status: "Active",
+        is_admin: false
+      })
+      .select()
+      .single();
+
+
+  if (insert.error) {
+
+    throw new Error(
+      "Your account was created, but the profile could not be created. Supabase says: " +
+      insert.error.message
+    );
+
+  }
+
+
+  currentProfile =
+    insert.data;
+
+  return insert.data;
+}
+
+
+/* =====================================================
+   LOAD APP
+===================================================== */
+
+async function loadApplication() {
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  try {
+
+    const profile =
+      await createOrLoadProfile(
+        currentUser
+      );
+
+
+    document
+      .getElementById("authScreen")
+      .classList.add("hidden");
+
+    document
+      .getElementById("appScreen")
+      .classList.remove("hidden");
+
+
+    document
+      .getElementById("navEmail")
+      .textContent =
+      currentUser.email || "";
+
+
+    document
+      .getElementById("welcomeText")
+      .textContent =
+      profile.full_name
+        ? "Welcome, " + profile.full_name + "."
+        : "Your WealthCashFx account overview.";
+
+
+    updateDashboard(profile);
+
+    await loadMyWithdrawals();
+
+
+    if (profile.is_admin === true) {
+
+      document
+        .getElementById("adminSection")
+        .classList.remove("hidden");
+
+      await loadAdminWithdrawals(
+        currentAdminStatus
+      );
+
+    } else {
+
+      document
+        .getElementById("adminSection")
+        .classList.add("hidden");
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "APPLICATION ERROR:",
+      error
+    );
+
+
+    /*
+      If login succeeded but the profile
+      failed, return to login and show
+      the exact problem.
+    */
+
+    await supabaseClient.auth.signOut({
+      scope: "local"
+    });
+
+    currentUser = null;
+    currentProfile = null;
+
+    document
+      .getElementById("appScreen")
+      .classList.add("hidden");
+
+    document
+      .getElementById("authScreen")
+      .classList.remove("hidden");
+
+    showLogin();
+
+    showAuthMessage(
+      error.message ||
+      "Your account could not be loaded.",
+      "error",
+      "Account loading failed"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function updateDashboard(profile) {
+
+  const balance =
+    Number(profile.balance || 0);
+
+
+  document
+    .getElementById("balanceDisplay")
+    .textContent =
+    "USD " +
+    balance.toLocaleString(
+      "en-US",
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
       }
     );
 
 
-    /* =========================================
-       START
-    ========================================== */
+  document
+    .getElementById("statusDisplay")
+    .textContent =
+    profile.status || "Active";
 
-    checkExistingSession();
+}
 
-  </script>
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logout() {
+
+  try {
+
+    await supabaseClient.auth.signOut({
+      scope: "local"
+    });
+
+  } catch (error) {
+
+    console.error(
+      "LOGOUT ERROR:",
+      error
+    );
+
+  }
+
+
+  currentUser = null;
+  currentProfile = null;
+
+
+  document
+    .getElementById("appScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("authScreen")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("adminSection")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("loginForm")
+    .reset();
+
+  document
+    .getElementById("signupForm")
+    .reset();
+
+
+  showLogin();
+
+}
+
+
+document
+  .getElementById("logoutBtn")
+  .addEventListener(
+    "click",
+    async function() {
+
+      this.disabled = true;
+
+      this.textContent =
+        "Logging out...";
+
+      await logout();
+
+      this.disabled = false;
+
+      this.textContent =
+        "Logout";
+
+    }
+  );
+
+
+/* =====================================================
+   WITHDRAWAL
+===================================================== */
+
+document
+  .getElementById("withdrawForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+      if (!currentUser) {
+
+        showWithdrawMessage(
+          "Please log in first."
+        );
+
+        return;
+      }
+
+
+      const amount =
+        Number(
+          document
+            .getElementById("withdrawAmount")
+            .value
+        );
+
+      const method =
+        document
+          .getElementById("withdrawMethod")
+          .value;
+
+      const accountDetails =
+        document
+          .getElementById("accountDetails")
+          .value
+          .trim();
+
+
+      if (!amount || amount <= 0) {
+
+        showWithdrawMessage(
+          "Please enter a valid amount."
+        );
+
+        return;
+      }
+
+
+      if (!method) {
+
+        showWithdrawMessage(
+          "Please select a withdrawal method."
+        );
+
+        return;
+      }
+
+
+      if (!accountDetails) {
+
+        showWithdrawMessage(
+          "Please enter your payment details."
+        );
+
+        return;
+      }
+
+
+      const balance =
+        Number(currentProfile?.balance || 0);
+
+
+      if (amount > balance) {
+
+        showWithdrawMessage(
+          "The withdrawal amount cannot exceed your available balance."
+        );
+
+        return;
+      }
+
+
+      const button =
+        this.querySelector("button");
+
+      button.disabled = true;
+
+      button.textContent =
+        "Submitting...";
+
+
+      try {
+
+        const result =
+          await supabaseClient
+            .from("withdrawal_requests")
+            .insert({
+              user_id: currentUser.id,
+              amount: amount,
+              method: method,
+              account_details: accountDetails,
+              status: "Pending"
+            });
+
+
+        if (result.error) {
+          throw result.error;
+        }
+
+
+        showWithdrawMessage(
+          "Withdrawal request submitted successfully.",
+          "success"
+        );
+
+
+        this.reset();
+
+        await loadMyWithdrawals();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showWithdrawMessage(
+          error.message ||
+          "Unable to submit withdrawal request."
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "Submit Withdrawal Request";
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   USER WITHDRAWALS
+===================================================== */
+
+async function loadMyWithdrawals() {
+
+  const container =
+    document.getElementById(
+      "myWithdrawals"
+    );
+
+
+  if (!currentUser) {
+
+    container.innerHTML =
+      '<div class="empty">Please log in.</div>';
+
+    return;
+  }
+
+
+  container.innerHTML =
+    '<div class="loading">Loading withdrawal requests...</div>';
+
+
+  const result =
+    await supabaseClient
+      .from("withdrawal_requests")
+      .select("*")
+      .eq("user_id", currentUser.id)
+      .order("created_at", {
+        ascending: false
+      });
+
+
+  if (result.error) {
+
+    console.error(result.error);
+
+    container.innerHTML =
+      '<div class="empty">' +
+      escapeHtml(result.error.message) +
+      '</div>';
+
+    return;
+  }
+
+
+  const data =
+    result.data || [];
+
+
+  if (data.length === 0) {
+
+    container.innerHTML =
+      '<div class="empty">No withdrawal requests yet.</div>';
+
+    return;
+  }
+
+
+  let html = `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Method</th>
+            <th>Status</th>
+            <th>Admin Note</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+
+  data.forEach(request => {
+
+    const status =
+      request.status || "Pending";
+
+
+    html += `
+      <tr>
+
+        <td>
+          ${formatDate(request.created_at)}
+        </td>
+
+        <td>
+          USD ${formatMoney(request.amount)}
+        </td>
+
+        <td>
+          ${escapeHtml(request.method)}
+        </td>
+
+        <td>
+          <span class="badge ${status.toLowerCase()}">
+            ${escapeHtml(status)}
+          </span>
+        </td>
+
+        <td>
+          ${escapeHtml(request.admin_note || "-")}
+        </td>
+
+      </tr>
+    `;
+
+  });
+
+
+  html += `
+        </tbody>
+      </table>
+    </div>
+  `;
+
+
+  container.innerHTML =
+    html;
+
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+function changeAdminTab(
+  status,
+  button
+) {
+
+  currentAdminStatus =
+    status;
+
+
+  document
+    .querySelectorAll(".admin-tab")
+    .forEach(tab => {
+      tab.classList.remove("active");
+    });
+
+
+  button.classList.add("active");
+
+
+  loadAdminWithdrawals(status);
+
+}
+
+
+async function loadAdminWithdrawals(
+  status
+) {
+
+  const container =
+    document.getElementById(
+      "adminWithdrawals"
+    );
+
+
+  if (
+    !currentProfile ||
+    currentProfile.is_admin !== true
+  ) {
+
+    container.innerHTML =
+      '<div class="empty">Admin access required.</div>';
+
+    return;
+  }
+
+
+  container.innerHTML =
+    '<div class="loading">Loading requests...</div>';
+
+
+  const result =
+    await supabaseClient
+      .from("withdrawal_requests")
+      .select("*")
+      .eq("status", status)
+      .order("created_at", {
+        ascending: false
+      });
+
+
+  if (result.error) {
+
+    console.error(result.error);
+
+    container.innerHTML =
+      '<div class="empty">' +
+      escapeHtml(result.error.message) +
+      '</div>';
+
+    return;
+  }
+
+
+  const data =
+    result.data || [];
+
+
+  if (data.length === 0) {
+
+    container.innerHTML =
+      '<div class="empty">No ' +
+      escapeHtml(status) +
+      ' withdrawal requests.</div>';
+
+    return;
+  }
+
+
+  let html = `
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Date</th>
+            <th>User ID</th>
+            <th>Amount</th>
+            <th>Method</th>
+            <th>Account Details</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+  `;
+
+
+  data.forEach(request => {
+
+    html += `
+      <tr>
+
+        <td>
+          ${formatDate(request.created_at)}
+        </td>
+
+        <td>
+          ${escapeHtml(request.user_id)}
+        </td>
+
+        <td>
+          USD ${formatMoney(request.amount)}
+        </td>
+
+        <td>
+          ${escapeHtml(request.method)}
+        </td>
+
+        <td>
+          ${escapeHtml(request.account_details)}
+        </td>
+
+        <td>
+          <span class="badge ${request.status.toLowerCase()}">
+            ${escapeHtml(request.status)}
+          </span>
+        </td>
+
+        <td>
+
+          <div class="admin-actions">
+
+            ${
+              request.status === "Pending"
+              ? `
+                <button
+                  class="small-btn"
+                  onclick="updateWithdrawalStatus('${request.id}','Approved')">
+                  Approve
+                </button>
+
+                <button
+                  class="small-btn"
+                  onclick="updateWithdrawalStatus('${request.id}','Rejected')">
+                  Reject
+                </button>
+              `
+              : ""
+            }
+
+            ${
+              request.status === "Approved"
+              ? `
+                <button
+                  class="small-btn"
+                  onclick="updateWithdrawalStatus('${request.id}','Paid')">
+                  Mark as Paid
+                </button>
+
+                <button
+                  class="small-btn"
+                  onclick="updateWithdrawalStatus('${request.id}','Rejected')">
+                  Reject
+                </button>
+              `
+              : ""
+            }
+
+            ${
+              request.status === "Rejected"
+              ? `
+                <button
+                  class="small-btn"
+                  onclick="updateWithdrawalStatus('${request.id}','Pending')">
+                  Move to Pending
+                </button>
+              `
+              : ""
+            }
+
+            ${
+              request.status === "Paid"
+              ? `
+                <span style="color:#7ee2a8;font-size:12px;">
+                  Completed
+                </span>
+              `
+              : ""
+            }
+
+          </div>
+
+        </td>
+
+      </tr>
+    `;
+
+  });
+
+
+  html += `
+        </tbody>
+      </table>
+
+    </div>
+  `;
+
+
+  container.innerHTML =
+    html;
+
+}
+
+
+/* =====================================================
+   ADMIN STATUS UPDATE
+===================================================== */
+
+async function updateWithdrawalStatus(
+  requestId,
+  newStatus
+) {
+
+  if (
+    !currentUser ||
+    !currentProfile ||
+    currentProfile.is_admin !== true
+  ) {
+
+    alert(
+      "Admin access required."
+    );
+
+    return;
+  }
+
+
+  let note = "";
+
+
+  if (newStatus === "Rejected") {
+
+    note =
+      prompt(
+        "Optional reason for rejection:"
+      ) || "";
+
+  }
+
+
+  if (
+    newStatus === "Approved" ||
+    newStatus === "Paid"
+  ) {
+
+    const confirmed =
+      confirm(
+        "Are you sure you want to change this withdrawal to " +
+        newStatus +
+        "?"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+  }
+
+
+  const updateData = {
+    status: newStatus,
+    updated_at: new Date().toISOString()
+  };
+
+
+  if (note) {
+    updateData.admin_note = note;
+  }
+
+
+  try {
+
+    const result =
+      await supabaseClient
+        .from("withdrawal_requests")
+        .update(updateData)
+        .eq("id", requestId);
+
+
+    if (result.error) {
+      throw result.error;
+    }
+
+
+    await loadAdminWithdrawals(
+      currentAdminStatus
+    );
+
+    await loadMyWithdrawals();
+
+
+    alert(
+      "Withdrawal status updated to " +
+      newStatus +
+      "."
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      error.message ||
+      "Unable to update withdrawal status."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   OTHER BUTTONS
+===================================================== */
+
+function showTransferNotice() {
+
+  alert(
+    "The Send Money feature is not configured yet. A secure server-side transfer system is required."
+  );
+
+}
+
+
+function showDepositNotice() {
+
+  alert(
+    "The Add Money feature is not configured yet."
+  );
+
+}
+
+
+function scrollToSection(id) {
+
+  const element =
+    document.getElementById(id);
+
+  if (element) {
+
+    element.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+}
+
+
+/* =====================================================
+   READABLE ERROR
+===================================================== */
+
+function getReadableError(error) {
+
+  if (!error) {
+    return "An unknown error occurred.";
+  }
+
+
+  const message =
+    error.message ||
+    error.error_description ||
+    error.msg ||
+    String(error);
+
+
+  /*
+    Make common Supabase errors easier
+    to understand.
+  */
+
+  if (
+    message.toLowerCase()
+      .includes("invalid api key")
+  ) {
+
+    return (
+      "Supabase rejected the Publishable key. " +
+      "Please make sure the key belongs to the WealthCashFx Supabase project."
+    );
+
+  }
+
+
+  if (
+    message.toLowerCase()
+      .includes("email not confirmed")
+  ) {
+
+    return (
+      "Your email has not been confirmed yet. " +
+      "Open the confirmation email from Supabase and confirm your account before logging in."
+    );
+
+  }
+
+
+  if (
+    message.toLowerCase()
+      .includes("user already registered")
+  ) {
+
+    return (
+      "This email is already registered. " +
+      "Use Login instead."
+    );
+
+  }
+
+
+  if (
+    message.toLowerCase()
+      .includes("invalid login credentials")
+  ) {
+
+    return (
+      "The email or password is incorrect."
+    );
+
+  }
+
+
+  if (
+    message.toLowerCase()
+      .includes("failed to fetch")
+  ) {
+
+    return (
+      "The website could not connect to Supabase. " +
+      "Check your internet connection and make sure the Supabase project is available."
+    );
+
+  }
+
+
+  return message;
+
+}
+
+
+/* =====================================================
+   UTILITIES
+===================================================== */
+
+function formatMoney(value) {
+
+  return Number(value || 0)
+    .toLocaleString(
+      "en-US",
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }
+    );
+
+}
+
+
+function formatDate(value) {
+
+  if (!value) {
+    return "-";
+  }
+
+
+  return new Date(value)
+    .toLocaleString(
+      "en-US",
+      {
+        dateStyle: "medium",
+        timeStyle: "short"
+      }
+    );
+
+}
+
+
+function escapeHtml(value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return "";
+
+  }
+
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   EXISTING SESSION
+===================================================== */
+
+async function checkExistingSession() {
+
+  try {
+
+    const result =
+      await supabaseClient.auth
+        .getSession();
+
+
+    if (result.error) {
+      throw result.error;
+    }
+
+
+    if (
+      result.data &&
+      result.data.session &&
+      result.data.session.user
+    ) {
+
+      currentUser =
+        result.data.session.user;
+
+      await loadApplication();
+
+    } else {
+
+      document
+        .getElementById("authScreen")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("appScreen")
+        .classList.add("hidden");
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "SESSION ERROR:",
+      error
+    );
+
+
+    document
+      .getElementById("authScreen")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("appScreen")
+      .classList.add("hidden");
+
+
+    showAuthMessage(
+      getReadableError(error),
+      "error",
+      "Connection problem"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+  async (event, session) => {
+
+    console.log(
+      "Supabase auth event:",
+      event
+    );
+
+
+    if (
+      session &&
+      session.user &&
+      !currentUser
+    ) {
+
+      currentUser =
+        session.user;
+
+      await loadApplication();
+
+    }
+
+
+    if (!session) {
+
+      currentUser = null;
+      currentProfile = null;
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   START WEBSITE
+===================================================== */
+
+checkExistingSession();
+
+</script>
 
 </body>
 </html>
