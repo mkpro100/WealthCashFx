@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>WealthCashFx</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -12,188 +13,277 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      font-family: Arial, sans-serif;
       background: #071426;
-      color: #fff;
+      color: #ffffff;
       min-height: 100vh;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1200px;
+      margin: auto;
     }
 
     header {
       background: #0b1d35;
-      border-bottom: 1px solid #1c3b61;
-      padding: 18px 20px;
+      border-bottom: 1px solid #193554;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 15px;
-      flex-wrap: wrap;
     }
 
     .logo {
-      font-size: 24px;
-      font-weight: 800;
-      color: #42a5ff;
+      font-size: 23px;
+      font-weight: bold;
+      color: #38a9ff;
     }
 
     .logo span {
-      color: #fff;
+      color: #ffffff;
     }
 
-    .user-info {
-      font-size: 13px;
-      color: #b7c7d9;
-      margin-top: 4px;
-    }
-
-    button {
+    .btn {
       border: none;
       border-radius: 8px;
-      padding: 11px 16px;
-      cursor: pointer;
-      font-weight: 700;
+      padding: 12px 18px;
+      font-weight: bold;
       font-size: 14px;
     }
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    .btn-primary {
+      background: #1687e8;
+      color: white;
     }
 
-    .logout {
-      background: #263b55;
-      color: #fff;
+    .btn-primary:hover {
+      background: #0f72c7;
     }
 
-    main {
+    .btn-danger {
+      background: #d83b4b;
+      color: white;
+    }
+
+    .btn-success {
+      background: #159447;
+      color: white;
+    }
+
+    .btn-warning {
+      background: #d99a16;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #34485f;
+      color: white;
+    }
+
+    .auth-page {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px;
+    }
+
+    .auth-box {
       width: 100%;
-      max-width: 1100px;
-      margin: auto;
-      padding: 25px 18px 50px;
+      max-width: 430px;
+      background: #0c2039;
+      border: 1px solid #1c3b5d;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 15px 45px rgba(0,0,0,.25);
     }
 
-    .welcome {
-      margin-bottom: 22px;
+    .auth-box h1 {
+      text-align: center;
+      margin-bottom: 10px;
     }
 
-    .welcome h1 {
-      font-size: 27px;
-      margin-bottom: 5px;
-    }
-
-    .welcome p {
-      color: #9eb2c9;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-
-    .card {
-      background: #0c203a;
-      border: 1px solid #1b3b5e;
-      border-radius: 14px;
-      padding: 20px;
-    }
-
-    .card-label {
-      color: #91a8c0;
-      font-size: 13px;
-      margin-bottom: 9px;
-    }
-
-    .balance {
-      font-size: 28px;
-      font-weight: 800;
-    }
-
-    .active {
-      color: #55d98b;
-      font-weight: 800;
-    }
-
-    section {
-      margin-top: 22px;
-    }
-
-    .section-title {
-      font-size: 21px;
-      margin-bottom: 13px;
-    }
-
-    .panel {
-      background: #0c203a;
-      border: 1px solid #1b3b5e;
-      border-radius: 14px;
-      padding: 20px;
+    .auth-box p {
+      color: #9fb2c8;
+      text-align: center;
+      margin-bottom: 25px;
     }
 
     label {
       display: block;
-      font-size: 13px;
-      color: #a9bdd2;
-      margin-bottom: 7px;
+      margin: 15px 0 7px;
+      color: #c8d6e5;
+      font-size: 14px;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      background: #07182b;
-      border: 1px solid #294968;
-      color: #fff;
-      padding: 12px;
+      padding: 13px;
       border-radius: 8px;
+      border: 1px solid #294866;
+      background: #071426;
+      color: white;
       outline: none;
-      margin-bottom: 14px;
     }
 
     textarea {
-      min-height: 95px;
+      min-height: 100px;
       resize: vertical;
     }
 
-    .primary {
-      background: #1687ff;
-      color: white;
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #1687e8;
     }
 
-    .success {
-      background: #20a866;
-      color: white;
+    .full {
+      width: 100%;
+      margin-top: 18px;
     }
 
-    .danger {
-      background: #d84c4c;
-      color: white;
+    .switch {
+      text-align: center;
+      margin-top: 20px;
+      color: #9fb2c8;
     }
 
-    .admin {
-      border: 1px solid #d5a934;
-      background: linear-gradient(180deg, #101f36, #0b192d);
+    .switch a {
+      color: #38a9ff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .message {
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .message.error {
+      background: #4b1720;
+      color: #ffb8c0;
+      border: 1px solid #8f2c3a;
+    }
+
+    .message.success {
+      background: #123d28;
+      color: #a9f0c4;
+      border: 1px solid #227a49;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #a9bdd2;
+    }
+
+    main {
+      padding: 30px 0 60px;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .welcome h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .welcome p {
+      color: #9fb2c8;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #0c2039;
+      border: 1px solid #1c3b5d;
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .card-title {
+      color: #9fb2c8;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .balance {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .active {
+      color: #45d98a;
+      font-weight: bold;
+    }
+
+    .section {
+      background: #0c2039;
+      border: 1px solid #1c3b5d;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      color: #8fa5bb;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
     }
 
     .admin-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
-      margin-bottom: 15px;
-    }
-
-    .admin-badge {
-      background: #d5a934;
-      color: #071426;
-      padding: 6px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 800;
     }
 
     .tabs {
@@ -204,21 +294,26 @@
     }
 
     .tab {
-      background: #182f4a;
-      color: #c7d5e3;
+      border: 1px solid #31516f;
+      background: #102a45;
+      color: #c8d6e5;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
-    .active-tab {
-      background: #1687ff !important;
-      color: white !important;
+    .tab.active {
+      background: #1687e8;
+      color: white;
+      border-color: #1687e8;
     }
 
     .withdrawal {
-      border: 1px solid #274865;
-      background: #091a2e;
-      border-radius: 11px;
-      padding: 16px;
+      border: 1px solid #294866;
+      border-radius: 10px;
+      padding: 17px;
       margin-bottom: 12px;
+      background: #091a2e;
     }
 
     .withdrawal-top {
@@ -226,49 +321,26 @@
       justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 10px;
-    }
-
-    .withdrawal-amount {
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .details {
-      color: #9fb4ca;
-      font-size: 13px;
-      line-height: 1.7;
       margin-bottom: 12px;
-      word-break: break-word;
+    }
+
+    .withdrawal strong {
+      font-size: 17px;
     }
 
     .status {
-      display: inline-block;
       padding: 5px 9px;
       border-radius: 20px;
-      font-size: 11px;
-      font-weight: 800;
-      height: fit-content;
+      background: #263b50;
+      font-size: 12px;
+      font-weight: bold;
     }
 
-    .pending {
-      background: #755b20;
-      color: #ffd970;
-    }
-
-    .approved {
-      background: #164e38;
-      color: #69e3a3;
-    }
-
-    .rejected {
-      background: #55252b;
-      color: #ff929c;
-    }
-
-    .paid {
-      background: #17486b;
-      color: #76caff;
+    .details {
+      color: #9fb2c8;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 12px;
     }
 
     .actions {
@@ -277,52 +349,32 @@
       flex-wrap: wrap;
     }
 
-    .actions button {
+    .actions .btn {
       padding: 9px 12px;
       font-size: 12px;
     }
 
-    .message {
-      padding: 11px 13px;
-      border-radius: 8px;
-      margin-bottom: 14px;
-      display: none;
-      font-size: 13px;
-    }
-
-    .success-msg {
-      background: #123d2c;
-      color: #76e5a9;
-      display: block;
-    }
-
-    .error-msg {
-      background: #471f26;
-      color: #ff9ca6;
-      display: block;
-    }
-
-    .empty,
-    .loading {
+    .empty {
+      text-align: center;
+      padding: 30px;
       color: #8fa5bb;
-      padding: 15px 0;
-      font-size: 14px;
-    }
-
-    .hidden {
-      display: none !important;
     }
 
     footer {
       text-align: center;
-      color: #71869d;
-      font-size: 12px;
-      padding: 30px 15px;
+      color: #6f8499;
+      padding: 25px;
+      font-size: 13px;
     }
 
     @media (max-width: 800px) {
-      .grid {
+      .cards,
+      .grid-2 {
         grid-template-columns: 1fr;
+      }
+
+      .welcome h1 {
+        font-size: 23px;
       }
     }
   </style>
@@ -331,1243 +383,1278 @@
 <body>
 
 <header>
-  <div>
-    <div class="logo">WealthCash<span>Fx</span></div>
-    <div class="user-info" id="headerEmail">Checking account...</div>
-  </div>
+  <div class="container nav">
+    <div class="logo">Wealth<span>CashFx</span></div>
 
-  <button class="logout" id="logoutBtn">Logout</button>
+    <button
+      id="logoutBtn"
+      class="btn btn-danger hidden"
+      type="button">
+      Logout
+    </button>
+  </div>
 </header>
 
-<main>
+<!-- AUTH -->
+<section id="authSection" class="auth-page">
+  <div class="auth-box">
 
-  <div id="loginRequired" class="panel hidden">
-    <h2>Please log in</h2>
-    <p style="color:#9eb2c9;margin-top:8px;">
-      You need to be signed in to access your WealthCashFx account.
-    </p>
+    <div id="loginBox">
+      <h1>Welcome Back</h1>
+      <p>Log in to your WealthCashFx account.</p>
+
+      <label>Email</label>
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Enter your email"
+        autocomplete="email">
+
+      <label>Password</label>
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Enter your password"
+        autocomplete="current-password">
+
+      <button id="loginBtn" class="btn btn-primary full" type="button">
+        Login
+      </button>
+
+      <div id="loginMessage" class="message"></div>
+
+      <div class="switch">
+        Don't have an account?
+        <a id="showSignup">Create account</a>
+      </div>
+    </div>
+
+    <div id="signupBox" class="hidden">
+      <h1>Create Account</h1>
+      <p>Open your WealthCashFx account.</p>
+
+      <label>Full Name</label>
+      <input
+        id="signupName"
+        type="text"
+        placeholder="Enter your full name">
+
+      <label>Email</label>
+      <input
+        id="signupEmail"
+        type="email"
+        placeholder="Enter your email"
+        autocomplete="email">
+
+      <label>Password</label>
+      <input
+        id="signupPassword"
+        type="password"
+        placeholder="Minimum 8 characters"
+        autocomplete="new-password">
+
+      <button id="signupBtn" class="btn btn-primary full" type="button">
+        Create Account
+      </button>
+
+      <div id="signupMessage" class="message"></div>
+
+      <div class="switch">
+        Already have an account?
+        <a id="showLogin">Log in</a>
+      </div>
+    </div>
+
   </div>
+</section>
 
-  <div id="dashboard">
+<!-- LOADING -->
+<div id="loadingSection" class="loading hidden">
+  Checking account...
+</div>
+
+<!-- DASHBOARD -->
+<main id="dashboardSection" class="hidden">
+  <div class="container">
 
     <div class="welcome">
       <h1>Welcome, <span id="userName">User</span></h1>
-      <p id="userEmail">Loading account...</p>
+      <p id="userEmail"></p>
     </div>
 
-    <div class="grid">
-
+    <div class="cards">
       <div class="card">
-        <div class="card-label">Available Balance</div>
-        <div class="balance" id="balance">$0.00</div>
+        <div class="card-title">Available Balance</div>
+        <div class="balance">
+          USD <span id="balance">0.00</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-label">Account Status</div>
-        <div class="active" id="accountStatus">Active</div>
+        <div class="card-title">Account Status</div>
+        <div id="accountStatus" class="active">Active</div>
       </div>
 
       <div class="card">
-        <div class="card-label">Currency</div>
+        <div class="card-title">Currency</div>
         <div>US Dollar</div>
       </div>
-
     </div>
 
-    <section>
-      <h2 class="section-title">Recent Activity</h2>
+    <!-- WITHDRAW -->
+    <section class="section">
+      <h2>Withdraw Funds</h2>
+      <div class="section-subtitle">
+        Submit a withdrawal request using your preferred payment method.
+      </div>
 
-      <div class="panel">
-        <div id="transactionMessage" class="loading">
-          Loading transactions...
+      <div class="grid-2">
+
+        <div>
+          <label>Amount (USD)</label>
+          <input
+            id="withdrawAmount"
+            type="number"
+            min="1"
+            step="0.01"
+            placeholder="Enter amount">
         </div>
 
-        <div id="transactionsList"></div>
+        <div>
+          <label>Payment Method</label>
+          <select id="withdrawMethod">
+            <option value="">Select method</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Crypto">Crypto</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+      </div>
+
+      <label>Account Details</label>
+      <textarea
+        id="withdrawDetails"
+        placeholder="Enter the account or wallet details needed for your withdrawal"></textarea>
+
+      <button
+        id="withdrawBtn"
+        class="btn btn-primary"
+        type="button">
+        Submit Withdrawal Request
+      </button>
+
+      <div id="withdrawMessage" class="message"></div>
+    </section>
+
+    <!-- MY WITHDRAWALS -->
+    <section class="section">
+      <h2>My Withdrawal Requests</h2>
+      <div class="section-subtitle">
+        View the status of your withdrawal requests.
+      </div>
+
+      <div id="myWithdrawals">
+        <div class="empty">Loading withdrawals...</div>
       </div>
     </section>
 
-    <section>
-      <h2 class="section-title">Transfer Credits</h2>
-
-      <div class="panel">
-
-        <div id="transferMessage" class="message"></div>
-
-        <label for="recipientEmail">Recipient Email</label>
-        <input
-          type="email"
-          id="recipientEmail"
-          placeholder="recipient@example.com"
-        >
-
-        <label for="transferAmount">Amount</label>
-        <input
-          type="number"
-          id="transferAmount"
-          min="0.01"
-          step="0.01"
-          placeholder="0.00"
-        >
-
-        <button class="primary" id="transferBtn">
-          Transfer Credits
-        </button>
-
-        <p style="color:#8198b0;font-size:12px;margin-top:12px;">
-          Transfers use the internal platform credit system.
-        </p>
-
+    <!-- TRANSFER -->
+    <section class="section">
+      <h2>Transfer Credits</h2>
+      <div class="section-subtitle">
+        Transfer functionality can be connected to a secure database function later.
       </div>
-    </section>
 
-    <section>
-      <h2 class="section-title">Request a Withdrawal</h2>
+      <div class="grid-2">
+        <div>
+          <label>Recipient Email</label>
+          <input
+            type="email"
+            placeholder="Recipient email"
+            disabled>
+        </div>
 
-      <div class="panel">
-
-        <div id="withdrawMessage" class="message"></div>
-
-        <label for="withdrawAmount">Amount</label>
-        <input
-          type="number"
-          id="withdrawAmount"
-          min="0.01"
-          step="0.01"
-          placeholder="0.00"
-        >
-
-        <label for="withdrawMethod">
-          Withdrawal Method
-        </label>
-
-        <select id="withdrawMethod">
-          <option value="">Select a method</option>
-          <option value="Bank Transfer">Bank Transfer</option>
-          <option value="Crypto">Crypto</option>
-          <option value="Other">Other</option>
-        </select>
-
-        <label for="accountDetails">
-          Account / Payment Details
-        </label>
-
-        <textarea
-          id="accountDetails"
-          placeholder="Enter the payment details required to process the request."
-        ></textarea>
-
-        <button class="primary" id="withdrawBtn">
-          Submit Withdrawal Request
-        </button>
-
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">
-        My Withdrawal Requests
-      </h2>
-
-      <div class="panel">
-        <div id="myWithdrawals" class="loading">
-          Loading withdrawal requests...
+        <div>
+          <label>Amount</label>
+          <input
+            type="number"
+            placeholder="Amount"
+            disabled>
         </div>
       </div>
+
+      <button class="btn btn-secondary" type="button" disabled>
+        Transfer Not Configured
+      </button>
     </section>
 
-    <!-- ADMIN DASHBOARD -->
+    <!-- ADMIN -->
+    <section id="adminSection" class="section hidden">
 
-    <section id="adminSection" class="hidden">
-
-      <div class="panel admin">
-
-        <div class="admin-header">
-
-          <div>
-            <h2>Admin Dashboard</h2>
-
-            <p style="color:#9eb2c9;margin-top:5px;">
-              Manage withdrawal requests
-            </p>
+      <div class="admin-header">
+        <div>
+          <h2>Admin Dashboard</h2>
+          <div class="section-subtitle">
+            Manage WealthCashFx withdrawal requests.
           </div>
-
-          <span class="admin-badge">
-            ADMIN
-          </span>
-
         </div>
 
-        <div id="adminMessage" class="message"></div>
+        <strong style="color:#45d98a;">ADMIN</strong>
+      </div>
 
-        <div class="tabs">
+      <div class="tabs">
+        <button class="tab active" data-status="Pending" type="button">
+          Pending
+        </button>
 
-          <button
-            class="tab active-tab"
-            data-status="Pending"
-          >
-            Pending
-          </button>
+        <button class="tab" data-status="Approved" type="button">
+          Approved
+        </button>
 
-          <button
-            class="tab"
-            data-status="Approved"
-          >
-            Approved
-          </button>
+        <button class="tab" data-status="Rejected" type="button">
+          Rejected
+        </button>
 
-          <button
-            class="tab"
-            data-status="Rejected"
-          >
-            Rejected
-          </button>
+        <button class="tab" data-status="Paid" type="button">
+          Paid
+        </button>
+      </div>
 
-          <button
-            class="tab"
-            data-status="Paid"
-          >
-            Paid
-          </button>
-
-        </div>
-
-        <div id="adminWithdrawals" class="loading">
-          Loading withdrawal requests...
-        </div>
-
+      <div id="adminWithdrawals">
+        <div class="empty">Loading requests...</div>
       </div>
 
     </section>
 
   </div>
 
+  <footer>
+    WealthCashFx
+  </footer>
 </main>
 
-<footer>
-  WealthCashFx &copy; 2026
-</footer>
-
-
 <script>
+/* =========================================================
+   WEALTHCASHFX SUPABASE CONFIGURATION
+   ========================================================= */
 
-  /*
-  ============================================================
-  SUPABASE CONFIGURATION
-  ============================================================
-  */
+const SUPABASE_URL =
+  "https://qzcxqaaxwxkhfyzodihy.supabase.co";
 
-  const SUPABASE_URL =
-    "https://qzcxqaaxwxkhfyzodihy.supabase.co";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6Y3hxYWF4d3hraGZ5em9kaWh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk2OTUzMjgsImV4cCI6MjEwNTI3MTMyOH0.WwsyVCuM8HeCZ02kiwDj-Skt7jChRFlCdUMOiguZOs";
 
-  const SUPABASE_ANON_KEY =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6Y3hxYWF4d3hraGZ5em9kaWh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk2OTUzMjgsImV4cCI6MjEwNTI3MTMyOH0.Wwsy6VCuM8HeCZ02kiwDj-Skt7jChRFlCdUMOiguZOs";
+const { createClient } = window.supabase;
 
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
+const supabaseClient = createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const authSection = document.getElementById("authSection");
+const loadingSection = document.getElementById("loadingSection");
+const dashboardSection = document.getElementById("dashboardSection");
+const logoutBtn = document.getElementById("logoutBtn");
+
+const loginBox = document.getElementById("loginBox");
+const signupBox = document.getElementById("signupBox");
+
+const loginBtn = document.getElementById("loginBtn");
+const signupBtn = document.getElementById("signupBtn");
+
+const showSignup = document.getElementById("showSignup");
+const showLogin = document.getElementById("showLogin");
+
+const loginMessage = document.getElementById("loginMessage");
+const signupMessage = document.getElementById("signupMessage");
+const withdrawMessage = document.getElementById("withdrawMessage");
+
+const userName = document.getElementById("userName");
+const userEmail = document.getElementById("userEmail");
+const balance = document.getElementById("balance");
+const accountStatus = document.getElementById("accountStatus");
+
+const adminSection = document.getElementById("adminSection");
+const adminWithdrawals = document.getElementById("adminWithdrawals");
+const myWithdrawals = document.getElementById("myWithdrawals");
+
+/* =========================================================
+   APP STATE
+   ========================================================= */
+
+let currentUser = null;
+let currentProfile = null;
+let currentAdminStatus = false;
+let currentAdminTab = "Pending";
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function showMessage(element, message, type) {
+  element.textContent = message;
+  element.className = "message show " + type;
+}
+
+function clearMessage(element) {
+  element.textContent = "";
+  element.className = "message";
+}
+
+function showLoginScreen() {
+  loadingSection.classList.add("hidden");
+  dashboardSection.classList.add("hidden");
+
+  authSection.classList.remove("hidden");
+
+  logoutBtn.classList.add("hidden");
+
+  loginBox.classList.remove("hidden");
+  signupBox.classList.add("hidden");
+
+  currentUser = null;
+  currentProfile = null;
+  currentAdminStatus = false;
+}
+
+function showDashboardScreen() {
+  authSection.classList.add("hidden");
+  loadingSection.classList.add("hidden");
+
+  dashboardSection.classList.remove("hidden");
+  logoutBtn.classList.remove("hidden");
+}
+
+/* =========================================================
+   LOGIN / SIGNUP SCREEN SWITCH
+   ========================================================= */
+
+showSignup.addEventListener("click", function () {
+  loginBox.classList.add("hidden");
+  signupBox.classList.remove("hidden");
+
+  clearMessage(loginMessage);
+  clearMessage(signupMessage);
+});
+
+showLogin.addEventListener("click", function () {
+  signupBox.classList.add("hidden");
+  loginBox.classList.remove("hidden");
+
+  clearMessage(loginMessage);
+  clearMessage(signupMessage);
+});
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+loginBtn.addEventListener("click", async function () {
+
+  clearMessage(loginMessage);
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  if (!email || !password) {
+    showMessage(
+      loginMessage,
+      "Please enter your email and password.",
+      "error"
     );
-
-
-  let currentUser = null;
-  let currentProfile = null;
-  let currentAdminStatus = "Pending";
-
-
-  function money(value) {
-
-    return Number(value || 0).toLocaleString(
-      "en-US",
-      {
-        style: "currency",
-        currency: "USD"
-      }
-    );
+    return;
   }
 
+  loginBtn.disabled = true;
+  loginBtn.textContent = "Logging in...";
 
-  function escapeHtml(value) {
+  try {
 
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-
-  function showMessage(id, message, type) {
-
-    const element =
-      document.getElementById(id);
-
-    element.textContent = message;
-
-    element.className =
-      "message " +
-      (type === "success"
-        ? "success-msg"
-        : "error-msg");
-  }
-
-
-  function hideMessage(id) {
-
-    const element =
-      document.getElementById(id);
-
-    element.className = "message";
-    element.textContent = "";
-  }
-
-
-  function statusClass(status) {
-
-    return String(status || "")
-      .toLowerCase()
-      .replace(/\s+/g, "-");
-  }
-
-
-  async function loadUser() {
-
-    const {
-      data: { user },
-      error
-    } = await supabaseClient.auth.getUser();
-
-
-    if (error || !user) {
-
-      currentUser = null;
-
-      document
-        .getElementById("dashboard")
-        .classList.add("hidden");
-
-      document
-        .getElementById("loginRequired")
-        .classList.remove("hidden");
-
-      return;
-    }
-
-
-    currentUser = user;
-
-
-    document
-      .getElementById("dashboard")
-      .classList.remove("hidden");
-
-
-    document
-      .getElementById("loginRequired")
-      .classList.add("hidden");
-
-
-    document
-      .getElementById("headerEmail")
-      .textContent = user.email || "";
-
-
-    document
-      .getElementById("userEmail")
-      .textContent = user.email || "";
-
-
-    await loadProfile();
-  }
-
-
-  async function loadProfile() {
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("profiles")
-      .select("*")
-      .eq("id", currentUser.id)
-      .maybeSingle();
-
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
 
     if (error) {
-
-      console.error("Profile error:", error);
-
-      document
-        .getElementById("userName")
-        .textContent = "User";
-
-      return;
+      throw error;
     }
 
-
-    if (!data) {
-
-      document
-        .getElementById("userName")
-        .textContent = "User";
-
-      return;
+    if (!data.session || !data.user) {
+      throw new Error("Login completed but no active session was created.");
     }
 
+    currentUser = data.user;
 
-    currentProfile = data;
+    await loadUserAccount(currentUser);
 
+  } catch (error) {
 
-    document
-      .getElementById("userName")
-      .textContent =
-      data.full_name ||
-      currentUser.email?.split("@")[0] ||
+    console.error("Login error:", error);
+
+    showMessage(
+      loginMessage,
+      error.message || "Unable to log in.",
+      "error"
+    );
+
+  } finally {
+
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Login";
+  }
+});
+
+/* =========================================================
+   SIGN UP
+   ========================================================= */
+
+signupBtn.addEventListener("click", async function () {
+
+  clearMessage(signupMessage);
+
+  const name =
+    document.getElementById("signupName").value.trim();
+
+  const email =
+    document.getElementById("signupEmail").value.trim();
+
+  const password =
+    document.getElementById("signupPassword").value;
+
+  if (!name || !email || !password) {
+    showMessage(
+      signupMessage,
+      "Please complete all fields.",
+      "error"
+    );
+    return;
+  }
+
+  if (password.length < 8) {
+    showMessage(
+      signupMessage,
+      "Password must contain at least 8 characters.",
+      "error"
+    );
+    return;
+  }
+
+  signupBtn.disabled = true;
+  signupBtn.textContent = "Creating account...";
+
+  try {
+
+    const { data, error } =
+      await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: name
+          }
+        }
+      });
+
+    if (error) {
+      throw error;
+    }
+
+    if (data.user) {
+
+      if (data.session) {
+        currentUser = data.user;
+        await loadUserAccount(data.user);
+      } else {
+
+        showMessage(
+          signupMessage,
+          "Account created. Please check your email if confirmation is required, then log in.",
+          "success"
+        );
+
+        signupBox.classList.add("hidden");
+        loginBox.classList.remove("hidden");
+
+        document.getElementById("loginEmail").value = email;
+      }
+    }
+
+  } catch (error) {
+
+    console.error("Signup error:", error);
+
+    showMessage(
+      signupMessage,
+      error.message || "Unable to create account.",
+      "error"
+    );
+
+  } finally {
+
+    signupBtn.disabled = false;
+    signupBtn.textContent = "Create Account";
+  }
+});
+
+/* =========================================================
+   LOAD USER ACCOUNT
+   ========================================================= */
+
+async function loadUserAccount(user) {
+
+  loadingSection.classList.remove("hidden");
+  authSection.classList.add("hidden");
+  dashboardSection.classList.add("hidden");
+
+  currentUser = user;
+
+  try {
+
+    let { data: profile, error } =
+      await supabaseClient
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .maybeSingle();
+
+    if (error) {
+      throw error;
+    }
+
+    /*
+      If the Auth account does not have a profile yet,
+      create one automatically.
+    */
+
+    if (!profile) {
+
+      const fullName =
+        user.user_metadata?.full_name ||
+        user.email?.split("@")[0] ||
+        "User";
+
+      const { data: newProfile, error: createError } =
+        await supabaseClient
+          .from("profiles")
+          .insert({
+            id: user.id,
+            full_name: fullName,
+            email: user.email,
+            balance: 0,
+            status: "Active",
+            is_admin: false
+          })
+          .select()
+          .single();
+
+      if (createError) {
+        throw createError;
+      }
+
+      profile = newProfile;
+    }
+
+    currentProfile = profile;
+    currentAdminStatus = profile.is_admin === true;
+
+    userName.textContent =
+      profile.full_name ||
+      user.user_metadata?.full_name ||
       "User";
 
+    userEmail.textContent =
+      profile.email ||
+      user.email ||
+      "";
 
-    document
-      .getElementById("balance")
-      .textContent = money(data.balance);
+    const numericBalance =
+      Number(profile.balance || 0);
 
+    balance.textContent =
+      numericBalance.toFixed(2);
 
-    document
-      .getElementById("accountStatus")
-      .textContent =
-      data.status || "Active";
+    accountStatus.textContent =
+      profile.status || "Active";
 
-
-    if (data.is_admin === true) {
-
-      document
-        .getElementById("adminSection")
-        .classList.remove("hidden");
-
-      await loadAdminWithdrawals(
-        currentAdminStatus
-      );
-
+    if (
+      String(profile.status || "Active").toLowerCase() === "active"
+    ) {
+      accountStatus.className = "active";
     } else {
-
-      document
-        .getElementById("adminSection")
-        .classList.add("hidden");
+      accountStatus.className = "";
     }
 
+    showDashboardScreen();
 
-    await loadTransactions();
     await loadMyWithdrawals();
+
+    if (currentAdminStatus) {
+      adminSection.classList.remove("hidden");
+      await loadAdminWithdrawals();
+    } else {
+      adminSection.classList.add("hidden");
+    }
+
+  } catch (error) {
+
+    console.error("Account loading error:", error);
+
+    /*
+      If there is an account/profile problem, don't leave
+      the page stuck on "Checking account..."
+    */
+
+    showLoginScreen();
+
+    showMessage(
+      loginMessage,
+      "Your account could not be loaded: " +
+      (error.message || "Unknown error"),
+      "error"
+    );
   }
+}
 
+/* =========================================================
+   LOGOUT — FIXED
+   ========================================================= */
 
-  async function loadTransactions() {
+logoutBtn.addEventListener("click", async function () {
 
-    const message =
-      document.getElementById(
-        "transactionMessage"
-      );
+  if (logoutBtn.disabled) return;
 
-    const list =
-      document.getElementById(
-        "transactionsList"
-      );
+  logoutBtn.disabled = true;
+  logoutBtn.textContent = "Logging out...";
 
+  try {
 
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("transactions")
-      .select("*")
-      .eq("user_id", currentUser.id)
-      .order("created_at", {
-        ascending: false
-      })
-      .limit(10);
-
+    const { error } =
+      await supabaseClient.auth.signOut({
+        scope: "local"
+      });
 
     if (error) {
-
-      console.error(
-        "Transactions error:",
-        error
-      );
-
-      message.textContent =
-        "No transaction history is available yet.";
-
-      list.innerHTML = "";
-
-      return;
+      throw error;
     }
 
+    /*
+      Clear local application state.
+    */
 
-    if (!data || data.length === 0) {
+    currentUser = null;
+    currentProfile = null;
+    currentAdminStatus = false;
 
-      message.textContent =
-        "No recent transactions.";
+    /*
+      Immediately show login screen.
+      This makes logout work even if the browser
+      takes a moment to process the auth event.
+    */
 
-      list.innerHTML = "";
+    showLoginScreen();
 
-      return;
-    }
+    document.getElementById("loginEmail").value = "";
+    document.getElementById("loginPassword").value = "";
 
+    clearMessage(loginMessage);
 
-    message.textContent = "";
+    /*
+      Replace the current page state so an old
+      dashboard view cannot remain visible.
+    */
 
+    window.history.replaceState(
+      {},
+      document.title,
+      window.location.pathname + window.location.search
+    );
 
-    list.innerHTML =
-      data.map(transaction => {
+  } catch (error) {
 
-        const amount =
-          Number(transaction.amount || 0);
+    console.error("Logout error:", error);
 
-        const description =
-          transaction.description ||
-          transaction.type ||
-          "Transaction";
+    /*
+      Even if the local sign-out call has a problem,
+      hide the dashboard and return to login.
+    */
 
-        const date =
-          transaction.created_at
-            ? new Date(
-                transaction.created_at
-              ).toLocaleString()
-            : "";
+    showLoginScreen();
 
+    showMessage(
+      loginMessage,
+      "Logout completed locally. Please log in again.",
+      "success"
+    );
 
-        return `
-          <div class="withdrawal">
+  } finally {
 
-            <div class="withdrawal-top">
-
-              <strong>
-                ${escapeHtml(description)}
-              </strong>
-
-              <strong>
-                ${money(amount)}
-              </strong>
-
-            </div>
-
-            <div class="details">
-              ${escapeHtml(date)}
-            </div>
-
-          </div>
-        `;
-
-      }).join("");
+    logoutBtn.disabled = false;
+    logoutBtn.textContent = "Logout";
   }
+});
 
+/* =========================================================
+   AUTH STATE LISTENER
+   ========================================================= */
 
-  async function submitWithdrawal() {
+supabaseClient.auth.onAuthStateChange(
+  async function (event, session) {
 
-    hideMessage("withdrawMessage");
+    console.log("Auth event:", event);
 
+    /*
+      Do not re-run account loading unnecessarily after
+      the logout button already handled the local logout.
+    */
+
+    if (event === "SIGNED_OUT") {
+      showLoginScreen();
+      return;
+    }
+
+    if (
+      (event === "SIGNED_IN" || event === "INITIAL_SESSION") &&
+      session?.user
+    ) {
+
+      /*
+        Only load if the dashboard is not already showing.
+      */
+
+      if (dashboardSection.classList.contains("hidden")) {
+        await loadUserAccount(session.user);
+      }
+    }
+  }
+);
+
+/* =========================================================
+   WITHDRAWAL REQUEST
+   ========================================================= */
+
+document
+  .getElementById("withdrawBtn")
+  .addEventListener("click", async function () {
+
+    clearMessage(withdrawMessage);
+
+    if (!currentUser) {
+      showMessage(
+        withdrawMessage,
+        "You must be logged in.",
+        "error"
+      );
+      return;
+    }
 
     const amount =
-      Number(
-        document
-          .getElementById("withdrawAmount")
-          .value
-      );
-
+      Number(document.getElementById("withdrawAmount").value);
 
     const method =
-      document
-        .getElementById("withdrawMethod")
-        .value;
+      document.getElementById("withdrawMethod").value;
 
-
-    const accountDetails =
-      document
-        .getElementById("accountDetails")
-        .value
-        .trim();
-
+    const details =
+      document.getElementById("withdrawDetails").value.trim();
 
     if (!amount || amount <= 0) {
-
       showMessage(
-        "withdrawMessage",
+        withdrawMessage,
         "Enter a valid withdrawal amount.",
         "error"
       );
-
       return;
     }
-
 
     if (!method) {
-
       showMessage(
-        "withdrawMessage",
-        "Select a withdrawal method.",
+        withdrawMessage,
+        "Please select a payment method.",
         "error"
       );
-
       return;
     }
 
-
-    if (!accountDetails) {
-
+    if (!details) {
       showMessage(
-        "withdrawMessage",
-        "Enter your payment details.",
+        withdrawMessage,
+        "Please enter your account details.",
         "error"
       );
-
       return;
     }
 
+    const withdrawBtn =
+      document.getElementById("withdrawBtn");
 
-    const button =
-      document.getElementById(
-        "withdrawBtn"
+    withdrawBtn.disabled = true;
+    withdrawBtn.textContent = "Submitting...";
+
+    try {
+
+      const { error } =
+        await supabaseClient
+          .from("withdrawal_requests")
+          .insert({
+            user_id: currentUser.id,
+            amount: amount,
+            method: method,
+            account_details: details,
+            status: "Pending"
+          });
+
+      if (error) {
+        throw error;
+      }
+
+      document.getElementById("withdrawAmount").value = "";
+      document.getElementById("withdrawMethod").value = "";
+      document.getElementById("withdrawDetails").value = "";
+
+      showMessage(
+        withdrawMessage,
+        "Withdrawal request submitted successfully.",
+        "success"
       );
 
+      await loadMyWithdrawals();
 
-    button.disabled = true;
-    button.textContent =
-      "Submitting...";
+      if (currentAdminStatus) {
+        await loadAdminWithdrawals();
+      }
 
+    } catch (error) {
 
-    const {
-      error
-    } = await supabaseClient
-      .from("withdrawal_requests")
-      .insert({
-        user_id: currentUser.id,
-        amount: amount,
-        method: method,
-        account_details: accountDetails,
-        status: "Pending"
-      });
+      console.error("Withdrawal error:", error);
 
+      showMessage(
+        withdrawMessage,
+        error.message || "Unable to submit withdrawal request.",
+        "error"
+      );
 
-    button.disabled = false;
-    button.textContent =
-      "Submit Withdrawal Request";
+    } finally {
 
+      withdrawBtn.disabled = false;
+      withdrawBtn.textContent = "Submit Withdrawal Request";
+    }
+  });
+
+/* =========================================================
+   LOAD MY WITHDRAWALS
+   ========================================================= */
+
+async function loadMyWithdrawals() {
+
+  if (!currentUser) return;
+
+  myWithdrawals.innerHTML =
+    '<div class="empty">Loading withdrawals...</div>';
+
+  try {
+
+    const { data, error } =
+      await supabaseClient
+        .from("withdrawal_requests")
+        .select("*")
+        .eq("user_id", currentUser.id)
+        .order("created_at", { ascending: false });
 
     if (error) {
-
-      console.error(
-        "Withdrawal error:",
-        error
-      );
-
-      showMessage(
-        "withdrawMessage",
-        error.message ||
-        "Unable to submit withdrawal request.",
-        "error"
-      );
-
-      return;
+      throw error;
     }
-
-
-    document
-      .getElementById("withdrawAmount")
-      .value = "";
-
-
-    document
-      .getElementById("withdrawMethod")
-      .value = "";
-
-
-    document
-      .getElementById("accountDetails")
-      .value = "";
-
-
-    showMessage(
-      "withdrawMessage",
-      "Withdrawal request submitted successfully.",
-      "success"
-    );
-
-
-    await loadMyWithdrawals();
-
-
-    if (currentProfile?.is_admin === true) {
-
-      await loadAdminWithdrawals(
-        currentAdminStatus
-      );
-    }
-  }
-
-
-  async function loadMyWithdrawals() {
-
-    const container =
-      document.getElementById(
-        "myWithdrawals"
-      );
-
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("withdrawal_requests")
-      .select("*")
-      .eq("user_id", currentUser.id)
-      .order("created_at", {
-        ascending: false
-      });
-
-
-    if (error) {
-
-      console.error(
-        "My withdrawals:",
-        error
-      );
-
-      container.innerHTML =
-        `<div class="empty">
-          Unable to load withdrawal requests.
-        </div>`;
-
-      return;
-    }
-
 
     if (!data || data.length === 0) {
-
-      container.innerHTML =
-        `<div class="empty">
-          You have no withdrawal requests yet.
-        </div>`;
-
+      myWithdrawals.innerHTML =
+        '<div class="empty">No withdrawal requests yet.</div>';
       return;
     }
 
-
-    container.innerHTML =
-      data.map(request => {
-
-        const status =
-          request.status || "Pending";
-
+    myWithdrawals.innerHTML =
+      data.map(function (item) {
 
         return `
           <div class="withdrawal">
 
             <div class="withdrawal-top">
+              <strong>
+                USD ${Number(item.amount || 0).toFixed(2)}
+              </strong>
 
-              <div>
-
-                <div class="withdrawal-amount">
-                  ${money(request.amount)}
-                </div>
-
-                <div class="details">
-                  ${escapeHtml(
-                    request.method || ""
-                  )}
-                </div>
-
-              </div>
-
-              <span
-                class="status ${statusClass(status)}"
-              >
-                ${escapeHtml(status)}
+              <span class="status">
+                ${escapeHtml(item.status || "Pending")}
               </span>
-
             </div>
 
             <div class="details">
+              <div>
+                <strong>Method:</strong>
+                ${escapeHtml(item.method || "")}
+              </div>
 
-              Submitted:
+              <div>
+                <strong>Account Details:</strong>
+                ${escapeHtml(item.account_details || "")}
+              </div>
+
+              <div>
+                <strong>Date:</strong>
+                ${formatDate(item.created_at)}
+              </div>
+
               ${
-                request.created_at
-                  ? new Date(
-                      request.created_at
-                    ).toLocaleString()
-                  : ""
-              }
-
-            </div>
-
-            ${
-              request.admin_note
+                item.admin_note
                 ? `
-                  <div class="details">
-                    Admin note:
-                    ${escapeHtml(
-                      request.admin_note
-                    )}
+                  <div>
+                    <strong>Admin Note:</strong>
+                    ${escapeHtml(item.admin_note)}
                   </div>
                 `
                 : ""
-            }
+              }
+            </div>
 
           </div>
         `;
 
       }).join("");
+
+  } catch (error) {
+
+    console.error("My withdrawals error:", error);
+
+    myWithdrawals.innerHTML =
+      '<div class="empty">Unable to load withdrawal requests.</div>';
   }
+}
 
+/* =========================================================
+   ADMIN TABS
+   ========================================================= */
 
-  async function loadAdminWithdrawals(status) {
+document.querySelectorAll(".tab").forEach(function (button) {
 
-    const container =
-      document.getElementById(
-        "adminWithdrawals"
-      );
+  button.addEventListener("click", async function () {
 
+    document.querySelectorAll(".tab").forEach(function (tab) {
+      tab.classList.remove("active");
+    });
 
-    if (!currentProfile?.is_admin) {
-      return;
-    }
+    button.classList.add("active");
 
+    currentAdminTab =
+      button.getAttribute("data-status");
 
-    container.innerHTML =
-      `<div class="loading">
-        Loading ${escapeHtml(status)}
-        requests...
-      </div>`;
+    await loadAdminWithdrawals();
+  });
 
+});
 
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("withdrawal_requests")
-      .select(`
-        *,
-        profiles (
-          full_name,
-          email
-        )
-      `)
-      .eq("status", status)
-      .order("created_at", {
-        ascending: false
-      });
+/* =========================================================
+   LOAD ADMIN WITHDRAWALS
+   ========================================================= */
 
+async function loadAdminWithdrawals() {
+
+  if (!currentAdminStatus) return;
+
+  adminWithdrawals.innerHTML =
+    '<div class="empty">Loading requests...</div>';
+
+  try {
+
+    /*
+      This query intentionally does not depend on a
+      profiles relationship. That avoids the common
+      Supabase foreign-key relationship error.
+    */
+
+    const { data, error } =
+      await supabaseClient
+        .from("withdrawal_requests")
+        .select("*")
+        .eq("status", currentAdminTab)
+        .order("created_at", { ascending: false });
 
     if (error) {
-
-      console.error(
-        "Admin withdrawals:",
-        error
-      );
-
-
-      const fallback =
-        await supabaseClient
-          .from("withdrawal_requests")
-          .select("*")
-          .eq("status", status)
-          .order("created_at", {
-            ascending: false
-          });
-
-
-      if (fallback.error) {
-
-        container.innerHTML =
-          `<div class="empty">
-            Unable to load admin withdrawal requests.
-          </div>`;
-
-        return;
-      }
-
-
-      renderAdminWithdrawals(
-        fallback.data || []
-      );
-
-      return;
+      throw error;
     }
-
-
-    renderAdminWithdrawals(
-      data || []
-    );
-  }
-
-
-  function renderAdminWithdrawals(data) {
-
-    const container =
-      document.getElementById(
-        "adminWithdrawals"
-      );
-
 
     if (!data || data.length === 0) {
 
-      container.innerHTML =
+      adminWithdrawals.innerHTML =
         `<div class="empty">
-          No ${escapeHtml(
-            currentAdminStatus
-          )} withdrawal requests.
+          No ${escapeHtml(currentAdminTab.toLowerCase())}
+          withdrawal requests.
         </div>`;
 
       return;
     }
 
-
-    container.innerHTML =
-      data.map(request => {
-
-        const profile =
-          request.profiles || {};
-
-
-        const userName =
-          profile.full_name ||
-          "User";
-
-
-        const userEmail =
-          profile.email ||
-          "Email unavailable";
-
-
-        const status =
-          request.status || "Pending";
-
-
-        let buttons = "";
-
-
-        if (status === "Pending") {
-
-          buttons = `
-
-            <button
-              class="success"
-              onclick="updateWithdrawalStatus(
-                '${request.id}',
-                'Approved'
-              )"
-            >
-              Approve
-            </button>
-
-            <button
-              class="danger"
-              onclick="updateWithdrawalStatus(
-                '${request.id}',
-                'Rejected'
-              )"
-            >
-              Reject
-            </button>
-
-          `;
-
-        } else if (status === "Approved") {
-
-          buttons = `
-
-            <button
-              class="success"
-              onclick="updateWithdrawalStatus(
-                '${request.id}',
-                'Paid'
-              )"
-            >
-              Mark as Paid
-            </button>
-
-            <button
-              class="danger"
-              onclick="updateWithdrawalStatus(
-                '${request.id}',
-                'Rejected'
-              )"
-            >
-              Reject
-            </button>
-
-          `;
-        }
-
+    adminWithdrawals.innerHTML =
+      data.map(function (item) {
 
         return `
-
           <div class="withdrawal">
 
             <div class="withdrawal-top">
 
-              <div>
+              <strong>
+                USD ${Number(item.amount || 0).toFixed(2)}
+              </strong>
 
-                <div class="withdrawal-amount">
-                  ${money(request.amount)}
-                </div>
-
-                <div class="details">
-                  ${escapeHtml(userName)}<br>
-                  ${escapeHtml(userEmail)}
-                </div>
-
-              </div>
-
-              <span
-                class="status ${statusClass(status)}"
-              >
-                ${escapeHtml(status)}
+              <span class="status">
+                ${escapeHtml(item.status || "")}
               </span>
 
             </div>
 
-
             <div class="details">
 
-              <strong>Method:</strong>
-              ${escapeHtml(
-                request.method || ""
-              )}
+              <div>
+                <strong>User ID:</strong>
+                ${escapeHtml(item.user_id || "")}
+              </div>
 
-              <br>
+              <div>
+                <strong>Payment Method:</strong>
+                ${escapeHtml(item.method || "")}
+              </div>
 
-              <strong>Payment details:</strong><br>
+              <div>
+                <strong>Account Details:</strong>
+                ${escapeHtml(item.account_details || "")}
+              </div>
 
-              ${escapeHtml(
-                request.account_details || ""
-              )}
-
-              <br><br>
-
-              <strong>Submitted:</strong>
-
-              ${
-                request.created_at
-                  ? new Date(
-                      request.created_at
-                    ).toLocaleString()
-                  : ""
-              }
+              <div>
+                <strong>Created:</strong>
+                ${formatDate(item.created_at)}
+              </div>
 
               ${
-                request.admin_note
-                  ? `
-                    <br><br>
-                    <strong>Admin note:</strong>
-                    ${escapeHtml(
-                      request.admin_note
-                    )}
-                  `
-                  : ""
+                item.admin_note
+                ? `
+                  <div>
+                    <strong>Admin Note:</strong>
+                    ${escapeHtml(item.admin_note)}
+                  </div>
+                `
+                : ""
               }
 
             </div>
 
-
             <div class="actions">
-              ${buttons}
+
+              ${
+                item.status === "Pending"
+                ? `
+                  <button
+                    class="btn btn-success"
+                    type="button"
+                    onclick="updateWithdrawalStatus('${item.id}', 'Approved')">
+                    Approve
+                  </button>
+
+                  <button
+                    class="btn btn-danger"
+                    type="button"
+                    onclick="updateWithdrawalStatus('${item.id}', 'Rejected')">
+                    Reject
+                  </button>
+                `
+                : ""
+              }
+
+              ${
+                item.status === "Approved"
+                ? `
+                  <button
+                    class="btn btn-success"
+                    type="button"
+                    onclick="updateWithdrawalStatus('${item.id}', 'Paid')">
+                    Mark as Paid
+                  </button>
+
+                  <button
+                    class="btn btn-danger"
+                    type="button"
+                    onclick="updateWithdrawalStatus('${item.id}', 'Rejected')">
+                    Reject
+                  </button>
+                `
+                : ""
+              }
+
             </div>
 
           </div>
-
         `;
 
       }).join("");
+
+  } catch (error) {
+
+    console.error("Admin withdrawals error:", error);
+
+    adminWithdrawals.innerHTML =
+      `<div class="empty">
+        Unable to load admin withdrawal requests.<br><br>
+        ${escapeHtml(error.message || "")}
+      </div>`;
+  }
+}
+
+/* =========================================================
+   ADMIN UPDATE WITHDRAWAL STATUS
+   ========================================================= */
+
+async function updateWithdrawalStatus(id, newStatus) {
+
+  if (!currentAdminStatus) {
+    alert("You are not authorized to perform this action.");
+    return;
   }
 
+  let adminNote = "";
 
-  async function updateWithdrawalStatus(
-    withdrawalId,
-    newStatus
-  ) {
+  if (newStatus === "Rejected") {
+    adminNote =
+      prompt("Optional reason for rejection:") || "";
+  }
 
-    if (!currentProfile?.is_admin) {
+  if (newStatus === "Paid") {
+    const confirmPaid =
+      confirm("Mark this withdrawal request as Paid?");
 
-      showMessage(
-        "adminMessage",
-        "Admin access is required.",
-        "error"
-      );
-
+    if (!confirmPaid) {
       return;
     }
+  }
 
+  try {
 
-    let adminNote = "";
+    const updateData = {
+      status: newStatus,
+      updated_at: new Date().toISOString()
+    };
 
-
-    if (newStatus === "Rejected") {
-
-      adminNote =
-        prompt(
-          "Optional reason for rejection:"
-        ) || "";
+    if (adminNote) {
+      updateData.admin_note = adminNote;
     }
 
-
-    const {
-      error
-    } = await supabaseClient
-      .from("withdrawal_requests")
-      .update({
-        status: newStatus,
-        admin_note: adminNote,
-        updated_at:
-          new Date().toISOString()
-      })
-      .eq("id", withdrawalId);
-
+    const { error } =
+      await supabaseClient
+        .from("withdrawal_requests")
+        .update(updateData)
+        .eq("id", id);
 
     if (error) {
-
-      console.error(
-        "Admin update:",
-        error
-      );
-
-      showMessage(
-        "adminMessage",
-        "Unable to update request: " +
-        error.message,
-        "error"
-      );
-
-      return;
+      throw error;
     }
 
-
-    showMessage(
-      "adminMessage",
-      "Withdrawal marked as " +
-      newStatus + ".",
-      "success"
+    alert(
+      "Withdrawal request updated to " +
+      newStatus +
+      "."
     );
 
-
-    await loadAdminWithdrawals(
-      currentAdminStatus
-    );
-
+    await loadAdminWithdrawals();
     await loadMyWithdrawals();
+
+  } catch (error) {
+
+    console.error("Admin update error:", error);
+
+    alert(
+      "Unable to update request:\n\n" +
+      (error.message || "Unknown error")
+    );
+  }
+}
+
+/* =========================================================
+   SECURITY / DISPLAY HELPERS
+   ========================================================= */
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function formatDate(value) {
+
+  if (!value) return "—";
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "—";
   }
 
+  return date.toLocaleString();
+}
 
-  document
-    .querySelectorAll(".tab")
-    .forEach(tab => {
+/* =========================================================
+   START APPLICATION
+   ========================================================= */
 
-      tab.addEventListener(
-        "click",
-        async () => {
+async function startApp() {
 
-          document
-            .querySelectorAll(".tab")
-            .forEach(button => {
-              button.classList.remove(
-                "active-tab"
-              );
-            });
+  loadingSection.classList.remove("hidden");
+  authSection.classList.add("hidden");
+  dashboardSection.classList.add("hidden");
+  logoutBtn.classList.add("hidden");
 
+  try {
 
-          tab.classList.add(
-            "active-tab"
-          );
+    const { data, error } =
+      await supabaseClient.auth.getSession();
 
+    if (error) {
+      throw error;
+    }
 
-          currentAdminStatus =
-            tab.dataset.status;
+    if (data.session?.user) {
 
+      await loadUserAccount(data.session.user);
 
-          await loadAdminWithdrawals(
-            currentAdminStatus
-          );
+    } else {
 
-        }
-      );
+      showLoginScreen();
 
-    });
+    }
 
+  } catch (error) {
 
-  document
-    .getElementById("transferBtn")
-    .addEventListener(
-      "click",
-      async () => {
+    console.error("Startup error:", error);
 
-        hideMessage(
-          "transferMessage"
-        );
+    showLoginScreen();
 
-
-        showMessage(
-          "transferMessage",
-          "The transfer function is not configured yet.",
-          "error"
-        );
-
-      }
+    showMessage(
+      loginMessage,
+      "Unable to connect to your account. Please try again.",
+      "error"
     );
+  }
+}
 
-
-  document
-    .getElementById("withdrawBtn")
-    .addEventListener(
-      "click",
-      submitWithdrawal
-    );
-
-
-  document
-    .getElementById("logoutBtn")
-    .addEventListener(
-      "click",
-      async () => {
-
-        await supabaseClient
-          .auth
-          .signOut();
-
-        window.location.reload();
-
-      }
-    );
-
-
-  supabaseClient
-    .auth
-    .onAuthStateChange(
-      async (event, session) => {
-
-        if (session?.user) {
-
-          currentUser =
-            session.user;
-
-          await loadUser();
-
-        } else {
-
-          currentUser = null;
-
-          document
-            .getElementById("dashboard")
-            .classList.add("hidden");
-
-          document
-            .getElementById("loginRequired")
-            .classList.remove("hidden");
-
-        }
-
-      }
-    );
-
-
-  loadUser();
+/* Start */
+startApp();
 
 </script>
 
