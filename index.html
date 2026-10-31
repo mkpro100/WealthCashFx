@@ -1,65 +1,821 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WealthCashFx</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WealthCashFx - Build. Learn. Grow.</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}body{background:#071426;color:#fff;min-height:100vh}.hidden{display:none!important}button,input,select,textarea{font:inherit}button{cursor:pointer}.container{width:92%;max-width:1100px;margin:auto}
-#authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,#06101f,#0a1e35)}.auth-box,.card,.section{background:#0c2138;border:1px solid #1c3853;border-radius:15px;padding:22px}.auth-box{width:100%;max-width:440px;padding:30px}.logo,.nav-logo,.admin-title{color:#f5c542;font-weight:800}.logo{text-align:center;font-size:30px}.subtitle{text-align:center;color:#aab8ca;margin:8px 0 24px}.auth-tabs,.admin-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}.auth-tabs button,.admin-tab,.action-btn,.small-btn{padding:11px;border:1px solid #29435e;border-radius:9px;background:#102a45;color:white}.auth-tabs button{flex:1}.active{background:#f5c542!important;color:#071426!important;font-weight:bold}
-.form-group{margin-bottom:15px}label{display:block;margin-bottom:7px;color:#d7e0eb;font-size:14px}input,select,textarea{width:100%;padding:13px;border-radius:9px;border:1px solid #29415d;background:#091a2d;color:white}.password-row{position:relative}.password-row input{padding-right:70px}.show-password{position:absolute;right:8px;top:7px;padding:8px;border:0;border-radius:6px;background:#18334f;color:white}.primary-btn{width:100%;padding:14px;border:0;border-radius:10px;background:#f5c542;color:#071426;font-weight:800;margin-top:5px}.primary-btn:disabled{opacity:.6}
-.message{display:none;padding:13px;border-radius:9px;margin:12px 0;font-size:14px;line-height:1.5;word-break:break-word}.message.show{display:block}.message.error{background:#35151b;border:1px solid #a53b4a;color:#ffb2bb}.message.success{background:#123323;border:1px solid #2c8b58;color:#9be6ba}
-header{background:#091b30;border-bottom:1px solid #1b344e;position:sticky;top:0}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px}.nav-logo{font-size:23px}.nav-right{display:flex;align-items:center;gap:12px}.user-email,.muted{color:#aebdce;font-size:13px}.logout-btn{border:1px solid #35506b;background:transparent;color:white;padding:9px 13px;border-radius:8px}
-main{padding:30px 0 60px}.welcome{margin-bottom:25px}.welcome h1{font-size:30px;margin-bottom:7px}.welcome p{color:#9fb0c3}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:25px}.card-title{color:#9eb0c3;font-size:14px;margin-bottom:10px}.balance{font-size:28px;font-weight:800;color:#f5c542}.status{color:#7ee2a8;font-weight:bold}.section{background:#0b1e34;margin-bottom:24px}.section h2{font-size:20px;margin-bottom:17px}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.action-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.action-btn{padding:14px}.info-box{padding:14px;background:#09182a;border-radius:10px;color:#9eb0c3;font-size:14px;line-height:1.6;margin-bottom:15px}
-.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:600px}th,td{padding:12px;text-align:left;border-bottom:1px solid #203a54;font-size:14px}th{color:#f5c542}td{color:#d6e0eb}.badge{display:inline-block;padding:5px 9px;border-radius:20px;font-size:12px;font-weight:bold;background:#19875426;color:#7ee2a8}.empty,.loading{text-align:center;padding:24px;color:#8396aa}.admin-tab{padding:9px 13px}.admin-actions{display:flex;gap:7px;flex-wrap:wrap}.small-btn{padding:7px 10px;font-size:12px}footer{text-align:center;padding:25px;color:#71869c;font-size:13px}
-@media(max-width:800px){.cards,.grid-2,.action-buttons{grid-template-columns:1fr}.nav{flex-direction:column;padding:14px 0}.nav-right{width:100%;justify-content:space-between}.user-email{max-width:220px;overflow:hidden;text-overflow:ellipsis}}
-</style></head><body>
-<section id="authScreen"><div class="auth-box"><div class="logo">WealthCashFx</div><div class="subtitle">Build. Learn. Grow.</div><div id="authMessage" class="message"></div>
-<div class="auth-tabs"><button id="loginTab" class="active" type="button" onclick="showLogin()">Login</button><button id="signupTab" type="button" onclick="showSignup()">Create Account</button></div>
-<form id="loginForm"><div class="form-group"><label>Email</label><input id="loginEmail" type="email" autocomplete="email" required></div><div class="form-group"><label>Password</label><div class="password-row"><input id="loginPassword" type="password" autocomplete="current-password" required><button type="button" class="show-password" onclick="togglePassword('loginPassword',this)">Show</button></div></div><button class="primary-btn" id="loginButton">Login</button></form>
-<form id="signupForm" class="hidden"><div class="form-group"><label>Full Name</label><input id="signupName" required></div><div class="form-group"><label>Email</label><input id="signupEmail" type="email" required></div><div class="form-group"><label>Password (minimum 8 characters)</label><input id="signupPassword" type="password" minlength="8" required></div><button class="primary-btn" id="signupButton">Create Account</button></form></div></section>
-<section id="appScreen" class="hidden"><header><div class="container nav"><div class="nav-logo">WealthCashFx</div><div class="nav-right"><span id="navEmail" class="user-email"></span><button id="logoutBtn" class="logout-btn">Logout</button></div></div></header>
-<main class="container"><div class="welcome"><h1>Welcome Back</h1><p id="welcomeText">Your WealthCashFx account overview.</p></div>
-<div class="cards"><div class="card"><div class="card-title">Available Balance</div><div id="balanceDisplay" class="balance">USD 0.00</div></div><div class="card"><div class="card-title">Account Status</div><div id="statusDisplay" class="status">Active</div></div><div class="card"><div class="card-title">Currency</div>US Dollar</div></div>
-<section class="section"><h2>Account Actions</h2><div class="action-buttons"><button class="action-btn" onclick="scrollToSection('withdrawSection')">Withdraw Funds</button><button class="action-btn" onclick="alert('Transfers are not configured yet.')">Send Money</button><button class="action-btn" onclick="scrollToSection('depositSection')">Add Money</button></div></section>
-<section class="section" id="depositSection"><h2>Add Money to Wallet</h2><div class="info-box"><b>Demo funding only.</b> This adds simulated funds to your test wallet. It does not charge a card or bank account. Do not use this function for real-money deposits.</div><div id="depositMessage" class="message"></div><form id="depositForm"><div class="form-group"><label>Amount (USD)</label><input id="depositAmount" type="number" min=".01" max="1000" step=".01" placeholder="Enter amount" required></div><button id="depositButton" class="primary-btn">Add Demo Funds</button></form><h2 style="margin-top:25px">My Deposit History</h2><div id="myDeposits" class="loading">Loading deposits...</div></section>
-<section class="section" id="withdrawSection"><h2>Request a Withdrawal</h2><div id="withdrawMessage" class="message"></div><form id="withdrawForm"><div class="grid-2"><div class="form-group"><label>Amount (USD)</label><input id="withdrawAmount" type="number" min=".01" step=".01" required></div><div class="form-group"><label>Withdrawal Method</label><select id="withdrawMethod" required><option value="">Select method</option><option>Bank Transfer</option><option>PayPal</option><option>Crypto</option><option>Other</option></select></div></div><div class="form-group"><label>Account / Payment Details</label><textarea id="accountDetails" required></textarea></div><div class="info-box">Requests are recorded for review. This demo does not send payouts.</div><button id="withdrawButton" class="primary-btn">Submit Withdrawal Request</button></form></section>
-<section class="section"><h2>My Withdrawal Requests</h2><div id="myWithdrawals" class="loading">Loading...</div></section>
-<section class="section"><h2>Send Money</h2><div class="info-box">Transfers are disabled until a secure server-side transfer system is built.</div></section>
-<section id="adminSection" class="section hidden"><h2 class="admin-title">Admin Dashboard</h2><div class="admin-tabs"><button class="admin-tab active" onclick="changeAdminTab('Pending',this)">Pending</button><button class="admin-tab" onclick="changeAdminTab('Approved',this)">Approved</button><button class="admin-tab" onclick="changeAdminTab('Rejected',this)">Rejected</button><button class="admin-tab" onclick="changeAdminTab('Paid',this)">Paid</button></div><div id="adminWithdrawals"></div></section></main><footer>WealthCashFx © 2026</footer></section>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#071426;color:#fff;min-height:100vh}
+.hidden{display:none!important}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.container{width:92%;max-width:1100px;margin:auto}
+#authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#06101f,#0a1e35)}
+.auth-box,.card,.section{background:#0c2138;border:1px solid #1c3853;border-radius:15px;padding:22px}
+.auth-box{width:100%;max-width:440px;padding:30px}
+.logo,.nav-logo{color:#f5c542;font-weight:800}
+.logo{text-align:center;font-size:30px}
+.subtitle{text-align:center;color:#aab8ca;margin:8px 0 24px}
+.auth-tabs,.admin-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.auth-tabs button,.admin-tab,.action-btn,.small-btn{
+padding:11px;border:1px solid #29435e;border-radius:9px;background:#102a45;color:white
+}
+.auth-tabs button{flex:1}
+.active{background:#f5c542!important;color:#071426!important;font-weight:bold}
+.form-group{margin-bottom:15px}
+label{display:block;margin-bottom:7px;color:#d7e0eb;font-size:14px}
+input,select,textarea{
+width:100%;padding:13px;border-radius:9px;border:1px solid #29415d;background:#091a2d;color:white
+}
+.primary-btn{
+width:100%;padding:14px;border:0;border-radius:10px;background:#f5c542;color:#071426;font-weight:800;margin-top:5px
+}
+.primary-btn:disabled{opacity:.6}
+.message{display:none;padding:13px;border-radius:9px;margin:12px 0;font-size:14px;line-height:1.5;word-break:break-word}
+.message.show{display:block}
+.message.error{background:#35151b;border:1px solid #a53b4a;color:#ffb2bb}
+.message.success{background:#123323;border:1px solid #2c8b58;color:#9be6ba}
+header{background:#091b30;border-bottom:1px solid #1b344e;position:sticky;top:0;z-index:5}
+.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.nav-logo{font-size:23px}
+.nav-right{display:flex;align-items:center;gap:12px}
+.user-email,.muted{color:#aebdce;font-size:13px}
+.logout-btn{border:1px solid #35506b;background:transparent;color:white;padding:9px 13px;border-radius:8px}
+main{padding:30px 0 60px}
+.welcome{margin-bottom:25px}
+.welcome h1{font-size:30px;margin-bottom:7px}
+.welcome p{color:#9fb0c3}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:25px}
+.card-title{color:#9eb0c3;font-size:14px;margin-bottom:10px}
+.balance{font-size:28px;font-weight:800;color:#f5c542}
+.status{color:#7ee2a8;font-weight:bold}
+.section{background:#0b1e34;margin-bottom:24px}
+.section h2{font-size:20px;margin-bottom:17px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.action-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.action-btn{padding:14px}
+.info-box{padding:14px;background:#09182a;border-radius:10px;color:#9eb0c3;font-size:14px;line-height:1.6;margin-bottom:15px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th,td{padding:12px;text-align:left;border-bottom:1px solid #203a54;font-size:14px}
+th{color:#f5c542}
+td{color:#d6e0eb}
+.empty,.loading{text-align:center;padding:24px;color:#8396aa}
+.admin-tab{padding:9px 13px}
+.small-btn{padding:7px 10px;font-size:12px;margin:2px}
+footer{text-align:center;padding:25px;color:#71869c;font-size:13px}
+@media(max-width:800px){
+.cards,.grid-2,.action-buttons{grid-template-columns:1fr}
+.nav{flex-direction:column;padding:14px 0}
+.nav-right{width:100%;justify-content:space-between}
+.user-email{max-width:220px;overflow:hidden;text-overflow:ellipsis}
+}
+</style>
+</head>
+
+<body>
+
+<section id="authScreen">
+<div class="auth-box">
+<div class="logo">WealthCashFx</div>
+<div class="subtitle">Build. Learn. Grow.</div>
+
+<div id="authMessage" class="message"></div>
+
+<div class="auth-tabs">
+<button id="loginTab" class="active" type="button" onclick="showLogin()">Login</button>
+<button id="signupTab" type="button" onclick="showSignup()">Create Account</button>
+</div>
+
+<form id="loginForm">
+<div class="form-group">
+<label>Email</label>
+<input id="loginEmail" type="email" autocomplete="email" required>
+</div>
+<div class="form-group">
+<label>Password</label>
+<input id="loginPassword" type="password" autocomplete="current-password" required>
+</div>
+<button class="primary-btn" id="loginButton">Login</button>
+</form>
+
+<form id="signupForm" class="hidden">
+<div class="form-group">
+<label>Full Name</label>
+<input id="signupName" required>
+</div>
+<div class="form-group">
+<label>Email</label>
+<input id="signupEmail" type="email" autocomplete="email" required>
+</div>
+<div class="form-group">
+<label>Password (minimum 8 characters)</label>
+<input id="signupPassword" type="password" minlength="8" autocomplete="new-password" required>
+</div>
+<button class="primary-btn" id="signupButton">Create Account</button>
+</form>
+</div>
+</section>
+
+<section id="appScreen" class="hidden">
+
+<header>
+<div class="container nav">
+<div class="nav-logo">WealthCashFx</div>
+<div class="nav-right">
+<span id="navEmail" class="user-email"></span>
+<button id="logoutBtn" class="logout-btn">Logout</button>
+</div>
+</div>
+</header>
+
+<main class="container">
+
+<div class="welcome">
+<h1>Welcome Back</h1>
+<p id="welcomeText">Your WealthCashFx account overview.</p>
+</div>
+
+<div class="cards">
+<div class="card">
+<div class="card-title">Available Balance</div>
+<div id="balanceDisplay" class="balance">USD 0.00</div>
+</div>
+<div class="card">
+<div class="card-title">Account Status</div>
+<div id="statusDisplay" class="status">Active</div>
+</div>
+<div class="card">
+<div class="card-title">Currency</div>
+US Dollar
+</div>
+</div>
+
+<section class="section">
+<h2>Account Actions</h2>
+<div class="action-buttons">
+<button class="action-btn" onclick="scrollToSection('withdrawSection')">Withdraw Funds</button>
+<button class="action-btn" onclick="scrollToSection('transferSection')">Send Money</button>
+<button class="action-btn" onclick="scrollToSection('depositSection')">Add Money</button>
+</div>
+</section>
+
+<section class="section" id="depositSection">
+<h2>Add Demo Money</h2>
+<div class="info-box">
+<b>Testing wallet only.</b> You can receive a one-time $100 simulated credit.
+This does not charge a bank account or card and is not real money.
+</div>
+<div id="depositMessage" class="message"></div>
+<button id="depositButton" class="primary-btn" onclick="addDemoMoney()">Add $100 Demo Funds</button>
+</section>
+
+<section class="section" id="transferSection">
+<h2>Send Money</h2>
+<div class="info-box">Send demo wallet credits to another registered WealthCashFx account.</div>
+<div id="transferMessage" class="message"></div>
+<form id="transferForm">
+<div class="form-group">
+<label>Recipient Email</label>
+<input id="recipientEmail" type="email" required>
+</div>
+<div class="form-group">
+<label>Amount (USD)</label>
+<input id="transferAmount" type="number" min="0.01" step="0.01" required>
+</div>
+<button id="transferButton" class="primary-btn">Send Transfer</button>
+</form>
+</section>
+
+<section class="section" id="withdrawSection">
+<h2>Request a Withdrawal</h2>
+<div class="info-box">This demo records withdrawal requests. It does not send actual payouts. The requested amount is reserved from your demo balance until the request is rejected or otherwise resolved.</div>
+<div id="withdrawMessage" class="message"></div>
+<form id="withdrawForm">
+<div class="grid-2">
+<div class="form-group">
+<label>Amount (USD)</label>
+<input id="withdrawAmount" type="number" min="0.01" step="0.01" required>
+</div>
+<div class="form-group">
+<label>Withdrawal Method</label>
+<select id="withdrawMethod" required>
+<option value="">Select method</option>
+<option>Bank Transfer</option>
+<option>PayPal</option>
+<option>Crypto</option>
+<option>Other</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label>Account / Payment Details</label>
+<textarea id="accountDetails" required></textarea>
+</div>
+<button id="withdrawButton" class="primary-btn">Submit Withdrawal Request</button>
+</form>
+</section>
+
+<section class="section">
+<h2>Transaction History</h2>
+<div id="myTransactions" class="loading">Loading transactions...</div>
+</section>
+
+<section class="section">
+<h2>My Withdrawal Requests</h2>
+<div id="myWithdrawals" class="loading">Loading...</div>
+</section>
+
+<section id="adminSection" class="section hidden">
+<h2 style="color:#f5c542">Admin Dashboard</h2>
+<div class="info-box">Admin tools are restricted to accounts whose is_admin field is enabled by a trusted administrator.</div>
+<div class="admin-tabs">
+<button class="admin-tab active" onclick="changeAdminTab('pending',this)">Pending</button>
+<button class="admin-tab" onclick="changeAdminTab('approved',this)">Approved</button>
+<button class="admin-tab" onclick="changeAdminTab('rejected',this)">Rejected</button>
+</div>
+<div id="adminWithdrawals" class="loading">Loading requests...</div>
+</section>
+
+</main>
+
+<footer>WealthCashFx © 2026</footer>
+</section>
+
 <script>
 "use strict";
-const SUPABASE_URL="https://qzcxqaaxwxkhfyzodihy.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY="sb_publishable_ORnDeZmqluJy1BKobLPs2Q_PBEX24E6";
-const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-let currentUser=null,currentProfile=null,currentAdminStatus="Pending",appLoading=false;
-const $=id=>document.getElementById(id);
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
-function money(v){return Number(v||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
-function date(v){return v?new Date(v).toLocaleString("en-US",{dateStyle:"medium",timeStyle:"short"}):"-";}
-function msg(id,text,type="error"){const e=$(id);e.textContent=text;e.className="message show "+type;}
-function clear(id){$(id).textContent="";$(id).className="message";}
-function readable(e){let m=e?.message||String(e||"Unknown error");if(m.toLowerCase().includes("invalid login credentials"))return "Email or password is incorrect.";if(m.toLowerCase().includes("email not confirmed"))return "Please confirm your email before logging in.";if(m.toLowerCase().includes("failed to fetch"))return "Could not connect to Supabase. Check your internet connection.";return m;}
-function showLogin(){ $("loginForm").classList.remove("hidden");$("signupForm").classList.add("hidden");$("loginTab").classList.add("active");$("signupTab").classList.remove("active");clear("authMessage");}
-function showSignup(){ $("signupForm").classList.remove("hidden");$("loginForm").classList.add("hidden");$("signupTab").classList.add("active");$("loginTab").classList.remove("active");clear("authMessage");}
-function togglePassword(id,b){const e=$(id);e.type=e.type==="password"?"text":"password";b.textContent=e.type==="password"?"Show":"Hide";}
-function scrollToSection(id){$(id)?.scrollIntoView({behavior:"smooth"});}
-function updateDashboard(p){$("balanceDisplay").textContent="USD "+money(p.balance);$("statusDisplay").textContent=p.status||"Active";}
-async function profileFor(user,name=""){
- const q=await supabaseClient.from("profiles").select("*").eq("id",user.id).maybeSingle();if(q.error)throw q.error;if(q.data){currentProfile=q.data;return q.data;}
- const ins=await supabaseClient.from("profiles").insert({id:user.id,full_name:name||user.user_metadata?.full_name||"",email:user.email,balance:0,status:"Active",is_admin:false}).select().single();if(ins.error)throw ins.error;currentProfile=ins.data;return ins.data;
+
+/* SUPABASE CONNECTION */
+const SUPABASE_URL = "https://qzcxqaaxwxkhfyzodihy.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ORnDeZmqluJy1BKobLPs2Q_PBEX24E6";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+const SITE_URL = "https://mkpro100.github.io/WealthCashFx/";
+
+let currentUser = null;
+let currentProfile = null;
+let currentAdminStatus = "pending";
+let appLoading = false;
+
+const $ = id => document.getElementById(id);
+
+function esc(v) {
+  return String(v ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
 }
-async function loadApp(){if(!currentUser||appLoading)return;appLoading=true;try{const p=await profileFor(currentUser);$("authScreen").classList.add("hidden");$("appScreen").classList.remove("hidden");$("navEmail").textContent=currentUser.email||"";$("welcomeText").textContent=p.full_name?"Welcome, "+p.full_name+".":"Your WealthCashFx account overview.";updateDashboard(p);await Promise.all([loadDeposits(),loadWithdrawals()]);if(p.is_admin===true){$("adminSection").classList.remove("hidden");await loadAdmin(currentAdminStatus);}else $("adminSection").classList.add("hidden");}catch(e){console.error(e);await supabaseClient.auth.signOut({scope:"local"});currentUser=null;currentProfile=null;$("appScreen").classList.add("hidden");$("authScreen").classList.remove("hidden");msg("authMessage",readable(e));}finally{appLoading=false;}}
-$("loginForm").addEventListener("submit",async e=>{e.preventDefault();clear("authMessage");const b=$("loginButton");b.disabled=true;b.textContent="Checking...";try{const r=await supabaseClient.auth.signInWithPassword({email:$("loginEmail").value.trim(),password:$("loginPassword").value});if(r.error)throw r.error;currentUser=r.data.user;await loadApp();}catch(x){msg("authMessage",readable(x));}finally{b.disabled=false;b.textContent="Login";}});
-$("signupForm").addEventListener("submit",async e=>{e.preventDefault();clear("authMessage");const name=$("signupName").value.trim(),email=$("signupEmail").value.trim(),password=$("signupPassword").value;if(!name||password.length<8){msg("authMessage","Enter your name and a password of at least 8 characters.");return;}const b=$("signupButton");b.disabled=true;b.textContent="Creating...";try{const r=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:name}}});if(r.error)throw r.error;if(r.data.user&&!r.data.session){msg("authMessage","Account created. Confirm your email, then log in.","success");$("signupForm").reset();return;}currentUser=r.data.user;await profileFor(currentUser,name);await loadApp();}catch(x){msg("authMessage",readable(x));}finally{b.disabled=false;b.textContent="Create Account";}});
-$("depositForm").addEventListener("submit",async e=>{e.preventDefault();clear("depositMessage");if(!currentUser){msg("depositMessage","Please log in first.");return;}const amount=Number($("depositAmount").value);if(!Number.isFinite(amount)||amount<.01||amount>1000){msg("depositMessage","Enter an amount between $0.01 and $1,000.");return;}const b=$("depositButton");b.disabled=true;b.textContent="Adding demo funds...";try{const r=await supabaseClient.rpc("add_wallet_funds",{p_amount:amount});if(r.error)throw r.error;if(!r.data?.success)throw new Error(r.data?.message||"Deposit was not completed.");const p=await supabaseClient.from("profiles").select("*").eq("id",currentUser.id).single();if(p.error)throw p.error;currentProfile=p.data;updateDashboard(currentProfile);await loadDeposits();$("depositForm").reset();msg("depositMessage","Success! USD "+money(amount)+" demo funds added.","success");}catch(x){console.error(x);msg("depositMessage",readable(x));}finally{b.disabled=false;b.textContent="Add Demo Funds";}});
-async function loadDeposits(){const box=$("myDeposits");const r=await supabaseClient.from("wallet_deposits").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});if(r.error){box.innerHTML='<div class="empty">'+esc(r.error.message)+'</div>';return;}if(!r.data?.length){box.innerHTML='<div class="empty">No deposits yet.</div>';return;}let h='<div class="table-wrap"><table><thead><tr><th>Date</th><th>Amount</th><th>Currency</th><th>Status</th><th>Description</th></tr></thead><tbody>';r.data.forEach(x=>h+='<tr><td>'+esc(date(x.created_at))+'</td><td>USD '+money(x.amount)+'</td><td>'+esc(x.currency)+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.description)+'</td></tr>');box.innerHTML=h+'</tbody></table></div>';}
-$("withdrawForm").addEventListener("submit",async e=>{e.preventDefault();clear("withdrawMessage");const amount=Number($("withdrawAmount").value),method=$("withdrawMethod").value,details=$("accountDetails").value.trim();if(!Number.isFinite(amount)||amount<=0||!method||!details){msg("withdrawMessage","Enter a valid amount, method, and payment details.");return;}if(amount>Number(currentProfile?.balance||0)){msg("withdrawMessage","Withdrawal cannot exceed your available balance.");return;}const b=$("withdrawButton");b.disabled=true;b.textContent="Submitting...";try{const r=await supabaseClient.from("withdrawal_requests").insert({user_id:currentUser.id,amount,method,account_details:details,status:"Pending"});if(r.error)throw r.error;$("withdrawForm").reset();msg("withdrawMessage","Request submitted for review. No payout has been sent.","success");await loadWithdrawals();}catch(x){msg("withdrawMessage",readable(x));}finally{b.disabled=false;b.textContent="Submit Withdrawal Request";}});
-async function loadWithdrawals(){const box=$("myWithdrawals");const r=await supabaseClient.from("withdrawal_requests").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});if(r.error){box.innerHTML='<div class="empty">'+esc(r.error.message)+'</div>';return;}if(!r.data?.length){box.innerHTML='<div class="empty">No withdrawal requests yet.</div>';return;}let h='<div class="table-wrap"><table><thead><tr><th>Date</th><th>Amount</th><th>Method</th><th>Status</th><th>Admin Note</th></tr></thead><tbody>';r.data.forEach(x=>h+='<tr><td>'+esc(date(x.created_at))+'</td><td>USD '+money(x.amount)+'</td><td>'+esc(x.method)+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.admin_note||"-")+'</td></tr>');box.innerHTML=h+'</tbody></table></div>';}
-function changeAdminTab(s,b){currentAdminStatus=s;document.querySelectorAll(".admin-tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");loadAdmin(s);}
-async function loadAdmin(status){const box=$("adminWithdrawals");if(!currentProfile?.is_admin){box.textContent="Admin access required.";return;}const r=await supabaseClient.from("withdrawal_requests").select("*").eq("status",status).order("created_at",{ascending:false});if(r.error){box.textContent=r.error.message;return;}if(!r.data?.length){box.textContent="No "+status+" requests.";return;}let h='<div class="table-wrap"><table><thead><tr><th>Date</th><th>User ID</th><th>Amount</th><th>Method</th><th>Details</th><th>Actions</th></tr></thead><tbody>';r.data.forEach(x=>{let a="";if(x.status==="Pending")a='<button class="small-btn" onclick="updateStatus(\''+esc(x.id)+'\',\'Approved\')">Approve</button> <button class="small-btn" onclick="updateStatus(\''+esc(x.id)+'\',\'Rejected\')">Reject</button>';if(x.status==="Approved")a='<button class="small-btn" onclick="updateStatus(\''+esc(x.id)+'\',\'Paid\')">Mark Paid</button> <button class="small-btn" onclick="updateStatus(\''+esc(x.id)+'\',\'Rejected\')">Reject</button>';h+='<tr><td>'+esc(date(x.created_at))+'</td><td>'+esc(x.user_id)+'</td><td>USD '+money(x.amount)+'</td><td>'+esc(x.method)+'</td><td>'+esc(x.account_details)+'</td><td>'+a+'</td></tr>';});box.innerHTML=h+'</tbody></table></div>';}
-async function updateStatus(id,status){if(!currentProfile?.is_admin)return;if(!confirm("Change withdrawal status to "+status+"?"))return;const update={status,updated_at:new Date().toISOString()};if(status==="Rejected"){const n=prompt("Optional rejection reason:");if(n)update.admin_note=n;}const r=await supabaseClient.from("withdrawal_requests").update(update).eq("id",id);if(r.error){alert(readable(r.error));return;}await Promise.all([loadAdmin(currentAdminStatus),loadWithdrawals()]);}
-$("logoutBtn").addEventListener("click",async()=>{const b=$("logoutBtn");b.disabled=true;try{await supabaseClient.auth.signOut({scope:"local"});currentUser=null;currentProfile=null;$("appScreen").classList.add("hidden");$("authScreen").classList.remove("hidden");$("loginForm").reset();$("signupForm").reset();showLogin();}finally{b.disabled=false;}});
-supabaseClient.auth.onAuthStateChange((event,session)=>{if(session?.user&&!currentUser){currentUser=session.user;setTimeout(loadApp,0);}if(!session){currentUser=null;currentProfile=null;}});
-(async()=>{const r=await supabaseClient.auth.getSession();if(r.error){msg("authMessage",readable(r.error));return;}if(r.data.session?.user){currentUser=r.data.session.user;await loadApp();}})();
-</script></body></html>
+
+function money(v) {
+  return Number(v || 0).toLocaleString("en-US", {
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  });
+}
+
+function date(v) {
+  return v ? new Date(v).toLocaleString() : "-";
+}
+
+function msg(id, text, type="error") {
+  const e = $(id);
+  e.textContent = text;
+  e.className = "message show " + type;
+}
+
+function clear(id) {
+  $(id).textContent = "";
+  $(id).className = "message";
+}
+
+function readable(e) {
+  const m = e?.message || String(e || "Unknown error");
+  const s = m.toLowerCase();
+
+  if (s.includes("invalid login credentials")) return "Email or password is incorrect.";
+  if (s.includes("email not confirmed")) return "Please confirm your email before logging in.";
+  if (s.includes("already registered")) return "This email already has an account. Please log in.";
+  if (s.includes("insufficient wallet balance")) return "You do not have enough demo funds.";
+  if (s.includes("recipient account not found")) return "We could not find an account with that recipient email.";
+  if (s.includes("duplicate key")) return "Your one-time demo credit has already been used.";
+  if (s.includes("failed to fetch")) return "Connection problem. Check your internet connection.";
+  return m;
+}
+
+function showLogin() {
+  $("loginForm").classList.remove("hidden");
+  $("signupForm").classList.add("hidden");
+  $("loginTab").classList.add("active");
+  $("signupTab").classList.remove("active");
+  clear("authMessage");
+}
+
+function showSignup() {
+  $("signupForm").classList.remove("hidden");
+  $("loginForm").classList.add("hidden");
+  $("signupTab").classList.add("active");
+  $("loginTab").classList.remove("active");
+  clear("authMessage");
+}
+
+function scrollToSection(id) {
+  $(id)?.scrollIntoView({behavior:"smooth"});
+}
+
+function updateDashboard(p) {
+  $("balanceDisplay").textContent = "USD " + money(p.balance);
+  $("statusDisplay").textContent = p.status || "Active";
+}
+
+async function refreshProfile() {
+  const r = await supabaseClient
+    .from("profiles")
+    .select("*")
+    .eq("id", currentUser.id)
+    .single();
+
+  if (r.error) throw r.error;
+  currentProfile = r.data;
+  updateDashboard(currentProfile);
+  return currentProfile;
+}
+
+/* LOAD APPLICATION */
+async function loadApp() {
+  if (!currentUser || appLoading) return;
+
+  appLoading = true;
+
+  try {
+    const p = await refreshProfile();
+
+    $("authScreen").classList.add("hidden");
+    $("appScreen").classList.remove("hidden");
+    $("navEmail").textContent = currentUser.email || "";
+
+    $("welcomeText").textContent = p.full_name
+      ? "Welcome, " + p.full_name + "."
+      : "Your WealthCashFx account overview.";
+
+    if (p.is_admin === true) {
+      $("adminSection").classList.remove("hidden");
+    } else {
+      $("adminSection").classList.add("hidden");
+    }
+
+    await Promise.all([
+      loadTransactions(),
+      loadWithdrawals()
+    ]);
+
+    if (p.is_admin === true) {
+      await loadAdmin(currentAdminStatus);
+    }
+
+  } catch (e) {
+    console.error(e);
+    msg("authMessage", "Could not load your profile: " + readable(e));
+    $("appScreen").classList.add("hidden");
+    $("authScreen").classList.remove("hidden");
+  } finally {
+    appLoading = false;
+  }
+}
+
+/* LOGIN */
+$("loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  clear("authMessage");
+
+  const b = $("loginButton");
+  b.disabled = true;
+  b.textContent = "Checking...";
+
+  try {
+    const r = await supabaseClient.auth.signInWithPassword({
+      email: $("loginEmail").value.trim(),
+      password: $("loginPassword").value
+    });
+
+    if (r.error) throw r.error;
+
+    currentUser = r.data.user;
+    await loadApp();
+
+  } catch (x) {
+    msg("authMessage", readable(x));
+  } finally {
+    b.disabled = false;
+    b.textContent = "Login";
+  }
+});
+
+/* SIGNUP - CORRECTED EMAIL REDIRECT */
+$("signupForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  clear("authMessage");
+
+  const name = $("signupName").value.trim();
+  const email = $("signupEmail").value.trim();
+  const password = $("signupPassword").value;
+
+  if (!name || password.length < 8) {
+    msg("authMessage", "Enter your name and a password of at least 8 characters.");
+    return;
+  }
+
+  const b = $("signupButton");
+  b.disabled = true;
+  b.textContent = "Creating...";
+
+  try {
+    const r = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: name
+        },
+        emailRedirectTo: SITE_URL
+      }
+    });
+
+    if (r.error) throw r.error;
+
+    if (r.data.user && !r.data.session) {
+      msg(
+        "authMessage",
+        "Account created successfully! Please open your email and confirm your account. Then return here to log in.",
+        "success"
+      );
+
+      $("signupForm").reset();
+      return;
+    }
+
+    currentUser = r.data.user;
+    await loadApp();
+
+  } catch (x) {
+    msg("authMessage", readable(x));
+  } finally {
+    b.disabled = false;
+    b.textContent = "Create Account";
+  }
+});
+
+/* DEMO FUNDING: ONE FIXED $100 CREDIT PER USER */
+async function addDemoMoney() {
+  clear("depositMessage");
+
+  if (!currentUser) {
+    msg("depositMessage", "Please log in first.");
+    return;
+  }
+
+  const b = $("depositButton");
+  b.disabled = true;
+  b.textContent = "Adding demo funds...";
+
+  try {
+    const r = await supabaseClient.rpc("add_demo_money");
+
+    if (r.error) throw r.error;
+
+    await refreshProfile();
+    await loadTransactions();
+
+    msg(
+      "depositMessage",
+      "Success! $100 demo credits have been added to your test wallet.",
+      "success"
+    );
+
+  } catch (e) {
+    console.error(e);
+    msg("depositMessage", readable(e));
+  } finally {
+    b.disabled = false;
+    b.textContent = "Add $100 Demo Funds";
+  }
+}
+
+/* TRANSFERS */
+$("transferForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  clear("transferMessage");
+
+  const email = $("recipientEmail").value.trim();
+  const amount = Number($("transferAmount").value);
+
+  if (!email || !Number.isFinite(amount) || amount <= 0) {
+    msg("transferMessage", "Enter a valid recipient email and amount.");
+    return;
+  }
+
+  const b = $("transferButton");
+  b.disabled = true;
+  b.textContent = "Sending...";
+
+  try {
+    const r = await supabaseClient.rpc("transfer_funds", {
+      recipient_email: email,
+      transfer_amount: amount
+    });
+
+    if (r.error) throw r.error;
+
+    await refreshProfile();
+    await loadTransactions();
+
+    $("transferForm").reset();
+
+    msg("transferMessage", "Transfer completed successfully.", "success");
+
+  } catch (x) {
+    msg("transferMessage", readable(x));
+  } finally {
+    b.disabled = false;
+    b.textContent = "Send Transfer";
+  }
+});
+
+/* WITHDRAWALS */
+$("withdrawForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  clear("withdrawMessage");
+
+  const amount = Number($("withdrawAmount").value);
+  const method = $("withdrawMethod").value;
+  const details = $("accountDetails").value.trim();
+
+  if (!Number.isFinite(amount) || amount <= 0 || !method || !details) {
+    msg("withdrawMessage", "Enter a valid amount, method, and payment details.");
+    return;
+  }
+
+  const b = $("withdrawButton");
+  b.disabled = true;
+  b.textContent = "Submitting...";
+
+  try {
+    const r = await supabaseClient.rpc("request_withdrawal", {
+      withdrawal_amount: amount,
+      withdrawal_method: method,
+      withdrawal_details: details
+    });
+
+    if (r.error) throw r.error;
+
+    await refreshProfile();
+    await loadWithdrawals();
+    await loadTransactions();
+
+    $("withdrawForm").reset();
+
+    msg(
+      "withdrawMessage",
+      "Your withdrawal request has been submitted for review. No payout has been sent.",
+      "success"
+    );
+
+  } catch (x) {
+    msg("withdrawMessage", readable(x));
+  } finally {
+    b.disabled = false;
+    b.textContent = "Submit Withdrawal Request";
+  }
+});
+
+/* TRANSACTION HISTORY */
+async function loadTransactions() {
+  const box = $("myTransactions");
+
+  const r = await supabaseClient
+    .from("transactions")
+    .select("*")
+    .eq("user_id", currentUser.id)
+    .order("created_at", {ascending:false});
+
+  if (r.error) {
+    box.innerHTML = '<div class="empty">' + esc(r.error.message) + '</div>';
+    return;
+  }
+
+  if (!r.data?.length) {
+    box.innerHTML = '<div class="empty">No transactions yet.</div>';
+    return;
+  }
+
+  let h = '<div class="table-wrap"><table><thead><tr>' +
+    '<th>Date</th><th>Type</th><th>Amount</th><th>Status</th><th>Description</th>' +
+    '</tr></thead><tbody>';
+
+  r.data.forEach(x => {
+    h += '<tr>' +
+      '<td>' + esc(date(x.created_at)) + '</td>' +
+      '<td>' + esc(x.type) + '</td>' +
+      '<td>USD ' + money(x.amount) + '</td>' +
+      '<td>' + esc(x.status) + '</td>' +
+      '<td>' + esc(x.description || "-") + '</td>' +
+      '</tr>';
+  });
+
+  box.innerHTML = h + '</tbody></table></div>';
+}
+
+/* USER WITHDRAWAL HISTORY */
+async function loadWithdrawals() {
+  const box = $("myWithdrawals");
+
+  const r = await supabaseClient
+    .from("withdrawal_requests")
+    .select("*")
+    .eq("user_id", currentUser.id)
+    .order("created_at", {ascending:false});
+
+  if (r.error) {
+    box.innerHTML = '<div class="empty">' + esc(r.error.message) + '</div>';
+    return;
+  }
+
+  if (!r.data?.length) {
+    box.innerHTML = '<div class="empty">No withdrawal requests yet.</div>';
+    return;
+  }
+
+  let h = '<div class="table-wrap"><table><thead><tr>' +
+    '<th>Date</th><th>Amount</th><th>Method</th><th>Status</th><th>Admin Note</th>' +
+    '</tr></thead><tbody>';
+
+  r.data.forEach(x => {
+    h += '<tr>' +
+      '<td>' + esc(date(x.created_at)) + '</td>' +
+      '<td>USD ' + money(x.amount) + '</td>' +
+      '<td>' + esc(x.method) + '</td>' +
+      '<td>' + esc(x.status) + '</td>' +
+      '<td>' + esc(x.admin_note || "-") + '</td>' +
+      '</tr>';
+  });
+
+  box.innerHTML = h + '</tbody></table></div>';
+}
+
+/* ADMIN DASHBOARD */
+function changeAdminTab(status, button) {
+  currentAdminStatus = status;
+
+  document.querySelectorAll(".admin-tab").forEach(x => {
+    x.classList.remove("active");
+  });
+
+  button.classList.add("active");
+  loadAdmin(status);
+}
+
+async function loadAdmin(status) {
+  const box = $("adminWithdrawals");
+
+  if (!currentProfile?.is_admin) {
+    box.textContent = "Administrator access required.";
+    return;
+  }
+
+  const r = await supabaseClient
+    .from("withdrawal_requests")
+    .select("*")
+    .eq("status", status)
+    .order("created_at", {ascending:false});
+
+  if (r.error) {
+    box.textContent = readable(r.error);
+    return;
+  }
+
+  if (!r.data?.length) {
+    box.innerHTML = '<div class="empty">No ' + esc(status) + ' requests.</div>';
+    return;
+  }
+
+  let h = '<div class="table-wrap"><table><thead><tr>' +
+    '<th>Date</th><th>User ID</th><th>Amount</th><th>Method</th><th>Payment Details</th><th>Actions</th>' +
+    '</tr></thead><tbody>';
+
+  r.data.forEach(x => {
+    let actions = "";
+
+    if (x.status === "pending") {
+      actions =
+        '<button class="small-btn" onclick="resolveWithdrawal(\'' + esc(x.id) + '\',\'approved\')">Approve</button>' +
+        '<button class="small-btn" onclick="resolveWithdrawal(\'' + esc(x.id) + '\',\'rejected\')">Reject</button>';
+    }
+
+    h += '<tr>' +
+      '<td>' + esc(date(x.created_at)) + '</td>' +
+      '<td>' + esc(x.user_id) + '</td>' +
+      '<td>USD ' + money(x.amount) + '</td>' +
+      '<td>' + esc(x.method) + '</td>' +
+      '<td>' + esc(x.account_details) + '</td>' +
+      '<td>' + actions + '</td>' +
+      '</tr>';
+  });
+
+  box.innerHTML = h + '</tbody></table></div>';
+}
+
+/* ADMIN APPROVE / REJECT */
+async function resolveWithdrawal(id, decision) {
+  if (!currentProfile?.is_admin) return;
+
+  if (!confirm("Are you sure you want to " + decision + " this request?")) return;
+
+  let note = null;
+
+  if (decision === "rejected") {
+    note = prompt("Optional rejection reason:") || null;
+  }
+
+  try {
+    const r = await supabaseClient.rpc("resolve_withdrawal", {
+      request_id: id,
+      decision: decision,
+      note: note
+    });
+
+    if (r.error) throw r.error;
+
+    await loadAdmin(currentAdminStatus);
+    await loadWithdrawals();
+    await loadTransactions();
+
+    alert("Withdrawal request updated successfully.");
+
+  } catch (e) {
+    alert(readable(e));
+  }
+}
+
+/* LOGOUT */
+$("logoutBtn").addEventListener("click", async () => {
+  const b = $("logoutBtn");
+  b.disabled = true;
+
+  try {
+    const r = await supabaseClient.auth.signOut({scope:"local"});
+    if (r.error) throw r.error;
+
+    currentUser = null;
+    currentProfile = null;
+
+    $("appScreen").classList.add("hidden");
+    $("authScreen").classList.remove("hidden");
+
+    $("loginForm").reset();
+    $("signupForm").reset();
+
+    showLogin();
+
+  } catch (e) {
+    alert(readable(e));
+  } finally {
+    b.disabled = false;
+  }
+});
+
+/* RESTORE EXISTING SESSION */
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  if (session?.user && !currentUser) {
+    currentUser = session.user;
+    setTimeout(() => loadApp(), 0);
+  }
+
+  if (!session) {
+    currentUser = null;
+    currentProfile = null;
+  }
+});
+
+(async () => {
+  const r = await supabaseClient.auth.getSession();
+
+  if (r.error) {
+    msg("authMessage", readable(r.error));
+    return;
+  }
+
+  if (r.data.session?.user) {
+    currentUser = r.data.session.user;
+    await loadApp();
+  }
+})();
+
+</script>
+</body>
+</html>
