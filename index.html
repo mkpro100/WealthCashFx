@@ -9,6 +9,8 @@
 
 .nav-left{display:flex;align-items:center;gap:14px}.menu-toggle{width:43px;height:43px;border:1px solid #35506b;border-radius:10px;background:#102a45;color:#f5c542;font-size:23px}.page-container{padding-top:30px;min-height:70vh}.app-page{display:none}.app-page.active-page{display:block}.side-menu{position:fixed;z-index:20;left:0;top:0;bottom:0;width:285px;max-width:85vw;background:#091b30;border-right:1px solid #29415d;padding:20px 15px;transform:translateX(-105%);transition:transform .25s ease;display:flex;flex-direction:column;gap:7px}.side-menu.open{transform:translateX(0)}.sidebar-shade{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:19;display:none}.sidebar-shade.show{display:block}.side-head{display:flex;align-items:center;justify-content:space-between;padding:5px 4px 20px;border-bottom:1px solid #203a54;margin-bottom:10px}.menu-close{background:transparent;border:0;color:white;font-size:30px;padding:0 8px}.side-caption{color:#8095ab;font-size:11px;letter-spacing:1.5px;padding:8px 10px}.menu-link{width:100%;display:flex;align-items:center;gap:13px;text-align:left;padding:13px 12px;border:1px solid transparent;border-radius:9px;background:transparent;color:#d8e3ef;font-size:15px}.menu-link:hover,.menu-link.selected{background:#132d49;border-color:#29415d;color:#f5c542}.menu-link span{color:inherit}.side-foot{margin-top:auto;color:#72869b;font-size:12px;padding:15px 10px;border-top:1px solid #203a54}.admin-menu-link.hidden{display:none!important}
 @media(max-width:800px){.nav{flex-direction:row;padding:12px 0}.nav-right{width:auto;justify-content:flex-end}.user-email{max-width:125px}.nav-logo{font-size:20px}.page-container{padding-top:20px}}
+.address-row{display:flex;gap:9px;align-items:stretch}.address-row input{min-width:0;flex:1;font-size:13px}.address-row button{white-space:nowrap}.divider-line{height:1px;background:#29415d;margin:22px 0}
+@media(max-width:560px){.address-row{flex-direction:column}.address-row button{width:100%}}
 </style>
 </head>
 <body>
@@ -26,6 +28,7 @@
   <div class="side-caption">MAIN MENU</div>
   <button class="menu-link selected" data-page="dashboardPage">⌂ <span>Dashboard</span></button>
   <button class="menu-link" data-page="walletPage">▣ <span>My Wallet</span></button>
+  <button class="menu-link" data-page="bitcoinDepositPage">₿ <span>Fund Account (Bitcoin)</span></button>
   <button class="menu-link" data-page="sendPage">⇄ <span>Send Money</span></button>
   <button class="menu-link" data-page="investmentPlansPage">◈ <span>Investment Plans</span></button>
   <button class="menu-link" data-page="myInvestmentsPage">▤ <span>My Investments</span></button>
@@ -42,6 +45,42 @@
 </section>
 <section class="app-page" id="walletPage">
 <section class="section" id="depositSection"><h2>Add Demo Money</h2><div class="info-box"><b>Testing wallet only.</b> One-time $100 simulated credit. No bank or card is charged; this is not real money.</div><div id="depositMessage" class="message"></div><button id="depositButton" class="primary-btn" onclick="addDemoMoney()">Add $100 Demo Funds</button></section>
+</section>
+<section class="app-page" id="bitcoinDepositPage">
+  <section class="section">
+    <h2>Fund Account with Bitcoin</h2>
+    <div class="info-box">
+      Send Bitcoin only on the Bitcoin mainnet. Check the address carefully in your own wallet before sending.
+      Submitting a transaction does not immediately add money to your account. Deposits remain pending until independently verified.
+    </div>
+    <div class="form-group">
+      <label>WealthCashFx Bitcoin Receiving Address</label>
+      <div class="address-row">
+        <input id="bitcoinDepositAddress" type="text" readonly value="Loading receiving address...">
+        <button id="copyBitcoinAddress" class="action-btn" type="button">Copy Address</button>
+      </div>
+    </div>
+    <div id="bitcoinAddressMessage" class="message"></div>
+    <div class="divider-line"></div>
+    <h3>Submit a Bitcoin Payment</h3>
+    <p class="muted" style="margin:8px 0 16px">After sending Bitcoin, submit the amount and the transaction ID (TXID). Do not submit a payment until you have checked the address and network.</p>
+    <div id="bitcoinDepositMessage" class="message"></div>
+    <form id="bitcoinDepositForm">
+      <div class="form-group">
+        <label for="bitcoinAmount">Amount sent (BTC)</label>
+        <input id="bitcoinAmount" type="number" min="0.00000001" step="0.00000001" placeholder="e.g. 0.001" required>
+      </div>
+      <div class="form-group">
+        <label for="bitcoinTxid">Bitcoin transaction ID (TXID)</label>
+        <input id="bitcoinTxid" type="text" minlength="64" maxlength="64" pattern="[A-Fa-f0-9]{64}" placeholder="64-character transaction ID" required>
+      </div>
+      <button id="bitcoinDepositSubmit" class="primary-btn" type="submit">Submit Deposit for Verification</button>
+    </form>
+  </section>
+  <section class="section" style="margin-top:18px">
+    <h2>My Bitcoin Deposit Submissions</h2>
+    <div id="myBitcoinDeposits" class="table-wrap"><div class="loading">Loading deposit submissions...</div></div>
+  </section>
 </section>
 <section class="app-page" id="sendPage">
 <section class="section" id="transferSection"><h2>Send Money</h2><div class="info-box">Send demo wallet credits to another registered WealthCashFx account. These are simulated credits, not real funds.</div><div id="transferMessage" class="message"></div><form id="transferForm"><div class="form-group"><label>Recipient Email</label><input id="recipientEmail" type="email" required></div><div class="form-group"><label>Amount (USD)</label><input id="transferAmount" type="number" min="0.01" step="0.01" required></div><button id="transferButton" class="primary-btn">Send Transfer</button></form></section>
@@ -97,10 +136,68 @@ document.querySelectorAll(".menu-link").forEach(b=>b.addEventListener("click",()
 function updateDashboard(p){$("balanceDisplay").textContent="USD "+money(p.balance);$("statusDisplay").textContent=p.status||"Active";}
 async function refreshProfile(){const r=await supabaseClient.from("profiles").select("*").eq("id",currentUser.id).single();if(r.error)throw r.error;currentProfile=r.data;updateDashboard(currentProfile);return currentProfile;}
 
-async function loadApp(){if(!currentUser||appLoading)return;appLoading=true;try{const p=await refreshProfile();$("authScreen").classList.add("hidden");$("appScreen").classList.remove("hidden");$("navEmail").textContent=currentUser.email||"";$("welcomeText").textContent=p.full_name?"Welcome, "+p.full_name+".":"Your WealthCashFx account overview.";$("adminSection").classList.toggle("hidden",p.is_admin!==true);$("adminMenuLink").classList.toggle("hidden",p.is_admin!==true);showPage("dashboardPage");await Promise.all([loadTransactions(),loadWithdrawals(),loadInvestmentPlans(),loadMyInvestments(),loadInvestmentActivity()]);if(p.is_admin===true)await loadAdmin(currentAdminStatus);subscribeInvestmentRealtime();}catch(e){console.error(e);msg("authMessage","Could not load your profile: "+readable(e));$("appScreen").classList.add("hidden");$("authScreen").classList.remove("hidden");}finally{appLoading=false;}}
+async function loadApp(){if(!currentUser||appLoading)return;appLoading=true;try{const p=await refreshProfile();$("authScreen").classList.add("hidden");$("appScreen").classList.remove("hidden");$("navEmail").textContent=currentUser.email||"";$("welcomeText").textContent=p.full_name?"Welcome, "+p.full_name+".":"Your WealthCashFx account overview.";$("adminSection").classList.toggle("hidden",p.is_admin!==true);$("adminMenuLink").classList.toggle("hidden",p.is_admin!==true);showPage("dashboardPage");await Promise.all([loadTransactions(),loadWithdrawals(),loadInvestmentPlans(),loadMyInvestments(),loadInvestmentActivity(),loadBitcoinDepositSettings(),loadMyBitcoinDeposits()]);if(p.is_admin===true)await loadAdmin(currentAdminStatus);subscribeInvestmentRealtime();}catch(e){console.error(e);msg("authMessage","Could not load your profile: "+readable(e));$("appScreen").classList.add("hidden");$("authScreen").classList.remove("hidden");}finally{appLoading=false;}}
 $("loginForm").addEventListener("submit",async e=>{e.preventDefault();clear("authMessage");const b=$("loginButton");b.disabled=true;b.textContent="Checking...";try{const r=await supabaseClient.auth.signInWithPassword({email:$("loginEmail").value.trim(),password:$("loginPassword").value});if(r.error)throw r.error;currentUser=r.data.user;await loadApp();}catch(x){msg("authMessage",readable(x));}finally{b.disabled=false;b.textContent="Login";}});
 $("signupForm").addEventListener("submit",async e=>{e.preventDefault();clear("authMessage");const name=$("signupName").value.trim(),email=$("signupEmail").value.trim(),password=$("signupPassword").value;if(!name||password.length<8){msg("authMessage","Enter your name and a password of at least 8 characters.");return;}const b=$("signupButton");b.disabled=true;b.textContent="Creating...";try{const r=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:name},emailRedirectTo:SITE_URL}});if(r.error)throw r.error;if(r.data.user&&!r.data.session){msg("authMessage","Account created successfully! Please confirm your email, then return here to log in.","success");$("signupForm").reset();return;}currentUser=r.data.user;await loadApp();}catch(x){msg("authMessage",readable(x));}finally{b.disabled=false;b.textContent="Create Account";}});
 async function addDemoMoney(){clear("depositMessage");if(!currentUser){msg("depositMessage","Please log in first.");return;}const b=$("depositButton");b.disabled=true;b.textContent="Adding demo funds...";try{const r=await supabaseClient.rpc("add_demo_money");if(r.error)throw r.error;await refreshProfile();await loadTransactions();msg("depositMessage","Success! $100 demo credits have been added to your test wallet.","success");}catch(e){msg("depositMessage",readable(e));}finally{b.disabled=false;b.textContent="Add $100 Demo Funds";}}
+
+/* BITCOIN DEPOSIT SUBMISSIONS: pending only; no wallet credit is performed here. */
+let bitcoinReceivingAddress="";
+async function loadBitcoinDepositSettings(){
+  const addressInput=$("bitcoinDepositAddress");
+  if(!addressInput)return;
+  const r=await supabaseClient.from("platform_settings").select("setting_value").eq("setting_key","bitcoin_deposit_address").maybeSingle();
+  if(r.error){addressInput.value="Could not load receiving address";msg("bitcoinAddressMessage","Could not load the Bitcoin address: "+readable(r.error));return;}
+  bitcoinReceivingAddress=r.data?.setting_value||"";
+  addressInput.value=bitcoinReceivingAddress||"Bitcoin receiving address has not been configured";
+}
+$("copyBitcoinAddress").addEventListener("click",async()=>{
+  clear("bitcoinAddressMessage");
+  if(!bitcoinReceivingAddress){msg("bitcoinAddressMessage","The receiving address is not available yet.");return;}
+  try{
+    await navigator.clipboard.writeText(bitcoinReceivingAddress);
+    msg("bitcoinAddressMessage","Bitcoin address copied. Verify the address again in your wallet before sending.","success");
+  }catch(e){
+    $("bitcoinDepositAddress").focus();
+    $("bitcoinDepositAddress").select();
+    msg("bitcoinAddressMessage","Automatic copy was unavailable. The address is selected; copy it manually.");
+  }
+});
+async function loadMyBitcoinDeposits(){
+  const box=$("myBitcoinDeposits");
+  if(!box||!currentUser)return;
+  const r=await supabaseClient.from("deposit_requests").select("id,amount_btc,transaction_id,status,created_at,admin_note").eq("user_id",currentUser.id).order("created_at",{ascending:false});
+  if(r.error){box.innerHTML='<div class="empty">Could not load deposit submissions: '+esc(readable(r.error))+'</div>';return;}
+  const rows=r.data||[];
+  if(!rows.length){box.innerHTML='<div class="empty">You have not submitted any Bitcoin deposits yet.</div>';return;}
+  box.innerHTML='<table><thead><tr><th>Date</th><th>BTC Sent</th><th>Transaction ID</th><th>Status</th><th>Admin Note</th></tr></thead><tbody>'+
+    rows.map(x=>'<tr><td>'+esc(date(x.created_at))+'</td><td>'+Number(x.amount_btc).toFixed(8)+' BTC</td><td style="max-width:190px;word-break:break-all">'+esc(x.transaction_id)+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.admin_note||"-")+'</td></tr>').join('')+
+    '</tbody></table>';
+}
+$("bitcoinDepositForm").addEventListener("submit",async e=>{
+  e.preventDefault();clear("bitcoinDepositMessage");
+  const amount=Number($("bitcoinAmount").value),txid=$("bitcoinTxid").value.trim().toLowerCase();
+  if(!bitcoinReceivingAddress){msg("bitcoinDepositMessage","The Bitcoin receiving address is not configured.");return;}
+  if(!Number.isFinite(amount)||amount<=0){msg("bitcoinDepositMessage","Enter a valid BTC amount.");return;}
+  if(!/^[a-f0-9]{64}$/.test(txid)){msg("bitcoinDepositMessage","Enter a valid 64-character Bitcoin transaction ID.");return;}
+  const button=$("bitcoinDepositSubmit");button.disabled=true;button.textContent="Submitting...";
+  try{
+    const r=await supabaseClient.from("deposit_requests").insert({
+      user_id:currentUser.id,
+      asset:"BTC",
+      network:"bitcoin-mainnet",
+      amount_btc:amount,
+      transaction_id:txid,
+      status:"pending"
+    });
+    if(r.error)throw r.error;
+    $("bitcoinDepositForm").reset();
+    await loadMyBitcoinDeposits();
+    msg("bitcoinDepositMessage","Your deposit submission was received and is pending verification. Your account balance has not been credited.","success");
+  }catch(x){msg("bitcoinDepositMessage",readable(x));}
+  finally{button.disabled=false;button.textContent="Submit Deposit for Verification";}
+});
+
 $("transferForm").addEventListener("submit",async e=>{e.preventDefault();clear("transferMessage");const email=$("recipientEmail").value.trim(),amount=Number($("transferAmount").value);if(!email||!Number.isFinite(amount)||amount<=0){msg("transferMessage","Enter a valid recipient email and amount.");return;}const b=$("transferButton");b.disabled=true;b.textContent="Sending...";try{const r=await supabaseClient.rpc("transfer_funds",{recipient_email:email,transfer_amount:amount});if(r.error)throw r.error;await refreshProfile();await loadTransactions();$("transferForm").reset();msg("transferMessage","Transfer completed successfully.","success");}catch(x){msg("transferMessage",readable(x));}finally{b.disabled=false;b.textContent="Send Transfer";}});
 
 /* INVESTMENT PLANS AND DEMO ACTIVITY */
