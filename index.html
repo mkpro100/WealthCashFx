@@ -1,118 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WealthCashFx - Build. Learn. Grow.</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}body{background:#071426;color:#fff;min-height:100vh}.hidden{display:none!important}button,input,select,textarea{font:inherit}button{cursor:pointer}.container{width:92%;max-width:1100px;margin:auto}#authScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#06101f,#0a1e35)}.auth-box,.card,.section{background:#0c2138;border:1px solid #1c3853;border-radius:15px;padding:22px}.auth-box{width:100%;max-width:460px;padding:30px}.logo,.nav-logo{color:#f5c542;font-weight:800}.logo{text-align:center;font-size:30px}.subtitle{text-align:center;color:#aab8ca;margin:8px 0 24px}.auth-tabs,.admin-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}.auth-tabs button,.admin-tab,.action-btn,.small-btn{padding:11px;border:1px solid #29435e;border-radius:9px;background:#102a45;color:white}.auth-tabs button{flex:1}.active{background:#f5c542!important;color:#071426!important;font-weight:bold}.form-group{margin-bottom:15px}label{display:block;margin-bottom:7px;color:#d7e0eb;font-size:14px}input,select,textarea{width:100%;padding:13px;border-radius:9px;border:1px solid #29415d;background:#091a2d;color:white}.primary-btn{width:100%;padding:14px;border:0;border-radius:10px;background:#f5c542;color:#071426;font-weight:800;margin-top:5px}.primary-btn:disabled,.small-btn:disabled{opacity:.6}.message{display:none;padding:13px;border-radius:9px;margin:12px 0;font-size:14px;line-height:1.5;word-break:break-word}.message.show{display:block}.message.error{background:#35151b;border:1px solid #a53b4a;color:#ffb2bb}.message.success{background:#123323;border:1px solid #2c8b58;color:#9be6ba}header{background:#091b30;border-bottom:1px solid #1b344e;position:sticky;top:0;z-index:5}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px}.nav-logo{font-size:23px}.nav-right{display:flex;align-items:center;gap:12px}.user-email,.muted{color:#aebdce;font-size:13px}.logout-btn{border:1px solid #35506b;background:transparent;color:white;padding:9px 13px;border-radius:8px}main{padding:30px 0 60px}.welcome{margin-bottom:25px}.welcome h1{font-size:30px;margin-bottom:7px}.welcome p{color:#9fb0c3}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:25px}.card-title{color:#9eb0c3;font-size:14px;margin-bottom:10px}.balance{font-size:28px;font-weight:800;color:#f5c542}.status{color:#7ee2a8;font-weight:bold}.section{background:#0b1e34;margin-bottom:24px}.section h2{font-size:20px;margin-bottom:17px}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.action-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.action-btn{padding:14px}.info-box{padding:14px;background:#09182a;border-radius:10px;color:#9eb0c3;font-size:14px;line-height:1.6;margin-bottom:15px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:600px}th,td{padding:12px;text-align:left;border-bottom:1px solid #203a54;font-size:14px;vertical-align:top}th{color:#f5c542}td{color:#d6e0eb}.empty,.loading{text-align:center;padding:24px;color:#8396aa}.admin-tab{padding:9px 13px}.small-btn{padding:7px 10px;font-size:12px;margin:2px}.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.plan-card{background:#09182a;border:1px solid #29415d;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px}.plan-card h3{color:#f5c542;font-size:18px}.plan-meta{color:#aebdce;font-size:13px;line-height:1.7}.demo-label{display:inline-block;color:#f5c542;border:1px solid #80651e;border-radius:20px;padding:4px 9px;font-size:11px;font-weight:bold}.activity-list{display:grid;gap:10px}.activity-item{background:#09182a;border:1px solid #203a54;border-radius:9px;padding:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}footer{text-align:center;padding:25px;color:#71869c;font-size:13px}.nav-left{display:flex;align-items:center;gap:14px}.menu-toggle{width:43px;height:43px;border:1px solid #35506b;border-radius:10px;background:#102a45;color:#f5c542;font-size:23px}.page-container{padding-top:30px;min-height:70vh}.app-page{display:none}.app-page.active-page{display:block}.side-menu{position:fixed;z-index:20;left:0;top:0;bottom:0;width:285px;max-width:85vw;background:#091b30;border-right:1px solid #29415d;padding:20px 15px;transform:translateX(-105%);transition:transform .25s ease;display:flex;flex-direction:column;gap:7px}.side-menu.open{transform:translateX(0)}.sidebar-shade{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:19;display:none}.sidebar-shade.show{display:block}.side-head{display:flex;align-items:center;justify-content:space-between;padding:5px 4px 20px;border-bottom:1px solid #203a54;margin-bottom:10px}.menu-close{background:transparent;border:0;color:white;font-size:30px;padding:0 8px}.side-caption{color:#8095ab;font-size:11px;letter-spacing:1.5px;padding:8px 10px}.menu-link{width:100%;display:flex;align-items:center;gap:13px;text-align:left;padding:13px 12px;border:1px solid transparent;border-radius:9px;background:transparent;color:#d8e3ef;font-size:15px}.menu-link:hover,.menu-link.selected{background:#132d49;border-color:#29415d;color:#f5c542}.menu-link span{color:inherit}.side-foot{margin-top:auto;color:#72869b;font-size:12px;padding:15px 10px;border-top:1px solid #203a54}.admin-menu-link.hidden{display:none!important}.address-row{display:flex;gap:9px;align-items:stretch}.address-row input{min-width:0;flex:1;font-size:13px}.address-row button{white-space:nowrap}.divider-line{height:1px;background:#29415d;margin:22px 0}.testimonial{padding:14px;border:1px solid #29415d;background:#09182a;border-radius:10px;margin:10px 0}.testimonial p{color:#d7e0eb;line-height:1.5;margin:8px 0}.stars{color:#f5c542}@media(max-width:800px){.cards,.grid-2,.action-buttons,.plan-grid{grid-template-columns:1fr}.nav{flex-direction:row;padding:12px 0}.nav-right{width:auto;justify-content:flex-end}.user-email{max-width:125px;overflow:hidden;text-overflow:ellipsis}.nav-logo{font-size:20px}.page-container{padding-top:20px}}@media(max-width:560px){.address-row{flex-direction:column}.address-row button{width:100%}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071426">
+  <title>WealthCashFx - Build. Learn. Grow.</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#071426;--panel:#10233b;--panel2:#142b47;--blue:#287bff;--gold:#f2c14e;--text:#f5f8ff;--muted:#a9b8cc;--line:#29415e;--green:#27c58b;--red:#ff6b78}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#06101f,#0a1c33 55%,#081629);color:var(--text);font-family:Poppins,Arial,sans-serif;min-height:100vh}
+    button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}.hidden{display:none!important}.wrap{width:min(1180px,94%);margin:auto}
+    header{padding:18px 0;border-bottom:1px solid #203650;background:#071426dd;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-size:21px;font-weight:800;letter-spacing:.2px}.brand span{color:var(--gold)}.nav small{color:var(--muted)}
+    .hero{padding:58px 0 34px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}.eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.12;margin:12px 0}.hero p{color:var(--muted);line-height:1.8}.hero-card,.panel,.auth-card,.stat,.item-card{background:linear-gradient(145deg,#122944,#0d2037);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 16px 40px #0002}
+    .hero-card h3{margin-top:0}.hero-card li{margin:12px 0;color:var(--muted)}.btn{padding:12px 17px;border-radius:10px;background:var(--blue);color:white;font-weight:700}.btn.gold{background:var(--gold);color:#152238}.btn.ghost{background:#203a59;color:#eaf2ff}.btn.danger{background:#7d2938}.btn.small{padding:8px 11px;font-size:12px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .auth-area{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:25px 0 55px}.auth-card h2{margin-top:0}.field{margin:12px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:12px 13px;border-radius:9px;border:1px solid #35506e;background:#091a2d;color:white;outline:none}.field textarea{min-height:90px;resize:vertical}.note{font-size:12px;color:var(--muted);line-height:1.7}.message{margin:10px 0;color:var(--gold);font-size:13px;white-space:pre-wrap}
+    .app{padding:25px 0 60px}.welcome{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.welcome h1{margin:0}.muted{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0}.stat span{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;margin-top:8px}.layout{display:grid;grid-template-columns:225px 1fr;gap:18px}.side{align-self:start;position:sticky;top:88px}.side button{width:100%;display:block;text-align:left;margin:5px 0;padding:12px;border-radius:9px;background:transparent;color:#dce8f8}.side button.active,.side button:hover{background:#1d3a5b}.content{min-width:0}.section{margin-bottom:18px}.section h2{margin-top:0}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.item-card h3{margin:0 0 8px}.item-card p{color:var(--muted);font-size:13px;line-height:1.65}.pill{display:inline-block;padding:4px 9px;border-radius:30px;background:#203c5c;color:#cfe1ff;font-size:11px}.goldtext{color:var(--gold)}.list{display:grid;gap:10px}.rowitem{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px;background:#0a1c30;border:1px solid #233c58;border-radius:10px}.rowitem p{margin:4px 0;color:var(--muted);font-size:12px;overflow-wrap:anywhere}.chatbox{height:310px;overflow:auto;background:#08192b;border:1px solid var(--line);padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:10px}.bubble{max-width:88%;background:#183554;border-radius:12px;padding:10px 12px;align-self:flex-start;overflow-wrap:anywhere}.bubble.mine{align-self:flex-end;background:#174c82}.bubble small{display:block;color:#b8c8da;font-size:10px;margin-top:5px}.chatform{display:flex;gap:8px;margin-top:10px}.chatform input{flex:1;min-width:0}.chatform input,.inline-input{padding:11px;border-radius:9px;border:1px solid #35506e;background:#091a2d;color:white}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.tabs button{background:#1a3451;color:white;padding:9px 13px;border-radius:9px}.tabs button.active{background:var(--blue)}.disclaimer{border:1px solid #705b2a;background:#2b2618;color:#f7df9b;padding:13px;border-radius:12px;font-size:12px;line-height:1.7;margin:18px 0}
+    footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px;text-align:center}
+    @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:35px}.layout{grid-template-columns:1fr}.side{position:static;display:flex;overflow:auto;gap:5px}.side button{white-space:nowrap;width:auto}.stats{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.grid2,.auth-area{grid-template-columns:1fr}.stat strong{font-size:22px}}
+  </style>
 </head>
 <body>
-<section id="authScreen"><div class="auth-box">
-<div class="logo">WealthCashFx</div><div class="subtitle">Build. Learn. Grow.</div>
-<div class="info-box">This is a demonstration platform. Wallet balances, investments and withdrawals are simulated and are not real money or financial services.</div>
-<div id="authMessage" class="message"></div>
-<div class="auth-tabs"><button id="loginTab" class="active" type="button" onclick="showLogin()">Login</button><button id="signupTab" type="button" onclick="showSignup()">Create Account</button></div>
-<form id="loginForm"><div class="form-group"><label>Email</label><input id="loginEmail" type="email" autocomplete="email" required></div><div class="form-group"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password" required></div><button class="primary-btn" id="loginButton">Login</button></form>
-<form id="signupForm" class="hidden"><div class="form-group"><label>Full Name</label><input id="signupName" required></div><div class="form-group"><label>Email</label><input id="signupEmail" type="email" autocomplete="email" required></div><div class="form-group"><label>Password (minimum 8 characters)</label><input id="signupPassword" type="password" minlength="8" autocomplete="new-password" required></div><button class="primary-btn" id="signupButton">Create Account</button></form>
-</div></section>
-<section id="appScreen" class="hidden">
-<header><div class="container nav"><div class="nav-left"><button id="menuToggle" class="menu-toggle" aria-label="Open menu">☰</button><div class="nav-logo">WealthCashFx</div></div><div class="nav-right"><span id="navEmail" class="user-email"></span><button id="logoutBtn" class="logout-btn">Logout</button></div></div></header>
-<div id="sidebarShade" class="sidebar-shade"></div>
-<aside id="sideMenu" class="side-menu"><div class="side-head"><div class="nav-logo">WealthCashFx</div><button id="menuClose" class="menu-close">×</button></div><div class="side-caption">MAIN MENU</div>
-<button class="menu-link selected" data-page="dashboardPage">⌂ <span>Dashboard</span></button>
-<button class="menu-link" data-page="walletPage">▣ <span>My Wallet</span></button>
-<button class="menu-link" data-page="bitcoinDepositPage">₿ <span>Bitcoin Deposit</span></button>
-<button class="menu-link" data-page="investmentPlansPage">◈ <span>Investment Plans</span></button>
-<button class="menu-link" data-page="myInvestmentsPage">▤ <span>My Investments</span></button>
-<button class="menu-link" data-page="withdrawPage">↗ <span>Withdraw Funds</span></button>
-<button class="menu-link" data-page="historyPage">◷ <span>Transaction History</span></button>
-<button class="menu-link admin-menu-link hidden" data-page="adminPage" id="adminMenuLink">⚙ <span>Admin Dashboard</span></button><div class="side-foot">Demo environment only</div></aside>
-<main class="container page-container">
-<section class="app-page active-page" id="dashboardPage"><div class="welcome"><h1>Welcome Back</h1><p id="welcomeText">Your WealthCashFx account overview.</p></div>
-<div class="cards"><div class="card"><div class="card-title">Available Demo Balance</div><div id="balanceDisplay" class="balance">USD 0.00</div></div><div class="card"><div class="card-title">Account Status</div><div id="statusDisplay" class="status">Active</div></div><div class="card"><div class="card-title">Currency</div>US Dollar</div></div>
-<section class="section"><h2>Account Actions</h2><div class="action-buttons"><button class="action-btn" onclick="showPage('withdrawPage')">Withdraw Funds</button><button class="action-btn" onclick="showPage('walletPage')">Wallet Details</button><button class="action-btn" onclick="showPage('bitcoinDepositPage')">Bitcoin Deposit</button></div></section>
-<section class="section"><h2>Community Testimonials</h2><div id="publicTestimonials" class="loading">Loading testimonials...</div></section>
-<section class="section"><h2>Share Your Testimonial</h2><div class="info-box">Submissions are private until an administrator reviews and publishes them. Please do not include sensitive personal or financial information.</div><div id="testimonialMessage" class="message"></div><form id="testimonialForm"><div class="form-group"><label>Your display name</label><input id="testimonialName" maxlength="80" required></div><div class="form-group"><label>Rating</label><select id="testimonialRating"><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select></div><div class="form-group"><label>Your message</label><textarea id="testimonialText" rows="4" maxlength="1000" required></textarea></div><button class="primary-btn" id="testimonialSubmit">Submit for Review</button></form></section>
-</section>
-<section class="app-page" id="walletPage"><section class="section"><h2>My Wallet</h2><div class="info-box">Your balance is a simulated demonstration balance. Customers cannot transfer wallet credits to other accounts or create demo credits themselves. Any wallet adjustment must be made by an authorized administrator.</div><div class="card"><div class="card-title">Current demo balance</div><div id="walletBalance" class="balance">USD 0.00</div></div></section></section>
-<section class="app-page" id="bitcoinDepositPage"><section class="section"><h2>Fund Account with Bitcoin</h2><div class="info-box">Only send Bitcoin on the Bitcoin mainnet. Submitting a transaction does not credit your demo wallet. Deposits remain pending until independently verified. Do not send funds unless you have independently verified the receiving address and understand this demo site does not guarantee a real deposit service.</div><div class="form-group"><label>Bitcoin Receiving Address</label><div class="address-row"><input id="bitcoinDepositAddress" readonly value="Loading receiving address..."><button id="copyBitcoinAddress" class="action-btn" type="button">Copy Address</button></div></div><div id="bitcoinAddressMessage" class="message"></div><div class="divider-line"></div><h3>Submit a Bitcoin Payment</h3><div id="bitcoinDepositMessage" class="message"></div><form id="bitcoinDepositForm"><div class="form-group"><label>Amount sent (BTC)</label><input id="bitcoinAmount" type="number" min="0.00000001" step="0.00000001" required></div><div class="form-group"><label>Bitcoin transaction ID (TXID)</label><input id="bitcoinTxid" minlength="64" maxlength="64" pattern="[A-Fa-f0-9]{64}" required></div><button id="bitcoinDepositSubmit" class="primary-btn">Submit Deposit for Verification</button></form></section><section class="section"><h2>My Bitcoin Deposit Submissions</h2><div id="myBitcoinDeposits" class="loading">Loading...</div></section></section>
-<section class="app-page" id="investmentPlansPage"><section class="section"><h2>Demo Investment Plans</h2><div class="info-box"><b>DEMO / TESTING ONLY.</b> Investments use simulated wallet credits. No real investments, earnings, or payouts occur.</div><div id="investmentMessage" class="message"></div><div id="investmentPlans" class="plan-grid"><div class="loading">Loading demo plans...</div></div></section></section>
-<section class="app-page" id="myInvestmentsPage"><section class="section"><h2>My Demo Investments</h2><div class="cards"><div class="card"><div class="card-title">Amount invested</div><div id="investedTotal" class="balance">USD 0.00</div></div><div class="card"><div class="card-title">Recorded demo profit/loss</div><div id="profitLossTotal" class="balance">USD 0.00</div></div><div class="card"><div class="card-title">Active investments</div><div id="activeInvestmentCount" class="balance">0</div></div></div><div id="myInvestments" class="loading">Loading...</div></section><section class="section"><h2>Demo Investment Activity</h2><div class="info-box">This feed contains only activity generated inside the demo system. It is not a list of real-world investors or real profits.</div><div id="investmentActivity" class="loading">Loading...</div></section></section>
-<section class="app-page" id="withdrawPage"><section class="section"><h2>Request a Demo Withdrawal</h2><div class="info-box">This records a simulated withdrawal request only. It does not send actual payouts. The requested amount is reserved from your demo balance until resolved.</div><div id="withdrawMessage" class="message"></div><form id="withdrawForm"><div class="grid-2"><div class="form-group"><label>Amount (USD)</label><input id="withdrawAmount" type="number" min="0.01" step="0.01" required></div><div class="form-group"><label>Withdrawal Method</label><select id="withdrawMethod" required><option value="">Select method</option><option>Bank Transfer</option><option>PayPal</option><option>Crypto</option><option>Other</option></select></div></div><div class="form-group"><label>Account / Payment Details</label><textarea id="accountDetails" required></textarea></div><button id="withdrawButton" class="primary-btn">Submit Demo Withdrawal Request</button></form></section></section>
-<section class="app-page" id="historyPage"><section class="section"><h2>Transaction History</h2><div id="myTransactions" class="loading">Loading...</div></section><section class="section"><h2>My Withdrawal Requests</h2><div id="myWithdrawals" class="loading">Loading...</div></section></section>
-<section class="app-page" id="adminPage"><section id="adminSection" class="section hidden"><h2 style="color:#f5c542">Admin Dashboard</h2><div class="info-box">Admin actions are checked by the database. Wallet changes are recorded as admin credit/debit transactions. Never share your admin login.</div><div class="admin-tabs"><button class="admin-tab active" onclick="changeAdminTab('withdrawals',this)">Withdrawals</button><button class="admin-tab" onclick="changeAdminTab('wallet',this)">Wallet Controls</button><button class="admin-tab" onclick="changeAdminTab('testimonials',this)">Testimonials</button></div>
-<div id="adminWithdrawals"><div class="admin-tabs"><button class="admin-tab active" onclick="loadAdminWithdrawals('pending',this)">Pending</button><button class="admin-tab" onclick="loadAdminWithdrawals('approved',this)">Approved</button><button class="admin-tab" onclick="loadAdminWithdrawals('rejected',this)">Rejected</button></div><div id="adminWithdrawalRows" class="loading">Loading...</div></div>
-<div id="adminWallet" class="hidden"><h3>Adjust a Customer Demo Wallet</h3><div class="info-box">Search by the customer's registered email. Credit/debit amounts are simulated demo credits only. The database verifies administrator permissions before applying changes.</div><div id="adminWalletMessage" class="message"></div><form id="walletSearchForm"><div class="form-group"><label>Customer email</label><input id="walletSearchEmail" type="email" required></div><button class="primary-btn" id="walletSearchButton">Find Customer</button></form><div id="walletCustomer" class="hidden"><div class="card" style="margin-top:15px"><div id="walletCustomerName"></div><div id="walletCustomerEmail" class="muted"></div><div id="walletCustomerBalance" class="balance"></div></div><form id="walletAdjustForm" style="margin-top:15px"><div class="grid-2"><div class="form-group"><label>Action</label><select id="walletAction"><option value="credit">Credit demo wallet</option><option value="debit">Debit demo wallet</option></select></div><div class="form-group"><label>Amount (USD)</label><input id="walletAmount" type="number" min="0.01" step="0.01" required></div></div><div class="form-group"><label>Reason / admin note</label><input id="walletNote" maxlength="250" required></div><button class="primary-btn" id="walletAdjustButton">Apply Wallet Adjustment</button></form></div></div>
-<div id="adminTestimonials" class="hidden"><div id="adminTestimonialRows" class="loading">Loading testimonials...</div></div>
-</section></section>
-</main><footer>WealthCashFx © 2026 · Demo environment only · No real investment returns or payouts</footer></section>
+<header><div class="wrap nav"><div class="brand">Wealth<span>Cash</span>Fx</div><small>Build. Learn. Grow.</small></div></header>
+
+<main id="landing" class="wrap">
+  <section class="hero">
+    <div><div class="eyebrow">WELCOME TO WEALTHCASHFX</div><h1>Build. Learn.<br><span class="goldtext">Grow together.</span></h1>
+      <p>A community demo platform designed to help members explore wallet interfaces, learning resources, activity tracking and community features in a clear, simple environment.</p>
+      <div class="actions"><button class="btn gold" onclick="document.getElementById('signupCard').scrollIntoView({behavior:'smooth'})">Create demo account</button><button class="btn ghost" onclick="document.getElementById('loginCard').scrollIntoView({behavior:'smooth'})">Member login</button></div>
+    </div>
+    <div class="hero-card"><h3>Explore the demo</h3><ul><li>Member dashboard and demo wallet</li><li>Internal demo credit transfer interface</li><li>Investment-plan simulations</li><li>Deposit and withdrawal request demonstrations</li><li>Community testimonials and live chat</li></ul><p class="note">Create an account to access the member area.</p></div>
+  </section>
+  <section class="auth-area">
+    <div class="auth-card" id="signupCard"><h2>Create account</h2>
+      <div class="field"><label>Full name</label><input id="signupName" autocomplete="name" placeholder="Your full name"></div>
+      <div class="field"><label>Email address</label><input id="signupEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>
+      <div class="field"><label>Password (minimum 8 characters)</label><input id="signupPassword" type="password" autocomplete="new-password" placeholder="Create a password"></div>
+      <button class="btn" onclick="signUp()">Create demo account</button><div id="signupMsg" class="message"></div>
+    </div>
+    <div class="auth-card" id="loginCard"><h2>Member login</h2>
+      <div class="field"><label>Email address</label><input id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>
+      <div class="field"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Your password"></div>
+      <button class="btn gold" onclick="signIn()">Login</button><button class="btn ghost" onclick="resetPassword()">Forgot password?</button><div id="loginMsg" class="message"></div>
+    </div>
+  </section>
+  <div class="disclaimer"><strong>Important demo notice:</strong> WealthCashFx is a demonstration interface for learning and testing. Wallet balances, transfers, investment plans and withdrawals shown here are simulated platform credits only. This website does not guarantee profit, investment returns, cash payouts or financial services. Do not send money or cryptocurrency based on demo screens.</div>
+</main>
+
+<main id="app" class="wrap app hidden">
+  <div class="welcome"><div><p class="eyebrow">MEMBER AREA</p><h1>Welcome, <span id="memberName">Member</span></h1><p class="muted" id="memberEmail"></p></div><div class="actions"><button class="btn ghost" onclick="refreshAll()">Refresh</button><button class="btn danger" onclick="signOut()">Log out</button></div></div>
+  <div class="stats">
+    <div class="stat"><span>DEMO WALLET BALANCE</span><strong id="balance">$0.00</strong><span class="pill">Demo credits only</span></div>
+    <div class="stat"><span>ACCOUNT STATUS</span><strong id="accountStatus">Active</strong><span class="muted" id="accountType">Member account</span></div>
+    <div class="stat"><span>MEMBER EMAIL</span><strong id="statEmail" style="font-size:15px;overflow-wrap:anywhere">—</strong><span class="muted">Verified account identity</span></div>
+  </div>
+  <div class="layout">
+    <nav class="side">
+      <button class="active" data-page="dashboard" onclick="showPage('dashboard',this)">Dashboard</button>
+      <button data-page="wallet" onclick="showPage('wallet',this)">My Wallet</button>
+      <button data-page="transfer" onclick="showPage('transfer',this)">Credit Transfers</button>
+      <button data-page="deposit" onclick="showPage('deposit',this)">Bitcoin Deposit</button>
+      <button data-page="plans" onclick="showPage('plans',this)">Investment Plans</button>
+      <button data-page="investments" onclick="showPage('investments',this)">My Investments</button>
+      <button data-page="withdraw" onclick="showPage('withdraw',this)">Withdraw Funds</button>
+      <button data-page="history" onclick="showPage('history',this)">Activity History</button>
+      <button data-page="community" onclick="showPage('community',this)">Community Chat</button>
+      <button id="adminNav" class="hidden" data-page="admin" onclick="showPage('admin',this)">Admin Dashboard</button>
+    </nav>
+    <div class="content">
+      <section id="page-dashboard" class="panel section">
+        <h2>Dashboard overview</h2><p class="muted">Your demo account activity and community space.</p>
+        <div class="grid2">
+          <div class="item-card"><h3>Quick access</h3><p>Explore your demo wallet, submit a test deposit request, review plan simulations or view your activity history.</p><div class="actions"><button class="btn small" onclick="showPage('wallet')">Open wallet</button><button class="btn small ghost" onclick="showPage('community')">Open community</button></div></div>
+          <div class="item-card"><h3>Account information</h3><p id="profileInfo">Loading profile…</p><span class="pill">Secure member session</span></div>
+        </div>
+        <div class="disclaimer">Demo environment only. No real funds are held or paid out through this interface.</div>
+      </section>
+
+      <section id="page-wallet" class="panel section hidden"><h2>My Wallet</h2><p class="muted">A view of simulated internal platform credits.</p><div class="stat"><span>AVAILABLE DEMO CREDITS</span><strong id="walletBalance">$0.00</strong></div><p class="note">These figures are not cash, cryptocurrency or withdrawable monetary value.</p></section>
+
+      <section id="page-transfer" class="panel section hidden"><h2>Internal Demo Credit Transfer</h2><p class="muted">Send simulated credits to another registered member by email.</p>
+        <div class="field"><label>Recipient email</label><input id="recipientEmail" type="email" placeholder="recipient@example.com"></div><div class="field"><label>Amount (demo credits)</label><input id="transferAmount" type="number" min="0.01" step="0.01" placeholder="10.00"></div><button class="btn" onclick="sendTransfer()">Submit demo transfer</button><div id="transferMsg" class="message"></div>
+        <p class="note">This action requires the Supabase RPC function <code>transfer_demo_credits</code>. If it is not installed, the page will show the exact error.</p>
+      </section>
+
+      <section id="page-deposit" class="panel section hidden"><h2>Bitcoin Deposit Request</h2><p class="muted">Submit a demo record for an administrator to review. This does not verify a blockchain payment or credit your wallet.</p>
+        <div class="field"><label>Amount (USD, demo)</label><input id="depositAmount" type="number" min="1" step="0.01" placeholder="100"></div><div class="field"><label>Transaction hash / reference (optional)</label><input id="depositReference" placeholder="Enter a reference"></div><button class="btn" onclick="submitDeposit()">Submit request</button><div id="depositMsg" class="message"></div>
+        <div class="disclaimer">Never send cryptocurrency to an address shown in a demo environment. A submitted reference is not proof of payment.</div>
+      </section>
+
+      <section id="page-plans" class="panel section hidden"><h2>Investment Plan Simulations</h2><p class="muted">Explore illustrative plans. These are not investment offers or promises of returns.</p><div class="grid3" id="planList"></div></section>
+      <section id="page-investments" class="panel section hidden"><h2>My Demo Investments</h2><div id="investmentList" class="list">Loading…</div></section>
+
+      <section id="page-withdraw" class="panel section hidden"><h2>Withdrawal Simulation</h2><p class="muted">Create a simulated withdrawal request for workflow testing only.</p>
+        <div class="field"><label>Amount (demo credits)</label><input id="withdrawAmount" type="number" min="0.01" step="0.01" placeholder="25"></div><div class="field"><label>Method label (e.g. test bank)</label><input id="withdrawMethod" placeholder="Test method"></div><button class="btn" onclick="requestWithdrawal()">Submit demo request</button><div id="withdrawMsg" class="message"></div>
+        <p class="note">This does not initiate a bank transfer, crypto transfer or cash payout.</p>
+      </section>
+
+      <section id="page-history" class="panel section hidden"><h2>Activity History</h2><div id="historyList" class="list">Loading…</div></section>
+
+      <section id="page-community" class="panel section hidden">
+        <h2>Community Live Chat</h2><p class="muted">Chat with other signed-in members. Please be respectful and never share passwords or private financial information.</p>
+        <div id="chatMessages" class="chatbox"><p class="muted">Loading community messages…</p></div>
+        <form class="chatform" onsubmit="sendChat(event)"><input id="chatInput" maxlength="1000" placeholder="Write a message…" required><button class="btn" type="submit">Send</button></form><div id="chatMsg" class="message"></div>
+        <div class="section"><h3>Community Testimonials</h3><div id="testimonialList" class="list">Loading testimonials…</div>
+          <div class="field"><label>Display name</label><input id="testimonialName" maxlength="60" placeholder="Your display name"></div><div class="field"><label>Your message</label><textarea id="testimonialMessage" maxlength="500" placeholder="Share feedback about the demo platform"></textarea></div><div class="field"><label>Rating</label><select id="testimonialRating"><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select></div><button class="btn" onclick="submitTestimonial()">Submit testimonial</button><div id="testimonialMsg" class="message"></div>
+        </div>
+      </section>
+
+      <section id="page-admin" class="panel section hidden"><h2>Admin Dashboard</h2><p class="muted">Administrator tools. Only accounts with <code>profiles.is_admin = true</code> should access these actions.</p>
+        <div class="tabs"><button class="active" onclick="adminTab('withdrawals',this)">Withdrawals</button><button onclick="adminTab('members',this)">Members</button><button onclick="adminTab('testimonials',this)">Testimonials</button><button onclick="adminTab('chat',this)">Live Chat</button></div>
+        <div id="admin-withdrawals" class="list">Loading…</div><div id="admin-members" class="list hidden">Loading…</div><div id="admin-testimonials" class="list hidden">Loading…</div><div id="admin-chat" class="list hidden">Loading…</div>
+      </section>
+    </div>
+  </div>
+  <div class="disclaimer"><strong>Demo notice:</strong> All balances and transactions are simulated platform credits. No guaranteed profit, investment return, real withdrawal or cash payout is provided.</div>
+</main>
+<footer><div class="wrap">© <span id="year"></span> WealthCashFx · Build. Learn. Grow. · Demonstration platform only.</div></footer>
+
 <script>
-"use strict";
-const SUPABASE_URL="https://qzcxqaaxwxkhfyzodihy.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY="sb_publishable_ORnDeZmqluJy1BKobLPs2Q_PBEX24E6";
-const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-const SITE_URL="https://mkpro100.github.io/WealthCashFx/";
-let currentUser=null,currentProfile=null,investmentRealtimeChannel=null,adminWalletUser=null;
-const $=id=>document.getElementById(id);
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
-function money(v){return Number(v||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
-function date(v){return v?new Date(v).toLocaleString():"-";}
-function msg(id,text,type="error"){$(id).textContent=text;$(id).className="message show "+type;}
-function clear(id){$(id).textContent="";$(id).className="message";}
-function readable(e){const m=e?.message||String(e||"Unknown error"),s=m.toLowerCase();if(s.includes("invalid login credentials"))return"Email or password is incorrect.";if(s.includes("email not confirmed"))return"Please confirm your email before logging in.";if(s.includes("already registered"))return"This email already has an account. Please log in.";if(s.includes("insufficient wallet balance"))return"You do not have enough demo funds.";if(s.includes("investment amount is outside"))return"That amount is outside this plan's limits.";if(s.includes("investment plan is unavailable"))return"This investment plan is currently unavailable.";if(s.includes("failed to fetch"))return"Connection problem. Check your internet connection.";return m;}
-function showLogin(){$("loginForm").classList.remove("hidden");$("signupForm").classList.add("hidden");$("loginTab").classList.add("active");$("signupTab").classList.remove("active");clear("authMessage");}
-function showSignup(){$("signupForm").classList.remove("hidden");$("loginForm").classList.add("hidden");$("signupTab").classList.add("active");$("loginTab").classList.remove("active");clear("authMessage");}
-function showPage(id){document.querySelectorAll(".app-page").forEach(p=>p.classList.toggle("active-page",p.id===id));document.querySelectorAll(".menu-link").forEach(b=>b.classList.toggle("selected",b.dataset.page===id));closeMenu();window.scrollTo({top:0,behavior:"smooth"});}
-function openMenu(){$("sideMenu").classList.add("open");$("sidebarShade").classList.add("show");}
-function closeMenu(){$("sideMenu").classList.remove("open");$("sidebarShade").classList.remove("show");}
-$("menuToggle").addEventListener("click",openMenu);$("menuClose").addEventListener("click",closeMenu);$("sidebarShade").addEventListener("click",closeMenu);
-document.querySelectorAll(".menu-link").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
-function updateDashboard(p){$("balanceDisplay").textContent="USD "+money(p.balance);$("walletBalance").textContent="USD "+money(p.balance);$("statusDisplay").textContent=p.status||"Active";}
-async function refreshProfile(){const r=await supabaseClient.from("profiles").select("id,full_name,email,balance,status,is_admin").eq("id",currentUser.id).single();if(r.error)throw r.error;currentProfile=r.data;updateDashboard(currentProfile);return currentProfile;}
-async function loadApp(){if(!currentUser)return;try{const p=await refreshProfile();$("authScreen").classList.add("hidden");$("appScreen").classList.remove("hidden");$("navEmail").textContent=currentUser.email||"";$("welcomeText").textContent=p.full_name?"Welcome, "+p.full_name+".":"Your WealthCashFx account overview.";$("testimonialName").value=p.full_name||"";$("adminSection").classList.toggle("hidden",p.is_admin!==true);$("adminMenuLink").classList.toggle("hidden",p.is_admin!==true);showPage("dashboardPage");await Promise.all([loadTransactions(),loadWithdrawals(),loadInvestmentPlans(),loadMyInvestments(),loadInvestmentActivity(),loadBitcoinDepositSettings(),loadMyBitcoinDeposits(),loadPublicTestimonials()]);subscribeInvestmentRealtime();if(p.is_admin===true){await loadAdminWithdrawals("pending");await loadAdminTestimonials();}}catch(e){console.error(e);msg("authMessage","Could not load your profile: "+readable(e));$("appScreen").classList.add("hidden");$("authScreen").classList.remove("hidden");}}
-$("loginForm").addEventListener("submit",async e=>{e.preventDefault();clear("authMessage");const b=$("loginButton");b.disabled=true;b.textContent="Checking...";try{const r=await supabaseClient.auth.signInWithPassword({email:$("loginEmail").value.trim(),password:$("loginPassword").value});if(r.error)throw r.error;currentUser=r.data.user;await loadApp();}catch(x){msg("authMessage",readable(x));}finally{b.disabled=false;b.textContent="Login";}});
-$("signupForm").addEventListener("submit",async e=>{e.preventDefault();clear("authMessage");const name=$("signupName").value.trim(),email=$("signupEmail").value.trim(),password=$("signupPassword").value;if(!name||password.length<8){msg("authMessage","Enter your name and a password of at least 8 characters.");return;}const b=$("signupButton");b.disabled=true;b.textContent="Creating...";try{const r=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:name},emailRedirectTo:SITE_URL}});if(r.error)throw r.error;if(r.data.user&&!r.data.session){msg("authMessage","Account created. Confirm your email, then log in.","success");$("signupForm").reset();return;}currentUser=r.data.user;await loadApp();}catch(x){msg("authMessage",readable(x));}finally{b.disabled=false;b.textContent="Create Account";}});
+const SUPABASE_URL = "https://qzcxqaaxwxkhfyzodihy.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_ORnDeZmqluJy1BKobLPs2Q_PBEX24E6";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let currentUser = null, currentProfile = null, realtimeChannels = [];
+const $ = id => document.getElementById(id);
+const money = value => "$" + Number(value || 0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const safe = value => String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const msg = (id,text) => { if($(id)) $(id).textContent = text || ""; };
+$("year").textContent = new Date().getFullYear();
 
-/* Bitcoin requests are pending submissions only; this code never credits a wallet. */
-let bitcoinReceivingAddress="";
-async function loadBitcoinDepositSettings(){const r=await supabaseClient.from("platform_settings").select("setting_value").eq("setting_key","bitcoin_deposit_address").maybeSingle();if(r.error){$("bitcoinDepositAddress").value="Could not load address";msg("bitcoinAddressMessage",readable(r.error));return;}bitcoinReceivingAddress=r.data?.setting_value||"";$("bitcoinDepositAddress").value=bitcoinReceivingAddress||"Address not configured";}
-$("copyBitcoinAddress").addEventListener("click",async()=>{clear("bitcoinAddressMessage");if(!bitcoinReceivingAddress){msg("bitcoinAddressMessage","Receiving address is not available.");return;}try{await navigator.clipboard.writeText(bitcoinReceivingAddress);msg("bitcoinAddressMessage","Address copied. Verify it carefully before sending.","success");}catch(e){$("bitcoinDepositAddress").select();msg("bitcoinAddressMessage","Address selected. Copy it manually.");}});
-async function loadMyBitcoinDeposits(){const box=$("myBitcoinDeposits"),r=await supabaseClient.from("deposit_requests").select("id,amount_btc,transaction_id,status,created_at,admin_note").eq("user_id",currentUser.id).order("created_at",{ascending:false});if(r.error){box.innerHTML='<div class="empty">'+esc(readable(r.error))+'</div>';return;}if(!r.data?.length){box.innerHTML='<div class="empty">No Bitcoin deposit submissions yet.</div>';return;}box.innerHTML='<table><thead><tr><th>Date</th><th>BTC</th><th>TXID</th><th>Status</th><th>Note</th></tr></thead><tbody>'+r.data.map(x=>'<tr><td>'+esc(date(x.created_at))+'</td><td>'+Number(x.amount_btc).toFixed(8)+'</td><td style="word-break:break-all">'+esc(x.transaction_id)+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.admin_note||"-")+'</td></tr>').join("")+'</tbody></table>';}
-$("bitcoinDepositForm").addEventListener("submit",async e=>{e.preventDefault();clear("bitcoinDepositMessage");const amount=Number($("bitcoinAmount").value),txid=$("bitcoinTxid").value.trim().toLowerCase();if(!bitcoinReceivingAddress){msg("bitcoinDepositMessage","Receiving address is not configured.");return;}if(!Number.isFinite(amount)||amount<=0||!/^[a-f0-9]{64}$/.test(txid)){msg("bitcoinDepositMessage","Enter a valid BTC amount and 64-character TXID.");return;}const b=$("bitcoinDepositSubmit");b.disabled=true;try{const r=await supabaseClient.from("deposit_requests").insert({user_id:currentUser.id,asset:"BTC",network:"bitcoin-mainnet",amount_btc:amount,transaction_id:txid,status:"pending"});if(r.error)throw r.error;$("bitcoinDepositForm").reset();await loadMyBitcoinDeposits();msg("bitcoinDepositMessage","Submitted for verification. Your wallet has not been credited.","success");}catch(x){msg("bitcoinDepositMessage",readable(x));}finally{b.disabled=false;}});
-
-/* Demo investments */
-async function loadInvestmentPlans(){const box=$("investmentPlans"),r=await supabaseClient.from("investment_plans").select("*").eq("is_active",true).order("duration_days");if(r.error){box.innerHTML='<div class="empty">'+esc(readable(r.error))+'</div>';return;}if(!r.data?.length){box.innerHTML='<div class="empty">No demo plans available.</div>';return;}box.innerHTML=r.data.map(p=>`<article class="plan-card"><span class="demo-label">DEMO PLAN</span><h3>${esc(p.name)}</h3><div class="plan-meta">${esc(p.description||"Simulated plan")}<br>Duration: ${Number(p.duration_days)} days<br>Minimum: USD ${money(p.min_amount)}<br>Maximum: USD ${money(p.max_amount)}</div><label>Amount (USD)</label><input id="amount-${esc(p.id)}" type="number" min="${Number(p.min_amount)}" max="${Number(p.max_amount)}" step="0.01" value="${Number(p.min_amount)}"><button class="primary-btn" type="button" onclick="startInvestment('${esc(p.id)}')">Invest Demo Funds</button></article>`).join("");}
-async function startInvestment(id){clear("investmentMessage");const amount=Number($("amount-"+id)?.value);if(!Number.isFinite(amount)||amount<=0)return msg("investmentMessage","Enter a valid amount.");if(!confirm("Use USD "+money(amount)+" of simulated demo credits? No real money or returns are involved."))return;try{const r=await supabaseClient.rpc("start_demo_investment",{p_plan_id:id,p_amount:amount});if(r.error)throw r.error;await Promise.all([refreshProfile(),loadMyInvestments(),loadInvestmentActivity()]);msg("investmentMessage","Demo investment started.","success");}catch(e){msg("investmentMessage",readable(e));}}
-async function loadMyInvestments(){const box=$("myInvestments"),r=await supabaseClient.from("demo_investments").select("id,amount,profit_loss,status,started_at,ends_at,investment_plans(name)").eq("user_id",currentUser.id).order("created_at",{ascending:false});if(r.error){box.innerHTML='<div class="empty">'+esc(readable(r.error))+'</div>';return;}const rows=r.data||[],invested=rows.reduce((s,x)=>s+Number(x.amount||0),0),pl=rows.reduce((s,x)=>s+Number(x.profit_loss||0),0);$("investedTotal").textContent="USD "+money(invested);$("profitLossTotal").textContent="USD "+money(pl);$("activeInvestmentCount").textContent=String(rows.filter(x=>x.status==="active").length);if(!rows.length){box.innerHTML='<div class="empty">No demo investments yet.</div>';return;}box.innerHTML='<div class="table-wrap"><table><thead><tr><th>Plan</th><th>Amount</th><th>Demo P/L</th><th>Status</th><th>Started</th><th>Ends</th></tr></thead><tbody>'+rows.map(x=>{const p=Array.isArray(x.investment_plans)?x.investment_plans[0]:x.investment_plans;return '<tr><td>'+esc(p?.name||"Demo plan")+'</td><td>USD '+money(x.amount)+'</td><td>USD '+money(x.profit_loss)+'</td><td>'+esc(x.status)+'</td><td>'+esc(date(x.started_at))+'</td><td>'+esc(date(x.ends_at))+'</td></tr>';}).join("")+'</tbody></table></div>';}
-async function loadInvestmentActivity(){const box=$("investmentActivity"),r=await supabaseClient.from("demo_investment_activity").select("id,display_label,event_type,amount,created_at").order("created_at",{ascending:false}).limit(20);if(r.error){box.innerHTML='<div class="empty">'+esc(readable(r.error))+'</div>';return;}if(!r.data?.length){box.innerHTML='<div class="empty">No demo activity yet.</div>';return;}box.innerHTML='<div class="activity-list">'+r.data.map(x=>'<div class="activity-item"><span><b>'+esc(x.display_label)+'</b> · '+esc(x.event_type.replaceAll("_"," "))+'</span><span>USD '+money(x.amount)+' · '+esc(date(x.created_at))+'</span></div>').join("")+'</div>';}
-function subscribeInvestmentRealtime(){if(investmentRealtimeChannel)supabaseClient.removeChannel(investmentRealtimeChannel);investmentRealtimeChannel=supabaseClient.channel("wealth-demo-"+currentUser.id).on("postgres_changes",{event:"*",schema:"public",table:"demo_investment_activity"},loadInvestmentActivity).on("postgres_changes",{event:"*",schema:"public",table:"demo_investments",filter:"user_id=eq."+currentUser.id},loadMyInvestments).subscribe();}
-
-/* Testimonials: customers can insert unpublished rows; public visitors only see published rows. */
-async function loadPublicTestimonials(){const box=$("publicTestimonials"),r=await supabaseClient.from("testimonials").select("id,display_name,message,rating,created_at").eq("is_published",true).order("created_at",{ascending:false}).limit(12);if(r.error){box.innerHTML='<div class="empty">Testimonials are temporarily unavailable.</div>';return;}if(!r.data?.length){box.innerHTML='<div class="empty">No published testimonials yet.</div>';return;}box.innerHTML=r.data.map(t=>'<article class="testimonial"><b>'+esc(t.display_name)+'</b><div class="stars">'+("★".repeat(Math.max(1,Math.min(5,Number(t.rating)||5))))+'</div><p>'+esc(t.message)+'</p><span class="muted">'+esc(date(t.created_at))+'</span></article>').join("");}
-$("testimonialForm").addEventListener("submit",async e=>{e.preventDefault();clear("testimonialMessage");const display_name=$("testimonialName").value.trim(),message=$("testimonialText").value.trim(),rating=Number($("testimonialRating").value);if(!display_name||!message)return msg("testimonialMessage","Please complete your name and message.");const b=$("testimonialSubmit");b.disabled=true;try{const r=await supabaseClient.from("testimonials").insert({display_name,message,rating,is_published:false});if(r.error)throw r.error;$("testimonialText").value="";msg("testimonialMessage","Thank you. Your testimonial has been submitted for administrator review.","success");}catch(x){msg("testimonialMessage",readable(x));}finally{b.disabled=false;}});
-
-/* Withdrawals and transaction history */
-$("withdrawForm").addEventListener("submit",async e=>{e.preventDefault();clear("withdrawMessage");const amount=Number($("withdrawAmount").value),method=$("withdrawMethod").value,details=$("accountDetails").value.trim();if(!Number.isFinite(amount)||amount<=0||!method||!details)return msg("withdrawMessage","Complete all withdrawal fields.");const b=$("withdrawButton");b.disabled=true;try{const r=await supabaseClient.rpc("request_withdrawal",{withdrawal_amount:amount,withdrawal_method:method,withdrawal_details:details});if(r.error)throw r.error;await Promise.all([refreshProfile(),loadWithdrawals(),loadTransactions()]);$("withdrawForm").reset();msg("withdrawMessage","Demo withdrawal request submitted. No payout was sent.","success");}catch(x){msg("withdrawMessage",readable(x));}finally{b.disabled=false;}});
-async function loadTransactions(){const box=$("myTransactions"),r=await supabaseClient.from("transactions").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});if(r.error){box.innerHTML='<div class="empty">'+esc(readable(r.error))+'</div>';return;}if(!r.data?.length){box.innerHTML='<div class="empty">No transactions yet.</div>';return;}box.innerHTML='<div class="table-wrap"><table><thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Status</th><th>Description</th></tr></thead><tbody>'+r.data.map(x=>'<tr><td>'+esc(date(x.created_at))+'</td><td>'+esc(x.type)+'</td><td>USD '+money(x.amount)+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.description||"-")+'</td></tr>').join("")+'</tbody></table></div>';}
-async function loadWithdrawals(){const box=$("myWithdrawals"),r=await supabaseClient.from("withdrawal_requests").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});if(r.error){box.innerHTML='<div class="empty">'+esc(readable(r.error))+'</div>';return;}if(!r.data?.length){box.innerHTML='<div class="empty">No withdrawal requests yet.</div>';return;}box.innerHTML='<div class="table-wrap"><table><thead><tr><th>Date</th><th>Amount</th><th>Method</th><th>Status</th><th>Admin Note</th></tr></thead><tbody>'+r.data.map(x=>'<tr><td>'+esc(date(x.created_at))+'</td><td>USD '+money(x.amount)+'</td><td>'+esc(x.method)+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.admin_note||"-")+'</td></tr>').join("")+'</tbody></table></div>';}
-let adminWithdrawalStatus="pending";
-function changeAdminTab(tab,button){document.querySelectorAll("#adminSection > .admin-tabs > .admin-tab").forEach(x=>x.classList.remove("active"));button.classList.add("active");["adminWithdrawals","adminWallet","adminTestimonials"].forEach((id,i)=>$(id).classList.toggle("hidden",["withdrawals","wallet","testimonials"][i]!==tab));if(tab==="testimonials")loadAdminTestimonials();}
-async function loadAdminWithdrawals(status,button){if(!currentProfile?.is_admin)return;adminWithdrawalStatus=status;if(button){document.querySelectorAll("#adminWithdrawals .admin-tab").forEach(x=>x.classList.remove("active"));button.classList.add("active");}const box=$("adminWithdrawalRows"),r=await supabaseClient.from("withdrawal_requests").select("*").eq("status",status).order("created_at",{ascending:false});if(r.error){box.textContent=readable(r.error);return;}if(!r.data?.length){box.innerHTML='<div class="empty">No '+esc(status)+' requests.</div>';return;}box.innerHTML='<div class="table-wrap"><table><thead><tr><th>Date</th><th>User ID</th><th>Amount</th><th>Method</th><th>Details</th><th>Action</th></tr></thead><tbody>'+r.data.map(x=>'<tr><td>'+esc(date(x.created_at))+'</td><td>'+esc(x.user_id)+'</td><td>USD '+money(x.amount)+'</td><td>'+esc(x.method)+'</td><td>'+esc(x.account_details)+'</td><td>'+(x.status==="pending"?'<button class="small-btn" onclick="resolveWithdrawal(\''+esc(x.id)+'\',\'approved\')">Approve</button><button class="small-btn" onclick="resolveWithdrawal(\''+esc(x.id)+'\',\'rejected\')">Reject</button>':'-')+'</td></tr>').join("")+'</tbody></table></div>';}
-async function resolveWithdrawal(id,decision){if(!currentProfile?.is_admin||!confirm("Are you sure you want to "+decision+" this demo request?"))return;const note=decision==="rejected"?(prompt("Optional rejection reason:")||null):null;try{const r=await supabaseClient.rpc("resolve_withdrawal",{request_id:id,decision,note});if(r.error)throw r.error;await Promise.all([loadAdminWithdrawals(adminWithdrawalStatus),loadWithdrawals(),loadTransactions(),refreshProfile()]);alert("Request updated.");}catch(e){alert(readable(e));}}
-
-/* Admin wallet controls: the RPC enforces admin status on the server. */
-$("walletSearchForm").addEventListener("submit",async e=>{e.preventDefault();clear("adminWalletMessage");$("walletCustomer").classList.add("hidden");const b=$("walletSearchButton");b.disabled=true;try{if(!currentProfile?.is_admin)throw new Error("Administrator access required.");const email=$("walletSearchEmail").value.trim().toLowerCase();const r=await supabaseClient.from("profiles").select("id,full_name,email,balance,status").ilike("email",email).maybeSingle();if(r.error)throw r.error;if(!r.data)throw new Error("No customer account found with that email.");adminWalletUser=r.data;$("walletCustomerName").textContent=r.data.full_name||"Customer";$("walletCustomerEmail").textContent=r.data.email;$("walletCustomerBalance").textContent="USD "+money(r.data.balance);$("walletCustomer").classList.remove("hidden");}catch(x){msg("adminWalletMessage",readable(x));}finally{b.disabled=false;}});
-$("walletAdjustForm").addEventListener("submit",async e=>{e.preventDefault();clear("adminWalletMessage");if(!currentProfile?.is_admin||!adminWalletUser)return msg("adminWalletMessage","Find a customer first.");const action=$("walletAction").value,amount=Number($("walletAmount").value),note=$("walletNote").value.trim();if(!Number.isFinite(amount)||amount<=0||!note)return msg("adminWalletMessage","Enter a valid amount and reason.");if(!confirm("Confirm "+action+" of USD "+money(amount)+" for "+adminWalletUser.email+"?"))return;const b=$("walletAdjustButton");b.disabled=true;try{const r=await supabaseClient.rpc("admin_adjust_wallet",{p_user_id:adminWalletUser.id,p_action:action,p_amount:amount,p_note:note});if(r.error)throw r.error;const refreshed=await supabaseClient.from("profiles").select("id,full_name,email,balance,status").eq("id",adminWalletUser.id).single();if(refreshed.error)throw refreshed.error;adminWalletUser=refreshed.data;$("walletCustomerBalance").textContent="USD "+money(adminWalletUser.balance);$("walletAdjustForm").reset();msg("adminWalletMessage","Wallet adjustment completed and recorded in transaction history.","success");}catch(x){msg("adminWalletMessage",readable(x));}finally{b.disabled=false;}});
-
-/* Admin testimonial moderation */
-async function loadAdminTestimonials(){if(!currentProfile?.is_admin)return;const box=$("adminTestimonialRows"),r=await supabaseClient.from("testimonials").select("id,display_name,message,rating,is_published,created_at").order("created_at",{ascending:false});if(r.error){box.innerHTML='<div class="empty">'+esc(readable(r.error))+'</div>';return;}if(!r.data?.length){box.innerHTML='<div class="empty">No testimonials submitted yet.</div>';return;}box.innerHTML=r.data.map(t=>'<article class="testimonial"><b>'+esc(t.display_name)+'</b> · '+(t.is_published?'<span class="status">Published</span>':'<span style="color:#f5c542">Pending review</span>')+'<div class="stars">'+("★".repeat(Math.max(1,Math.min(5,Number(t.rating)||5))))+'</div><p>'+esc(t.message)+'</p><span class="muted">'+esc(date(t.created_at))+'</span><div style="margin-top:10px">'+(!t.is_published?'<button class="small-btn" onclick="moderateTestimonial(\''+esc(t.id)+'\',true)">Approve & Publish</button>':'<button class="small-btn" onclick="moderateTestimonial(\''+esc(t.id)+'\',false)">Unpublish</button>')+'<button class="small-btn" onclick="deleteTestimonial(\''+esc(t.id)+'\')">Delete</button></div></article>').join("");}
-async function moderateTestimonial(id,publish){if(!currentProfile?.is_admin)return;try{const r=await supabaseClient.from("testimonials").update({is_published:publish}).eq("id",id);if(r.error)throw r.error;await Promise.all([loadAdminTestimonials(),loadPublicTestimonials()]);}catch(e){alert(readable(e));}}
-async function deleteTestimonial(id){if(!currentProfile?.is_admin||!confirm("Delete this testimonial permanently?"))return;try{const r=await supabaseClient.from("testimonials").delete().eq("id",id);if(r.error)throw r.error;await Promise.all([loadAdminTestimonials(),loadPublicTestimonials()]);}catch(e){alert(readable(e));}}
-
-$("logoutBtn").addEventListener("click",async()=>{const b=$("logoutBtn");b.disabled=true;try{if(investmentRealtimeChannel){await supabaseClient.removeChannel(investmentRealtimeChannel);investmentRealtimeChannel=null;}const r=await supabaseClient.auth.signOut({scope:"local"});if(r.error)throw r.error;currentUser=null;currentProfile=null;adminWalletUser=null;$("appScreen").classList.add("hidden");$("authScreen").classList.remove("hidden");$("loginForm").reset();$("signupForm").reset();showLogin();}catch(e){alert(readable(e));}finally{b.disabled=false;}});
-supabaseClient.auth.onAuthStateChange((event,session)=>{if(session?.user&&!currentUser){currentUser=session.user;setTimeout(()=>loadApp(),0);}if(!session){currentUser=null;currentProfile=null;if(investmentRealtimeChannel){supabaseClient.removeChannel(investmentRealtimeChannel);investmentRealtimeChannel=null;}}});
-(async()=>{const r=await supabaseClient.auth.getSession();if(r.error){msg("authMessage",readable(r.error));return;}if(r.data.session?.user){currentUser=r.data.session.user;await loadApp();}})();
+async function signUp(){
+  const full_name=$("signupName").value.trim(), email=$("signupEmail").value.trim(), password=$("signupPassword").value;
+  if(!full_name||!email||password.length<8){msg("signupMsg","Enter your name, a valid email and a password of at least 8 characters.");return;}
+  msg("signupMsg","Creating account…");
+  const {data,error}=await db.auth.signUp({email,password,options:{data:{full_name}}});
+  if(error){msg("signupMsg",error.message);return;}
+  msg("signupMsg",data.session?"Account created. Opening your dashboard…":"Account created. Check your email to confirm, then log in.");
+  if(data.session) await loadApp(data.session.user);
+}
+async function signIn(){
+  msg("loginMsg","Signing in…");
+  const {data,error}=await db.auth.signInWithPassword({email:$("loginEmail").value.trim(),password:$("loginPassword").value});
+  if(error){msg("loginMsg",error.message);return;} await loadApp(data.user);
+}
+async function resetPassword(){
+  const email=$("loginEmail").value.trim(); if(!email){msg("loginMsg","Enter your email address first.");return;}
+  const {error}=await db.auth.resetPasswordForEmail(email);
+  msg("loginMsg",error?error.message:"Password reset email requested. Check your inbox.");
+}
+async function signOut(){
+  await cleanupRealtime(); const {error}=await db.auth.signOut(); if(error){alert(error.message);return;}
+  currentUser=null;currentProfile=null;$("app").classList.add("hidden");$("landing").classList.remove("hidden");
+}
+db.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_OUT"){currentUser=null;$("app").classList.add("hidden");$("landing").classList.remove("hidden");}});
+async function loadApp(user){
+  currentUser=user;
+  $("landing").classList.add("hidden");$("app").classList.remove("hidden");
+  $("memberEmail").textContent=user.email||"";$("statEmail").textContent=user.email||"";
+  const {data:profile,error}=await db.from("profiles").select("*").eq("id",user.id).maybeSingle();
+  if(error){$("profileInfo").textContent="Profile could not load: "+error.message;currentProfile={id:user.id,full_name:user.user_metadata?.full_name||"Member",balance:0,status:"Active",is_admin:false};}
+  else if(!profile){
+    const name=user.user_metadata?.full_name||user.email?.split("@")[0]||"Member";
+    const inserted=await db.from("profiles").upsert({id:user.id,full_name:name,email:user.email,balance:0,status:"Active"},{onConflict:"id"}).select("*").maybeSingle();
+    currentProfile=inserted.data||{id:user.id,full_name:name,balance:0,status:"Active",is_admin:false};
+    if(inserted.error) $("profileInfo").textContent="Profile row missing. Ask the administrator to check the profiles table: "+inserted.error.message;
+  } else currentProfile=profile;
+  const name=currentProfile.full_name||user.email||"Member";
+  $("memberName").textContent=name;$("profileInfo").textContent=`Name: ${name} · Status: ${currentProfile.status||"Active"} · Email: ${user.email}`;
+  $("accountStatus").textContent=currentProfile.status||"Active";$("balance").textContent=money(currentProfile.balance);$("walletBalance").textContent=money(currentProfile.balance);
+  $("adminNav").classList.toggle("hidden",!currentProfile.is_admin);
+  await refreshAll();subscribeRealtime();
+}
+async function refreshAll(){
+  if(!currentUser)return;
+  $("balance").textContent=money(currentProfile?.balance);$("walletBalance").textContent=money(currentProfile?.balance);
+  await Promise.allSettled([loadInvestments(),loadHistory(),loadChat(),loadTestimonials()]);
+  if(currentProfile?.is_admin) await loadAdminWithdrawals();
+}
+function showPage(page,button){
+  document.querySelectorAll(".content>section").forEach(s=>s.classList.add("hidden"));
+  $("page-"+page)?.classList.remove("hidden");
+  document.querySelectorAll(".side button").forEach(b=>b.classList.remove("active"));
+  if(button)button.classList.add("active");
+  if(page==="community"){loadChat();loadTestimonials();}
+  if(page==="admin"&&currentProfile?.is_admin)loadAdminWithdrawals();
+}
+function planCards(){
+  const plans=[["Starter Learning Plan","Practice with a small demo amount",25],["Growth Simulation","Explore a medium demo scenario",100],["Advanced Simulation","Explore a larger demo scenario",250]];
+  $("planList").innerHTML=plans.map((p,i)=>`<div class="item-card"><span class="pill">DEMO PLAN ${i+1}</span><h3>${p[0]}</h3><p>${p[1]}. No real investment or return is offered.</p><strong class="goldtext">${money(p[2])} demo credits</strong><div class="actions"><button class="btn small" onclick="startInvestment(${p[2]},'${p[0]}')">Start simulation</button></div></div>`).join("");
+}
+planCards();
+async function startInvestment(amount,name){
+  const {data,error}=await db.rpc("start_demo_investment",{p_amount:amount,p_plan_name:name});
+  if(error){alert("Could not start demo investment: "+error.message);return;}
+  alert("Demo investment request submitted.");loadInvestments();loadHistory();
+}
+async function loadInvestments(){
+  const box=$("investmentList");const {data,error}=await db.from("investments").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false}).limit(30);
+  if(error){box.textContent="Unable to load investments: "+error.message;return;}
+  box.innerHTML=data?.length?data.map(x=>`<div class="rowitem"><div><strong>${safe(x.plan_name||"Demo investment")}</strong><p>${safe(x.status||"Pending")} · ${safe(x.created_at||"")}</p></div><strong>${money(x.amount)}</strong></div>`).join(""):"No demo investments yet.";
+}
+async function sendTransfer(){
+  const email=$("recipientEmail").value.trim(),amount=Number($("transferAmount").value);
+  if(!email||!(amount>0)){msg("transferMsg","Enter a recipient email and an amount greater than zero.");return;}
+  msg("transferMsg","Submitting…");
+  const {data,error}=await db.rpc("transfer_demo_credits",{p_recipient_email:email,p_amount:amount});
+  msg("transferMsg",error?"Transfer failed: "+error.message:"Demo transfer submitted.");
+  if(!error){$("recipientEmail").value="";$("transferAmount").value="";await refreshAll();}
+}
+async function submitDeposit(){
+  const amount=Number($("depositAmount").value),reference=$("depositReference").value.trim();
+  if(!(amount>0)){msg("depositMsg","Enter a valid demo amount.");return;}
+  const {error}=await db.from("deposit_requests").insert({user_id:currentUser.id,amount,transaction_reference:reference,status:"pending"});
+  msg("depositMsg",error?"Request failed: "+error.message:"Demo deposit request submitted for review. No wallet credit has been added.");
+}
+async function requestWithdrawal(){
+  const amount=Number($("withdrawAmount").value),method=$("withdrawMethod").value.trim();
+  if(!(amount>0)||!method){msg("withdrawMsg","Enter an amount and a method label.");return;}
+  const {data,error}=await db.rpc("request_withdrawal",{p_amount:amount,p_method:method});
+  msg("withdrawMsg",error?"Request failed: "+error.message:"Demo withdrawal request submitted.");
+  if(!error)loadHistory();
+}
+async function loadHistory(){
+  const box=$("historyList");const {data,error}=await db.from("transactions").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false}).limit(40);
+  if(error){box.textContent="Unable to load activity history: "+error.message;return;}
+  box.innerHTML=data?.length?data.map(t=>`<div class="rowitem"><div><strong>${safe(t.type||t.description||"Activity")}</strong><p>${safe(t.status||"Recorded")} · ${safe(t.created_at||"")}</p></div><strong>${money(t.amount)}</strong></div>`).join(""):"No activity recorded yet.";
+}
+async function sendChat(event){
+  event.preventDefault();const text=$("chatInput").value.trim();if(!text)return;
+  const display_name=currentProfile?.full_name||currentUser.email||"Member";
+  const {error}=await db.from("chat_messages").insert({user_id:currentUser.id,sender_id:currentUser.id,sender_role:"user",display_name,message:text});
+  if(error){msg("chatMsg","Message could not be sent: "+error.message);return;}
+  $("chatInput").value="";msg("chatMsg","Message sent.");await loadChat();
+}
+async function loadChat(){
+  const box=$("chatMessages");if(!box||!currentUser)return;
+  const {data,error}=await db.from("chat_messages").select("id,user_id,sender_role,display_name,message,created_at,is_hidden").eq("is_hidden",false).order("created_at",{ascending:false}).limit(80);
+  if(error){box.innerHTML=`<p class="muted">Unable to load chat: ${safe(error.message)}</p>`;return;}
+  const rows=(data||[]).reverse();
+  box.innerHTML=rows.length?rows.map(m=>`<div class="bubble ${m.user_id===currentUser.id?"mine":""}"><strong>${safe(m.display_name||m.sender_role||"Member")}</strong><div>${safe(m.message)}</div><small>${safe(new Date(m.created_at).toLocaleString())}</small></div>`).join(""):"<p class='muted'>No messages yet. Start the conversation.</p>";
+  box.scrollTop=box.scrollHeight;
+}
+async function submitTestimonial(){
+  const display_name=$("testimonialName").value.trim()||currentProfile?.full_name||"Member",message=$("testimonialMessage").value.trim(),rating=Number($("testimonialRating").value);
+  if(!message){msg("testimonialMsg","Please write a short message.");return;}
+  const {error}=await db.from("testimonials").insert({user_id:currentUser.id,display_name,message,rating,is_published:false});
+  msg("testimonialMsg",error?"Could not submit: "+error.message:"Thank you. Your testimonial is awaiting admin approval.");
+  if(!error){$("testimonialMessage").value="";}
+}
+async function loadTestimonials(){
+  const box=$("testimonialList");if(!box||!currentUser)return;
+  const {data,error}=await db.from("testimonials").select("id,display_name,message,rating,created_at").eq("is_published",true).order("created_at",{ascending:false}).limit(12);
+  if(error){box.textContent="Unable to load testimonials: "+error.message;return;}
+  box.innerHTML=data?.length?data.map(t=>`<div class="rowitem"><div><strong>${safe(t.display_name||"Member")} · ${"★".repeat(Math.max(1,Math.min(5,Number(t.rating)||5)))}</strong><p>${safe(t.message)}</p></div></div>`).join(""):"No approved testimonials yet.";
+}
+function adminTab(tab,button){
+  ["withdrawals","members","testimonials","chat"].forEach(x=>$("admin-"+x).classList.toggle("hidden",x!==tab));
+  document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));button.classList.add("active");
+  if(tab==="withdrawals")loadAdminWithdrawals();if(tab==="members")loadAdminMembers();if(tab==="testimonials")loadAdminTestimonials();if(tab==="chat")loadAdminChat();
+}
+async function loadAdminWithdrawals(){
+  if(!currentProfile?.is_admin)return;const box=$("admin-withdrawals");
+  const {data,error}=await db.from("withdrawals").select("*").order("created_at",{ascending:false}).limit(60);
+  if(error){box.textContent="Unable to load withdrawals: "+error.message;return;}
+  box.innerHTML=data?.length?data.map(w=>`<div class="rowitem"><div><strong>${money(w.amount)} · ${safe(w.status||"pending")}</strong><p>User: ${safe(w.user_id)} · ${safe(w.method||"")} · ${safe(w.created_at||"")}</p></div><div class="actions"><button class="btn small" onclick="resolveWithdrawal('${w.id}','approved')">Approve</button><button class="btn small danger" onclick="resolveWithdrawal('${w.id}','rejected')">Reject</button></div></div>`).join(""):"No withdrawal requests.";
+}
+async function resolveWithdrawal(id,status){
+  const {error}=await db.rpc("resolve_withdrawal",{p_withdrawal_id:id,p_status:status});
+  if(error){alert(error.message);return;}loadAdminWithdrawals();
+}
+async function loadAdminMembers(){
+  const box=$("admin-members");const {data,error}=await db.from("profiles").select("id,full_name,email,balance,status,is_admin").order("full_name").limit(100);
+  if(error){box.textContent=error.message;return;}
+  box.innerHTML=data?.length?data.map(p=>`<div class="rowitem"><div><strong>${safe(p.full_name||"Member")} ${p.is_admin?"· ADMIN":""}</strong><p>${safe(p.email)} · ${safe(p.status||"")} · ${money(p.balance)}</p></div><button class="btn small" onclick="adjustWallet('${p.id}')">Adjust demo credits</button></div>`).join(""):"No members.";
+}
+async function adjustWallet(id){
+  const raw=prompt("Enter adjustment amount. Use a minus sign to subtract demo credits:");if(raw===null)return;
+  const amount=Number(raw);if(!Number.isFinite(amount)||amount===0){alert("Enter a non-zero number.");return;}
+  const {error}=await db.rpc("admin_adjust_wallet",{p_user_id:id,p_amount:amount,p_note:"Admin demo adjustment"});
+  if(error){alert(error.message);return;}loadAdminMembers();
+}
+async function loadAdminTestimonials(){
+  const box=$("admin-testimonials");const {data,error}=await db.from("testimonials").select("*").order("created_at",{ascending:false}).limit(100);
+  if(error){box.textContent=error.message;return;}
+  box.innerHTML=data?.length?data.map(t=>`<div class="rowitem"><div><strong>${safe(t.display_name||"Member")} · ${safe(t.is_published?"Published":"Pending")}</strong><p>${safe(t.message)}</p></div><div class="actions"><button class="btn small" onclick="publishTestimonial('${t.id}',${!t.is_published})">${t.is_published?"Unpublish":"Publish"}</button><button class="btn small danger" onclick="deleteTestimonial('${t.id}')">Delete</button></div></div>`).join(""):"No testimonials.";
+}
+async function publishTestimonial(id,value){
+  const {error}=await db.from("testimonials").update({is_published:value}).eq("id",id);
+  if(error){alert(error.message);return;}loadAdminTestimonials();loadTestimonials();
+}
+async function deleteTestimonial(id){
+  if(!confirm("Delete this testimonial?"))return;const {error}=await db.from("testimonials").delete().eq("id",id);
+  if(error){alert(error.message);return;}loadAdminTestimonials();loadTestimonials();
+}
+async function loadAdminChat(){
+  const box=$("admin-chat");const {data,error}=await db.from("chat_messages").select("id,user_id,sender_role,display_name,message,created_at,is_hidden").order("created_at",{ascending:false}).limit(100);
+  if(error){box.textContent="Unable to load chat moderation: "+error.message;return;}
+  box.innerHTML=data?.length?data.map(m=>`<div class="rowitem"><div><strong>${safe(m.display_name||m.sender_role)} · ${safe(m.is_hidden?"Hidden":"Visible")}</strong><p>${safe(m.message)} · ${safe(m.created_at)}</p></div><div class="actions"><button class="btn small" onclick="hideChat('${m.id}',${!m.is_hidden})">${m.is_hidden?"Restore":"Hide"}</button><button class="btn small danger" onclick="deleteChat('${m.id}')">Delete</button></div></div>`).join(""):"No chat messages.";
+}
+async function hideChat(id,hidden){
+  const {error}=await db.from("chat_messages").update({is_hidden:hidden}).eq("id",id);
+  if(error){alert(error.message);return;}loadAdminChat();loadChat();
+}
+async function deleteChat(id){
+  if(!confirm("Permanently delete this chat message?"))return;const {error}=await db.from("chat_messages").delete().eq("id",id);
+  if(error){alert(error.message);return;}loadAdminChat();loadChat();
+}
+function subscribeRealtime(){
+  cleanupRealtime();
+  const ch=db.channel("wealthcashfx-live-"+currentUser.id)
+    .on("postgres_changes",{event:"*",schema:"public",table:"chat_messages"},()=>{loadChat();if(currentProfile?.is_admin)loadAdminChat();})
+    .on("postgres_changes",{event:"*",schema:"public",table:"testimonials"},()=>{loadTestimonials();if(currentProfile?.is_admin)loadAdminTestimonials();})
+    .subscribe();realtimeChannels.push(ch);
+}
+async function cleanupRealtime(){for(const ch of realtimeChannels){try{await db.removeChannel(ch);}catch(e){}}realtimeChannels=[];}
+(async()=>{const {data}=await db.auth.getSession();if(data.session?.user)await loadApp(data.session.user);})();
 </script>
-</body></html>
+</body>
+</html>
