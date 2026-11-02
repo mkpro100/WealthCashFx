@@ -19,6 +19,7 @@
     .hero-card h3{margin-top:0}.hero-card li{margin:12px 0;color:var(--muted)}.btn{padding:12px 17px;border-radius:10px;background:var(--blue);color:white;font-weight:700}.btn.gold{background:var(--gold);color:#152238}.btn.ghost{background:#203a59;color:#eaf2ff}.btn.danger{background:#7d2938}.btn.small{padding:8px 11px;font-size:12px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
     .auth-area{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:25px 0 55px}.auth-card h2{margin-top:0}.field{margin:12px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:12px 13px;border-radius:9px;border:1px solid #35506e;background:#091a2d;color:white;outline:none}.field textarea{min-height:90px;resize:vertical}.note{font-size:12px;color:var(--muted);line-height:1.7}.message{margin:10px 0;color:var(--gold);font-size:13px;white-space:pre-wrap}
     .app{padding:25px 0 60px}.welcome{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.welcome h1{margin:0}.muted{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0}.stat span{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;margin-top:8px}.layout{display:grid;grid-template-columns:225px 1fr;gap:18px}.side{align-self:start;position:sticky;top:88px}.side button{width:100%;display:block;text-align:left;margin:5px 0;padding:12px;border-radius:9px;background:transparent;color:#dce8f8}.side button.active,.side button:hover{background:#1d3a5b}.content{min-width:0}.section{margin-bottom:18px}.section h2{margin-top:0}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.item-card h3{margin:0 0 8px}.item-card p{color:var(--muted);font-size:13px;line-height:1.65}.pill{display:inline-block;padding:4px 9px;border-radius:30px;background:#203c5c;color:#cfe1ff;font-size:11px}.goldtext{color:var(--gold)}.list{display:grid;gap:10px}.rowitem{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px;background:#0a1c30;border:1px solid #233c58;border-radius:10px}.rowitem p{margin:4px 0;color:var(--muted);font-size:12px;overflow-wrap:anywhere}.chatbox{height:310px;overflow:auto;background:#08192b;border:1px solid var(--line);padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:10px}.bubble{max-width:88%;background:#183554;border-radius:12px;padding:10px 12px;align-self:flex-start;overflow-wrap:anywhere}.bubble.mine{align-self:flex-end;background:#174c82}.bubble small{display:block;color:#b8c8da;font-size:10px;margin-top:5px}.chatform{display:flex;gap:8px;margin-top:10px}.chatform input{flex:1;min-width:0}.chatform input,.inline-input{padding:11px;border-radius:9px;border:1px solid #35506e;background:#091a2d;color:white}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.tabs button{background:#1a3451;color:white;padding:9px 13px;border-radius:9px}.tabs button.active{background:var(--blue)}.disclaimer{border:1px solid #705b2a;background:#2b2618;color:#f7df9b;padding:13px;border-radius:12px;font-size:12px;line-height:1.7;margin:18px 0}
+    .public-section{padding:18px 0 28px}.ticker-window{overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#091a2d;padding:12px}.ticker-track{display:flex;gap:12px;width:max-content;animation:tickerMove 34s linear infinite}.ticker-window:hover .ticker-track{animation-play-state:paused}.ticker-item{white-space:nowrap;background:#142d49;border:1px solid #294765;border-radius:10px;padding:10px 14px;font-size:12px;color:#e9f2ff}.ticker-item b{color:var(--gold)}@keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}.testimonial-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.testimonial-card{background:#0a1c30;border:1px solid #29415e;border-radius:13px;padding:15px}.testimonial-card p{color:#dce8f8;font-size:13px;line-height:1.7}.testimonial-card small{color:var(--muted)}.address-box{overflow-wrap:anywhere;background:#091a2d;border:1px dashed var(--gold);padding:14px;border-radius:10px;font-weight:600;color:#f6d77d}.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#27c58b;margin-right:7px;box-shadow:0 0 10px #27c58b}.member-displays{margin-top:18px}.empty-state{color:var(--muted);font-size:13px;padding:12px;background:#091a2d;border-radius:10px}@media(max-width:800px){.testimonial-grid{grid-template-columns:1fr}}
     footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px;text-align:center}
     @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:35px}.layout{grid-template-columns:1fr}.side{position:static;display:flex;overflow:auto;gap:5px}.side button{white-space:nowrap;width:auto}.stats{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.grid2,.auth-area{grid-template-columns:1fr}.stat strong{font-size:22px}}
   </style>
@@ -34,6 +35,10 @@
     </div>
     <div class="hero-card"><h3>Explore the demo</h3><ul><li>Member dashboard and demo wallet</li><li>Internal demo credit transfer interface</li><li>Investment-plan simulations</li><li>Deposit and withdrawal request demonstrations</li><li>Community testimonials and live chat</li></ul><p class="note">Create an account to access the member area.</p></div>
   </section>
+  <section class="public-section" aria-label="Live demo activity"><h2><span class="live-dot"></span>Live Demo Activity</h2><p class="muted">Recent platform activity recorded by the demo system. Amounts are simulated credits, not real deposits or payouts.</p><div class="ticker-window"><div id="publicActivityTicker" class="ticker-track"><div class="ticker-item">Loading recorded demo activity…</div></div></div></section>
+  <section class="public-section"><h2>Community Testimonials</h2><p class="muted">Feedback submitted by members and approved by the platform administrator.</p><div id="publicTestimonials" class="testimonial-grid"><div class="empty-state">Loading approved testimonials…</div></div></section>
+  <section class="public-section"><h2>Platform Bitcoin Address</h2><p class="muted">Address shown from the platform settings for reference only. This is a demo interface; do not send cryptocurrency based on this page.</p><div id="publicBitcoinAddress" class="address-box">Loading saved Bitcoin address…</div><div class="actions"><button class="btn ghost small" onclick="copyBitcoinAddress()">Copy address</button></div></section>
+
   <section class="auth-area">
     <div class="auth-card" id="signupCard"><h2>Create account</h2>
       <div class="field"><label>Full name</label><input id="signupName" autocomplete="name" placeholder="Your full name"></div>
@@ -77,6 +82,10 @@
           <div class="item-card"><h3>Quick access</h3><p>Explore your demo wallet, submit a test deposit request, review plan simulations or view your activity history.</p><div class="actions"><button class="btn small" onclick="showPage('wallet')">Open wallet</button><button class="btn small ghost" onclick="showPage('community')">Open community</button></div></div>
           <div class="item-card"><h3>Account information</h3><p id="profileInfo">Loading profile…</p><span class="pill">Secure member session</span></div>
         </div>
+        <div class="member-displays">
+          <section class="section"><h3><span class="live-dot"></span>Live Demo Activity</h3><p class="note">Recorded demo events only. No real customer payments or payouts are represented.</p><div class="ticker-window"><div id="memberActivityTicker" class="ticker-track"><div class="ticker-item">Loading recorded demo activity…</div></div></div></section>
+          <section class="section"><h3>Community Testimonials</h3><div id="memberTestimonials" class="testimonial-grid"><div class="empty-state">Loading approved testimonials…</div></div></section>
+        </div>
         <div class="disclaimer">Demo environment only. No real funds are held or paid out through this interface.</div>
       </section>
 
@@ -88,6 +97,7 @@
       </section>
 
       <section id="page-deposit" class="panel section hidden"><h2>Bitcoin Deposit Request</h2><p class="muted">Submit a demo record for an administrator to review. This does not verify a blockchain payment or credit your wallet.</p>
+        <h3>Platform Bitcoin Deposit Address</h3><div id="bitcoinAddress" class="address-box">Loading saved Bitcoin address…</div><p id="bitcoinAddressNote" class="note">This address is displayed for reference only. Confirm the platform's real payment setup before sending any cryptocurrency.</p><div class="actions"><button class="btn ghost small" onclick="copyBitcoinAddress()">Copy address</button></div>
         <div class="field"><label>Amount (USD, demo)</label><input id="depositAmount" type="number" min="1" step="0.01" placeholder="100"></div><div class="field"><label>Transaction hash / reference (optional)</label><input id="depositReference" placeholder="Enter a reference"></div><button class="btn" onclick="submitDeposit()">Submit request</button><div id="depositMsg" class="message"></div>
         <div class="disclaimer">Never send cryptocurrency to an address shown in a demo environment. A submitted reference is not proof of payment.</div>
       </section>
@@ -131,6 +141,42 @@ const money = value => "$" + Number(value || 0).toLocaleString("en-US",{minimumF
 const safe = value => String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const msg = (id,text) => { if($(id)) $(id).textContent = text || ""; };
 $("year").textContent = new Date().getFullYear();
+let savedBitcoinAddress = "";
+const ACTIVITY_TABLE = "demo_investment_activity";
+
+function renderTicker(targetId, rows){
+  const el=$(targetId); if(!el)return;
+  if(!rows?.length){el.innerHTML='<div class="ticker-item">No recorded demo activity yet. New platform events will appear here.</div>';return;}
+  const cards=rows.map(r=>{const kind=String(r.event_type||"activity").toLowerCase();const label=kind.includes("withdraw")?"Demo withdrawal request":kind.includes("invest")?"Demo investment started":kind.includes("deposit")?"Demo deposit request":"Demo activity";return `<div class="ticker-item"><b>${label}</b> · ${money(r.amount)} credits · ${safe(new Date(r.created_at).toLocaleString())}</div>`;}).join("");
+  el.innerHTML=cards+cards;
+}
+async function loadPublicActivity(){
+  const {data,error}=await db.from(ACTIVITY_TABLE).select("event_type,amount,created_at").order("created_at",{ascending:false}).limit(20);
+  const rows=error?[]:(data||[]);
+  ["publicActivityTicker","memberActivityTicker"].forEach(id=>{const el=$(id);if(!el)return;if(error){el.innerHTML='<div class="ticker-item">Activity feed is awaiting its public demo activity table setup.</div>';return;}renderTicker(id,rows);});
+}
+function renderTestimonials(rows){
+  const html=rows?.length?rows.map(t=>`<article class="testimonial-card"><strong>${safe(t.display_name||"Member")} · <span class="goldtext">${"★".repeat(Math.max(1,Math.min(5,Number(t.rating)||5)))}</span></strong><p>${safe(t.message)}</p><small>Approved community feedback</small></article>`).join(""):'<div class="empty-state">No approved testimonials yet.</div>';
+  ["publicTestimonials","memberTestimonials","testimonialList"].forEach(id=>{const el=$(id);if(el)el.innerHTML=html;});
+}
+async function loadPublicTestimonials(){
+  const {data,error}=await db.from("testimonials").select("id,display_name,message,rating,created_at").eq("is_published",true).order("created_at",{ascending:false}).limit(12);
+  if(error){["publicTestimonials","memberTestimonials"].forEach(id=>{if($(id))$(id).innerHTML='<div class="empty-state">Approved testimonials are not publicly readable yet. Check the testimonials table read policy.</div>';});return;}
+  renderTestimonials(data||[]);
+}
+async function loadBitcoinAddress(){
+  const boxes=[$("bitcoinAddress"),$("publicBitcoinAddress")].filter(Boolean);
+  if(!boxes.length)return;
+  const {data,error}=await db.from("public_bitcoin_deposit_address").select("setting_value").limit(1).maybeSingle();
+  if(error){boxes.forEach(box=>box.textContent="Unable to load saved wallet address: "+error.message);return;}
+  savedBitcoinAddress=String(data?.setting_value||"").trim();
+  const display=savedBitcoinAddress||"No Bitcoin deposit address has been saved in platform settings.";
+  boxes.forEach(box=>box.textContent=display);
+}
+async function copyBitcoinAddress(){
+  if(!savedBitcoinAddress){alert("There is no saved Bitcoin address to copy.");return;}
+  try{await navigator.clipboard.writeText(savedBitcoinAddress);alert("Bitcoin address copied.");}catch(e){alert("Copy is unavailable in this browser. Press and hold the address to copy it.");}
+}
 
 async function signUp(){
   const full_name=$("signupName").value.trim(), email=$("signupEmail").value.trim(), password=$("signupPassword").value;
@@ -177,7 +223,7 @@ async function loadApp(user){
 async function refreshAll(){
   if(!currentUser)return;
   $("balance").textContent=money(currentProfile?.balance);$("walletBalance").textContent=money(currentProfile?.balance);
-  await Promise.allSettled([loadInvestments(),loadHistory(),loadChat(),loadTestimonials()]);
+  await Promise.allSettled([loadInvestments(),loadHistory(),loadChat(),loadTestimonials(),loadPublicActivity(),loadBitcoinAddress()]);
   if(currentProfile?.is_admin) await loadAdminWithdrawals();
 }
 function showPage(page,button){
@@ -251,12 +297,8 @@ async function submitTestimonial(){
   msg("testimonialMsg",error?"Could not submit: "+error.message:"Thank you. Your testimonial is awaiting admin approval.");
   if(!error){$("testimonialMessage").value="";}
 }
-async function loadTestimonials(){
-  const box=$("testimonialList");if(!box||!currentUser)return;
-  const {data,error}=await db.from("testimonials").select("id,display_name,message,rating,created_at").eq("is_published",true).order("created_at",{ascending:false}).limit(12);
-  if(error){box.textContent="Unable to load testimonials: "+error.message;return;}
-  box.innerHTML=data?.length?data.map(t=>`<div class="rowitem"><div><strong>${safe(t.display_name||"Member")} · ${"★".repeat(Math.max(1,Math.min(5,Number(t.rating)||5)))}</strong><p>${safe(t.message)}</p></div></div>`).join(""):"No approved testimonials yet.";
-}
+async function loadTestimonials(){ await loadPublicTestimonials(); }
+
 function adminTab(tab,button){
   ["withdrawals","members","testimonials","chat"].forEach(x=>$("admin-"+x).classList.toggle("hidden",x!==tab));
   document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));button.classList.add("active");
@@ -314,10 +356,13 @@ function subscribeRealtime(){
   const ch=db.channel("wealthcashfx-live-"+currentUser.id)
     .on("postgres_changes",{event:"*",schema:"public",table:"chat_messages"},()=>{loadChat();if(currentProfile?.is_admin)loadAdminChat();})
     .on("postgres_changes",{event:"*",schema:"public",table:"testimonials"},()=>{loadTestimonials();if(currentProfile?.is_admin)loadAdminTestimonials();})
+    .on("postgres_changes",{event:"*",schema:"public",table:ACTIVITY_TABLE},()=>loadPublicActivity())
     .subscribe();realtimeChannels.push(ch);
 }
 async function cleanupRealtime(){for(const ch of realtimeChannels){try{await db.removeChannel(ch);}catch(e){}}realtimeChannels=[];}
-(async()=>{const {data}=await db.auth.getSession();if(data.session?.user)await loadApp(data.session.user);})();
+(async()=>{await Promise.allSettled([loadPublicActivity(),loadPublicTestimonials(),loadBitcoinAddress()]);const {data}=await db.auth.getSession();if(data.session?.user)await loadApp(data.session.user);})();
+// Refresh public demo displays periodically so newly recorded events appear without reloading.
+setInterval(()=>{loadPublicActivity();loadPublicTestimonials();loadBitcoinAddress();},30000);
 </script>
 </body>
 </html>
